@@ -6,16 +6,15 @@
 <link rel="stylesheet" type="text/css" href="{% static 'ampdb/ampdb/style.css' %}">
 <img src="{% static 'logo.png' %}" width="20%" height="20%">
 
-<form method="POST" action="/search">
+<form method="GET" action="/ampdb/search">
     <label for="querY_id">Protein PDB ID </label><br></br>
 
-    <input type="text" name="textfield"><br></br>
-
+    <input type="text" name="query_id" value="{{ query_id }}><br></br>
     <label for="email">Email </label><br></br>
 
     <input type="text" name="email" placeholder="optional"> <br></br>
     <br></br>
-    <button type="submit">Search</button>
+    <button type="submit" value="OK">Search</button>
 </form>
 
 {% else %}
