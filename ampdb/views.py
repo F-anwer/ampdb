@@ -2,10 +2,10 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
 from .models import PDBQuery, Proteins
 
+from django import forms
 from django.views import generic
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
-
 
 
 class IndexView(generic.ListView):
@@ -15,6 +15,28 @@ class IndexView(generic.ListView):
 
     #def get_queryset(self):
     #    return PDBQuery.objects.all()
+
+
+class SearchForm(forms.Form):
+    query_id = forms.CharField()
+
+    def create_query(self):
+        """ the form fields get put into self.cleaned_data, make a new
+        PDBQuery object from those fields and return """
+        query = PDBQuery(query_id=self.cleaned_data['query_id'])
+        query.save()
+        return query
+
+
+class SearchView(generic.edit.FormView):
+    form_class = SearchForm
+    template_name = 'search.html'
+    success_url = '/ampdb/'
+
+    def form_valid(self, form):
+        """ creates a query object and returns a redirect to the detail view """
+        query = form.create_query()
+        return HttpResponseRedirect(reverse('ampdb:results', args=(query.id,)))
     
 
 class ResultsView(generic.DetailView):
@@ -24,7 +46,11 @@ class ResultsView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['system'] = self.request.GET.get('system', None)
-        context['protein'] = Proteins.objects.get(name=self.object.query_id)
+        try:
+            context['protein'] = Proteins.objects.get(name=self.object.query_id)
+        except Proteins.DoesNotExist:
+            context['protein'] = None
+
         return context
 
 

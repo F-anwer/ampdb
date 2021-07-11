@@ -6,12 +6,13 @@
 <link rel="stylesheet" type="text/css" href="{% static 'ampdb/ampdb/style.css' %}">
 <img src="{% static 'logo.png' %}" width="20%" height="20%">
 
-<form method="GET" action="/ampdb/search">
+<form method="POST" action="/ampdb/search/">
+    {% csrf_token %}
     <label for="querY_id"> Protein PDB ID </label><br></br>
-    <input type="text" name="system" value="{{ query_id }}"><br></br>
+    <input type="text" name="query_id" value="{{ query_id }}"><br></br>
 
     <label for="email"> Email </label><br></br>
-    <input type="text" name="system" value="email" placeholder="optional"> <br></br>
+    <input type="text" name="email" value="email" placeholder="optional"> <br></br>
     
     <br></br>
     
