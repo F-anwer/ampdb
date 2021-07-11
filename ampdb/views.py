@@ -24,6 +24,7 @@ class ResultsView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['system'] = self.request.GET.get('system', None)
+        context['protein'] = Proteins.objects.get(name=self.object.query_id)
         return context
 
 
