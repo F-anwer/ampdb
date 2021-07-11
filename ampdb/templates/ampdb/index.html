@@ -22,6 +22,7 @@
 <table>
 	{% for query in queries %}
 	<tr>
+		<td><a href="{% url 'ampdb:results' query.id %}">view</a></td>
 		<td>{{ query.id }}</td>
 		<td>{{ query.query_id }}</td>
 	</tr>
