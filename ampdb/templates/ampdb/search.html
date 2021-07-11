@@ -19,17 +19,7 @@
     <button type="submit" value="OK">Search</button>
 </form>
 
-<h2>List of queries</h2>
-<table>
-	{% for query in queries %}
-	<tr>
-		<td><a href="{% url 'ampdb:results' query.id %}">view</a></td>
-		<td>{{ query.id }}</td>
-		<td>{{ query.query_id }}</td>
-	</tr>
-	{% endfor %}
-</table>
-
 {% else %}
     <p>Page unavailable. Pleasse try again soon.</p>
 {% endif %}
+

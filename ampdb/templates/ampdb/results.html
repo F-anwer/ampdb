@@ -1,10 +1,11 @@
-<h1>{{ PDBQuery.query_id }}</h1>
-
-<h1>reults {{ system }} </h1>
-<!-- <ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul> -->
-
-<!-- <a href="{% url 'polls:detail' question.id %}">Vote again?</a> -->
+<h1>result</h1>
+<h1>{{ object.query_id }}</h1>
+{% if protein %}
+<ul>
+	<li>{{ protein }}</li>
+	<li>charge: {{ protein.charge }}</li>
+	<li>length: {{ protein.length }}</li>
+</ul>
+{% else %}
+no such protein '{{ object.query_id }}'
+{% endif %}
