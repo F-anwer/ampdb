@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404, render
-from .models import PDBQuery
+from .models import PDBQuery, Proteins
 
 from django.views import generic
 from django.urls import reverse
