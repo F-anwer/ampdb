@@ -1,7 +1,4 @@
 from django.db import models
-
-# Create your models here.
-from django.db import models
 from django.utils import timezone
 import datetime
 
@@ -11,7 +8,7 @@ class PDBQuery(models.Model):
 
     def __str__(self):
         return self.query_id
-    
+
 
 class Proteins(models.Model):
     name = models.CharField(("Name"), max_length=255)
@@ -27,5 +24,3 @@ class Proteins(models.Model):
     hmoment_angle = models.FloatField(("MomentAngle"))
     hmoment_2 = models.FloatField(("Moment2"))
     pdb_id = models.CharField(("PDBID"), max_length=256)
-
-
