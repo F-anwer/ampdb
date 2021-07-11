@@ -9,16 +9,17 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 
 class IndexView(generic.ListView):
+    model = PDBQuery
     template_name = 'ampdb/index.html'
+    context_object_name = 'queries'
 
-    def get_queryset(self):
-        pass
+    #def get_queryset(self):
+    #    return PDBQuery.objects.all()
     
 
 class ResultsView(generic.DetailView):
     model = PDBQuery
     template_name = 'ampdb/results.html'
-    context = get_context_data() 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
