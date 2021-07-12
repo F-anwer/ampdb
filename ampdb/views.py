@@ -29,7 +29,7 @@ class SearchForm(forms.Form):
 
 class SearchView(generic.edit.FormView):
     form_class = SearchForm
-    template_name = 'ampdb/search.html'
+    template_name = 'ampdb/index.html'
     success_url = '/ampdb/'
 
     def form_valid(self, form):
