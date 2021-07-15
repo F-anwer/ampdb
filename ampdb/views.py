@@ -36,7 +36,7 @@ class SearchView(generic.edit.FormView):
         """ creates a query object and returns a redirect to the detail
         view """
         query = form.create_query()
-        return HttpResponseRedirect(reverse('ampdb:results', args=(query.id,)))
+        return HttpResponseRedirect(reverse('ampdb:proteins', args=(query.id,)))
 
 
 class ProteinView(generic.TemplateView):
@@ -60,7 +60,9 @@ class ResultsView(generic.DetailView):
         context = super().get_context_data(**kwargs)
         try:
 
-            print(Proteins.objects.all())
+            context['protein'] = Proteins.objects.get(
+                    name=context['pdbquery'])
+            print(context['protein'])
         except Proteins.DoesNotExist:
             context['protein'] = None
 
