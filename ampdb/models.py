@@ -41,4 +41,7 @@ class Proteins(models.Model):
     hydrophobicity = models.FloatField(("Hydrophobicity"))
     hmoment_angle = models.FloatField(("MomentAngle"))
     hmoment_2 = models.FloatField(("Moment2"))
-    pdb_id = models.CharField(("PDBID"), max_length=256)
+    pdb_name = models.CharField(("PDBName"), max_length=256)
+
+    def __str__(self):
+        return self.name

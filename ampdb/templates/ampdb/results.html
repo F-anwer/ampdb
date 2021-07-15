@@ -1,11 +1,14 @@
 <h1>result</h1>
 <h1>{{ object.query_id }}</h1>
-{% if protein %}
+
+
+{% if protein.name %}
 <ul>
 	<li>{{ protein }}</li>
 	<li>charge: {{ protein.charge }}</li>
 	<li>length: {{ protein.length }}</li>
 </ul>
 {% else %}
+{{ protein }}
 no such protein '{{ object.query_id }}'
 {% endif %}
