@@ -6,6 +6,7 @@ from django.views import generic
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
 
+import urllib
 
 class IndexView(generic.ListView):
     model = PDBQuery
@@ -36,8 +37,7 @@ class SearchView(generic.edit.FormView):
         """ creates a query object and returns a redirect to the detail
         view """
         query = form.create_query()
-        return HttpResponseRedirect(reverse('ampdb:proteins', args=(query.id,)))
-
+        return HttpResponseRedirect(reverse('ampdb:protein') + '?' + urllib.parse.urlencode({"name":query.query_id}))
 
 class ProteinView(generic.TemplateView):
     template_name = 'ampdb/protein.html'
@@ -59,10 +59,8 @@ class ResultsView(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         try:
-
             context['protein'] = Proteins.objects.get(
-                    name=context['pdbquery'])
-            print(context['protein'])
+                    name=self.request.GET.get('name', None))
         except Proteins.DoesNotExist:
             context['protein'] = None
 
