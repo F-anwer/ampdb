@@ -5,6 +5,7 @@ from django import forms
 from django.views import generic
 from django.urls import reverse
 from django.http import HttpResponse, HttpResponseRedirect
+from wsgiref.util import FileWrapper
 
 import urllib
 
@@ -12,9 +13,6 @@ class IndexView(generic.ListView):
     model = PDBQuery
     template_name = 'ampdb/index.html'
     context_object_name = 'queries'
-
-    # def get_queryset(self):
-    #     return PDBQuery.objects.all()
 
 
 class SearchForm(forms.Form):
@@ -53,6 +51,7 @@ class ProteinView(generic.TemplateView):
 
 
 class ResultsView(generic.DetailView):
+    'Trying to fix this function.'
     model = PDBQuery
     template_name = 'ampdb/results.html'
 

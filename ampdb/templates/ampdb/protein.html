@@ -2,7 +2,6 @@
 <html lang="en">
 {% load static %}
 <img src="{% static 'logo.png' %}" width="20%" height="20%">
-
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -180,9 +179,15 @@
             });
           });
           </script>
+            <a role="button"
+                href='/static/pdb/{{ protein.pdb_name}}'
+                download='/static/pdb/{{ protein.pdb_name}}'
+                class="btn btn-light text-dark ml-0">
+                Download PDB
+            </a>
                </div>
       {% else %}
-      no such protein
+        no such protein
       {% endif %}
     </div>
     <!-- Optional JavaScript; choose one of the two! -->
