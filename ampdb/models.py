@@ -5,6 +5,7 @@ import datetime
 
 class PDBQuery(models.Model):
     query_id = models.CharField(max_length=200)
+    # email = models.CharField(max_length=200)
 
     def __str__(self):
         return self.query_id
@@ -13,6 +14,9 @@ class PDBQuery(models.Model):
 class Proteins(models.Model):
     name = models.CharField(("Name"), max_length=255)
     sequence = models.CharField(("Sequence"), max_length=500)
+    hydrolitic_activity = models.FloatField(("HydrolyticActivity"))
+    mic_value = models.FloatField(("MICValue"))
+    solubility = models.CharField(("Solubility"), max_length=256)
     tiny = models.IntegerField(("Tiny"))
     small = models.IntegerField(("Small"))
     aliphatic = models.IntegerField(("Aliphatic"))
@@ -39,9 +43,18 @@ class Proteins(models.Model):
     instaIndex = models.FloatField(("InstaIndex"))
     BomanIndex = models.FloatField(("BomanIndex"))
     hydrophobicity = models.FloatField(("Hydrophobicity"))
-    hmoment_angle = models.FloatField(("MomentAngle"))
-    hmoment_2 = models.FloatField(("Moment2"))
+    hmoment_angle = models.FloatField(("HydrophobicMoment"))
+    transmembrane = models.IntegerField(("Transmembrane"))
+    extracellular = models.CharField(("Extracellular"), max_length=256)
+    cytoplasmic = models.CharField(("Cytoplasmic"), max_length=256)
+    hydrophobic_plots = models.FloatField(("HydrophobicPlots"))
+    hydropathy_plots = models.FloatField(("HydropathyPlots"))
+    disulfide_end = models.CharField(("DisulfideEnd"), max_length=256)
+    toxicity = models.CharField(("Toxicity"), max_length=256)
+    rmsf = models.FloatField(("RMSF"))
+    flexibility = models.FloatField(("Flexibility"))
     pdb_name = models.CharField(("PDBName"), max_length=256)
+    links = models.CharField(("Links"), max_length=256)
 
     def __str__(self):
         return self.name
