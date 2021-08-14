@@ -19,6 +19,11 @@ class AboutUsView(generic.ListView):
     template_name = 'ampdb/about_us.html'
     context_object_name = 'queries'
 
+class ContactView(generic.ListView):
+    model = PDBQuery
+    template_name = 'ampdb/contact.html'
+    context_object_name = 'queries'
+
 
 class SearchForm(forms.Form):
     query_id = forms.CharField()

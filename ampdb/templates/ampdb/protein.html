@@ -12,6 +12,7 @@
             <a class="navbar-brand" height="100" href="{% url 'ampdb:index' %}">
                 <img src="{% static 'logo.png' %}" width="200">
             </a>
+
             <div class="avbar-nav ml-auto mb-2 mb-lg-0 justify-content-right" id="navbarNav">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">
@@ -19,7 +20,7 @@
                         <a class="nav-link text-dark" href="#">Tutorials</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark" href="#">Contact</a>
+                        <a class="nav-link text-dark" href="{% url 'ampdb:contact' %}">Contact</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link text-dark" href="{% url 'ampdb:about_us' %}">About Us</a>
@@ -61,7 +62,13 @@
                 <div class="tab-content shadow-lg">
                     <div class="tab-pane fade show bg-white text-dark active" role="tab" id="physio">
                         <div class="nav nav-tabs flex-content">
-                            <table class="table">
+                            <table class="table table-hover">
+                                  <thead>
+                                    <tr>
+                                      <th scope="col">Property</th>
+                                      <th scope="col">Value</th>
+                                    </tr>
+                                  </thead>
                                 <tbody>
                                 <tr>
                                     <td>Sequence</td>
@@ -190,8 +197,8 @@
                             </table>
                         </div>
                     </div>
-                    <div class="tab-pane fade show flex-content" id="struct">
-                        <div class="nav nav-tabs nav-fill">
+                    <div class="tab-pane fade show flex-center" id="struct">
+                        <div class="nav nav-tabs content-center">
                         <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
                         <div id="container-01" class="mol-container"></div>
                         <style>

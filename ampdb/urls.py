@@ -9,6 +9,8 @@ urlpatterns = [
     path('protein/', views.ProteinView.as_view(), name='protein'),
     path('search/', views.SearchView.as_view(), name='search'),
     path('about/', views.AboutUsView.as_view(), name='about_us'),
+    path('contact/', views.ContactView.as_view(), name='contact'),
+
     path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
 
 ]
