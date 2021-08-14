@@ -12,7 +12,6 @@
             <a class="navbar-brand" href="#">
                 <img src="{% static 'logo.png' %}" width="200" height="100">
             </a>
-
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="nav nav-tabs">
                     <li class="nav-item active">
@@ -24,12 +23,15 @@
                 </ul>
                 </span>
             </div>
+            </head>
     </div>
+    <script type="text/css">
+        body {
+            background: url("{% static 'amp.jpg' %}") no-repeat;
+            background-size: cover;
+        }
 
-    </nav>
-    </div>
-
-
+    </script>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -43,203 +45,194 @@
         <h1>{{ protein.name }}</h1>
         <div class="container p-2">
             <ul class="nav nav-tabs nav-justified">
-                <li class="nav-item mr-1 active">
-                    <a class="nav-link bg-primary text-white" data-toggle="tab" href="#physio">Physiochemical
+                <li class="nav-item mr-1">
+                    <a class="nav-link" role="tab" data-toggle="tab" href="#physio">Physiochemical
                         Parameters</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#struct" data-toggle="tab">Peptide>Structure</a>
+                    <a class="nav-link" href="#struct" role="tab" data-toggle="tab">Peptide>Structure</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#docking" data-toggle="tab">Docking</a>
+                    <a class="nav-link" href="#docking" role="tab" data-toggle="tab">Docking</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#results" data-toggle="tab">Results</a>
+                    <a class="nav-link" href="#results" role="tab" data-toggle="tab">Results</a>
                 </li>
                 {#                    <li class="nav-item">#}
                 {#                        <a class="nav-link" href="#">Tutorials <span class="sr-only">(current)</span></a>#}
                 {#                    </li>#}
             </ul>
             <div class="tab-content shadow-lg">
-                <div class="tab-pane fade show bg-white text-dark active" id="physio">
-                    <div class="row">
-                        <div class="col-md-3 w-50">
-                            <div class="nav nav-tabs flex-column">
-                                <table class="table">
+                <div class="tab-pane fade show bg-white text-dark active" role="tab" id="physio">
+                    <div class="nav nav-tabs flex-content">
+                        <table class="table">
+                            <tbody>
+                            <tr>
+                                <td>Sequence</td>
+                                <td>{{ protein.sequence }}</td>
+                            </tr>
 
-                                    <tbody>
-                                    <tr>
-                                        <td>Sequence</td>
-                                        <td>{{ protein.sequence }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Timy</td>
+                                <td>{{ protein.tiny }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Timy</td>
-                                        <td>{{ protein.tiny }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Small</td>
+                                <td>{{ protein.small }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Small</td>
-                                        <td>{{ protein.small }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Aliphatic</td>
+                                <td>{{ protein.aliphatic }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Aliphatic</td>
-                                        <td>{{ protein.aliphatic }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Aromatic</td>
+                                <td>{{ protein.aromatic }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Aromatic</td>
-                                        <td>{{ protein.aromatic }}</td>
-                                    </tr>
+                            <tr>
+                                <td>None-Polar</td>
+                                <td>{{ protein.non_polar }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>None-Polar</td>
-                                        <td>{{ protein.non_polar }}</td>
-                                    </tr>
+                            <tr>
+                                <td>None-Polar</td>
+                                <td>{{ protein.non_polar }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>None-Polar</td>
-                                        <td>{{ protein.non_polar }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Polar</td>
+                                <td>{{ protein.polar }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Polar</td>
-                                        <td>{{ protein.polar }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Charged</td>
+                                <td>{{ protein.charged_aa }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Charged</td>
-                                        <td>{{ protein.charged_aa }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Basic</td>
+                                <td>{{ protein.basic }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Basic</td>
-                                        <td>{{ protein.basic }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Acidic</td>
+                                <td>{{ protein.acidic }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Acidic</td>
-                                        <td>{{ protein.acidic }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Molecular Weight Tiny</td>
+                                <td>{{ protein.mol_weight_timy }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Molecular Weight Tiny</td>
-                                        <td>{{ protein.mol_weight_timy }}</td>
-                                    </tr>
-
-                                    <tr>
-                                        <td>Molecular Weight Small</td>
-                                        <td>{{ protein.mol_weight_small }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Molecular Weight Small</td>
+                                <td>{{ protein.mol_weight_small }}</td>
+                            </tr>
 
 
-                                    <tr>
-                                        <td>Molecular Weight Aliphatic</td>
-                                        <td>{{ protein.mol_weight_apliphatic }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Molecular Weight Aliphatic</td>
+                                <td>{{ protein.mol_weight_apliphatic }}</td>
+                            </tr>
 
 
-                                    <tr>
-                                        <td>Molecular Weight Aromatic</td>
-                                        <td>{{ protein.mol_weight_aromatic }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Molecular Weight Aromatic</td>
+                                <td>{{ protein.mol_weight_aromatic }}</td>
+                            </tr>
 
 
-                                    <tr>
-                                        <td>Molecular Weight Non-Polar</td>
-                                        <td>{{ protein.mol_weight_non_polar }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Molecular Weight Non-Polar</td>
+                                <td>{{ protein.mol_weight_non_polar }}</td>
+                            </tr>
 
 
-                                    <tr>
-                                        <td>Molecular Weight Polar</td>
-                                        <td>{{ protein.mol_weight_polar }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Molecular Weight Polar</td>
+                                <td>{{ protein.mol_weight_polar }}</td>
+                            </tr>
 
 
-                                    <tr>
-                                        <td>Molecular Weight Charged</td>
-                                        <td>{{ protein.mol_weight_charged }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Molecular Weight Charged</td>
+                                <td>{{ protein.mol_weight_charged }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Molecular Weight Basic</td>
-                                        <td>{{ protein.mol_weight_basic }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Molecular Weight Basic</td>
+                                <td>{{ protein.mol_weight_basic }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Molecular Weight Acidic</td>
-                                        <td>{{ protein.mol_weight_acidic }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Molecular Weight Acidic</td>
+                                <td>{{ protein.mol_weight_acidic }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Hydrophobicity</td>
-                                        <td>{{ protein.hydrophobicity }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Hydrophobicity</td>
+                                <td>{{ protein.hydrophobicity }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Hydrophobic Moment angle (100°)</td>
-                                        <td>{{ protein.hmoment_angle }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Hydrophobic Moment angle (100°)</td>
+                                <td>{{ protein.hmoment_angle }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>Hydrophobic Moment angle (160°)</td>
-                                        <td>{{ protein.hmoment_2 }}</td>
-                                    </tr>
+                            <tr>
+                                <td>Hydrophobic Moment angle (160°)</td>
+                                <td>{{ protein.hmoment_2 }}</td>
+                            </tr>
 
-                                    <tr>
-                                        <td>olecular Weight</td>
-                                        <td>{{ protein.molecular_weight }}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="tab-content flex-center">
-                                <div class="tab-pane fade show" id="struct">
-
-                                    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
-                                    <div id="container-01" class="mol-container"></div>
-                                    <style>
-                                        .mol-container {
-                                            width: 80%;
-                                            height: 500px;
-                                            position: relative;
-                                        }
-                                    </style>
-                                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                                    <script>
-                                        jQuery(function () {
-                                            let element = jQuery('#container-01');
-                                            let config = {backgroundColor: 'White'};
-                                            let viewer = $3Dmol.createViewer(element, config);
-                                            let pdbUri = '/static/pdb/{{ protein.pdb_name}}';
-                                            jQuery.ajax(pdbUri, {
-                                                success: function (data) {
-                                                    let v = viewer;
-                                                    v.addModel(data, "pdb");                       /* load data */
-                                                    v.setStyle({}, {cartoon: {color: 'spectrum'}});  /* style all atoms */
-                                                    v.zoomTo();                                      /* set camera */
-                                                    v.render();                                      /* render scene */
-                                                    v.zoom(1.2, 1000);                             /* slight zoom */
-                                                },
-                                                error: function (hdr, status, err) {
-                                                    console.error("Failed to load PDB " + pdbUri + ": " + err);
-                                                },
-                                            });
-                                        });
-                                    </script>
-                                    <a role="button"
-                                       href='/static/pdb/{{ protein.pdb_name }}'
-                                       download='/static/pdb/{{ protein.pdb_name }}'
-                                       class="btn btn-light text-dark ml-0">
-                                        Download PDB
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
+                            <tr>
+                                <td>olecular Weight</td>
+                                <td>{{ protein.molecular_weight }}</td>
+                            </tr>
+                        </table>
                     </div>
+                </div>
+                <div class="tab-pane fade show" id="struct">
+
+                    <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+                    <div id="container-01" class="mol-container"></div>
+                    <style>
+                        .mol-container {
+                            width: 80%;
+                            height: 500px;
+                            position: relative;
+                        }
+                    </style>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                    <script>
+                        jQuery(function () {
+                            let element = jQuery('#container-01');
+                            let config = {backgroundColor: 'White'};
+                            let viewer = $3Dmol.createViewer(element, config);
+                            let pdbUri = '/static/pdb/{{ protein.pdb_name}}';
+                            jQuery.ajax(pdbUri, {
+                                success: function (data) {
+                                    let v = viewer;
+                                    v.addModel(data, "pdb");                       /* load data */
+                                    v.setStyle({}, {cartoon: {color: 'spectrum'}});  /* style all atoms */
+                                    v.zoomTo();                                      /* set camera */
+                                    v.render();                                      /* render scene */
+                                    v.zoom(1.2, 1000);                             /* slight zoom */
+                                },
+                                error: function (hdr, status, err) {
+                                    console.error("Failed to load PDB " + pdbUri + ": " + err);
+                                },
+                            });
+                        });
+                    </script>
+                    <a role="button"
+                       href='/static/pdb/{{ protein.pdb_name }}'
+                       download='/static/pdb/{{ protein.pdb_name }}'
+                       class="btn btn-light text-dark ml-0">
+                        Download PDB
+                    </a>
                 </div>
             </div>
         </div>
