@@ -9,4 +9,5 @@ class ProteinsTests(TestCase):
         pass
 
 
-class PDBQueryTests(TestCase): pass
+class PDBQueryTests(TestCase):
+    pass
