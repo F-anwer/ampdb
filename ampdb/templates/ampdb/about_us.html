@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load static %}
+
+<head>
+    <div class="sticky-top">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" height="100" href="{% url 'ampdb:index' %}">
+                <img src="{% static 'logo.png' %}" width="200">
+            </a>
+            <div class="avbar-nav ml-auto mb-2 mb-lg-0 justify-content-right" id="navbarNav">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+
+                        <a class="nav-link text-dark" href="#">Tutorials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">About Us</a>
+                    </li>
+                </ul>
+                </span>
+            </div>
+            </head>
+    </div>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Title</title>
+</head>
+<body>
+<div class="cover"
+     style="background-image: url({% static 'amp.jpg' %}); background-repeat: no-repeat; background-attachment: relative; background-position: bottom;">
+    <div class="container">
+        <h2>
+            About Us
+        </h2>
+
+        <p>
+            AbAMPdb is an open repository to screen potential antimicrobial peptides against Acinetobacter baumannii.
+            Our
+            current index is version 1 and searches more than 150 publications to screen 30 Potential AMPs from
+            different
+            resources. All the data based on AMPs and their interaction with A. baumannii Omp38 protein Uniprot ID is
+            Q6RYW5
+            freely available through search index and can be downloaded via available formats.
+        </p>
+
+        <h2>
+            AbAMPdb Team
+        </h2>
+
+        <p>
+            Please mention yours and also consult the order of arranging names with Dr. Tariq Saeed <br>
+            Farha Anwer (PhD candidate, ASAB, NUST) <br>
+            Dr. Amjad Ali (Associate Professor, ASAB, NUST) <br>
+        </p>
+
+        <h2>
+            AbAMPdb Funding
+        </h2>
+
+        <p>
+            Atta Ur Rahman School of Applied Biosciences (ASAB), NUST <br>
+            Research Centre for Modelling and Simulation (RCMS), NUST
+        </p>
+
+        <center><img src="{% static 'nust.png' %}" width="20%" height="20%"></center>
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+                integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+                crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+                integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+                crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+                integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+                crossorigin="anonymous"></script>
+    </div>
+</div>
+</body>
+</html>
