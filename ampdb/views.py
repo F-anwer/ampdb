@@ -48,7 +48,7 @@ class SearchForm(forms.Form):
 
 
 class SearchView(generic.edit.FormView):
-    """"""
+    """Search view of the AMPdb tool."""
 
     form_class = SearchForm
     template_name = "ampdb/index.html"
