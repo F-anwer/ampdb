@@ -54,7 +54,12 @@ class Proteins(models.Model):
     rmsf = models.FloatField(("RMSF"))
     flexibility = models.FloatField(("Flexibility"))
     pdb_name = models.CharField(("PDBName"), max_length=256)
-    links = models.CharField(("Links"), max_length=256)
+    links = models.URLField(("Links"),
+        max_length=128,
+        db_index=True,
+        unique=True,
+        blank=True
+    )
 
     def __str__(self):
         return self.name

@@ -36,15 +36,15 @@
                     </form>
                 </div>
                 <h2>List of queries</h2>
-                <table>
-                    {% for query in queries %}
-                        <tr>
-                            <td><a href="{% url 'ampdb:results' query.id %}">view</a></td>
-                            <td>{{ query.id }}</td>
-                            <td>{{ query.query_id }}</td>
-                        </tr>
-                    {% endfor %}
-                </table>
+{#                <table>#}
+{#                    {% for query in queries %}#}
+{#                        <tr>#}
+{#                            <td><a href="{% url 'ampdb:results' query.id %}">view</a></td>#}
+{#                            <td>{{ query.id }}</td>#}
+{#                            <td>{{ query.query_id }}</td>#}
+{#                        </tr>#}
+{#                    {% endfor %}#}
+{#                </table>#}
                     </div>
 
     {% else %}

@@ -33,6 +33,13 @@ class ContactView(generic.ListView):
     template_name = "ampdb/contact.html"
     context_object_name = "queries"
 
+class TutorialView(generic.ListView):
+    """Contact section of the AMPdb tool."""
+
+    model = PDBQuery
+    template_name = "ampdb/tutorial.html"
+    context_object_name = "queries"
+
 
 class SearchForm(forms.Form):
     """Search view showing the top results from the main page of the AMPdb tool."""
