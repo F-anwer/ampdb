@@ -1,4 +1,4 @@
-name: db
+git: db
 channels:
   - defaults
 dependencies:
