@@ -1,4 +1,4 @@
-git: db
+name: db
 channels:
   - defaults
 dependencies:
@@ -38,15 +38,26 @@ dependencies:
   - zipp=3.5.0=pyhd3eb1b0_0
   - zlib=1.2.11=h7b6447c_3
   - pip:
+    - appdirs==1.4.4
+    - autopep8==1.5.7
+    - black==21.7b0
+    - click==8.0.1
     - defusedxml==0.7.1
+    - delta==0.4.2
     - diff-match-patch==20200713
     - django-import-export==2.5.0
     - et-xmlfile==1.1.0
     - markuppy==1.14
+    - mypy-extensions==0.4.3
     - odfpy==1.4.1
     - openpyxl==3.0.7
+    - pathspec==0.9.0
     - pyyaml==5.4.1
+    - regex==2021.8.3
     - tablib==3.0.0
+    - toml==0.10.2
+    - tomli==1.2.1
+    - whales3==1.0
     - xlrd==2.0.1
     - xlwt==1.3.0
 prefix: /home/navid/anaconda3/envs/db
