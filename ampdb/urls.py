@@ -6,6 +6,9 @@ from django.conf.urls.static import static
 app_name = "ampdb"
 urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
+    path("login/", views.LoginInView.as_view(), name="login"),
+    path("home/", views.SearchView.as_view(), name="home"),
+
     path("protein/", views.ProteinView.as_view(), name="protein"),
     path("search/", views.SearchView.as_view(), name="search"),
     path("about/", views.AboutUsView.as_view(), name="about_us"),

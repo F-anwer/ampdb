@@ -10,35 +10,34 @@ from wsgiref.util import FileWrapper
 import urllib
 
 
-class IndexView(generic.ListView):
+class IndexView(generic.TemplateView):
     """Index first page view of the AMPdb tool"""
 
-    model = PDBQuery
     template_name = "ampdb/index.html"
-    context_object_name = "queries"
+
+class LoginInView(generic.TemplateView):
+    """Index first page view of the AMPdb tool"""
+
+    template_name = "ampdb/login.html"
 
 
-class AboutUsView(generic.ListView):
+class AboutUsView(generic.TemplateView):
     """About Us view of the AMPdb tool"""
 
-    model = PDBQuery
     template_name = "ampdb/about_us.html"
-    context_object_name = "queries"
 
 
-class ContactView(generic.ListView):
+class ContactView(generic.TemplateView):
     """Contact section of the AMPdb tool."""
 
     model = PDBQuery
     template_name = "ampdb/contact.html"
     context_object_name = "queries"
 
-class TutorialView(generic.ListView):
+class TutorialView(generic.TemplateView):
     """Contact section of the AMPdb tool."""
 
-    model = PDBQuery
     template_name = "ampdb/tutorial.html"
-    context_object_name = "queries"
 
 
 class SearchForm(forms.Form):
@@ -58,7 +57,7 @@ class SearchView(generic.edit.FormView):
     """Search view of the AMPdb tool."""
 
     form_class = SearchForm
-    template_name = "ampdb/index.html"
+    template_name = "ampdb/search.html"
     success_url = "/ampdb/"
 
     def form_valid(self, form):

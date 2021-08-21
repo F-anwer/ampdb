@@ -18,25 +18,11 @@
                 Acinetobacter baumannii. The database provides predicted information related to antimicrobial
                 potentials, homology-based modelled structures and the peptide protein interactions of these AMPs.<br><br></h4>
             {#        <link rel="stylesheet" type="text/css" href="{% static 'ampdb/ampdb/style.css' %}">#}
-            <center><img src="{% static 'logo.png' %}" width="40%" height="30%"></center>
+            <center><img src="{% static 'img/logo.png' %}" width="40%" height="30%"></center>
             <div class="cover"
                  style="background-image: url({% static 'amp.jpg' %}); background-repeat: no-repeat; background-attachment: fixed; background-position: bottom;">
 
-                <div class="row justify-content-center">
-                    <form class="form-inline" method="POST" action="/ampdb/search/">
-                        {% csrf_token %}
-                        <div class="form-group mx-sm-3 mb-2">
-                            <input type="text" class="form-control" name="query_id" value="{{ query_id }}"
-                                   placeholder="Protein Name">
-                            <input name="email" class="form-control" type="text" placeholder="Email">
-                            <div class="input-group-append">
-                                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-
-
+            <center><a href="{% url 'ampdb:login' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Enter Site</a></center>
     {% else %}
         <p>Page unavailable. Pleasse try again soon.</p>
     {% endif %}
