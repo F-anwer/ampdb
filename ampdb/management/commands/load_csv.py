@@ -73,7 +73,7 @@ class Command(BaseCommand):
                     }
                     try:
                         value = boolmap[str(value).strip().lower()]
-                    except:
+                    except Exception:
                         print('found unparseable bool:', value)
                         raise
                 # print(f'{df_name} -> {orm_name}: {value}')
