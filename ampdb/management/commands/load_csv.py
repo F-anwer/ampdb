@@ -9,7 +9,6 @@ class Command(BaseCommand):
         parser.add_argument('csv_dir', type=str, help='Path to csv data file.')
 
     def handle(self, *args, csv_dir=None, **kwargs):
-        pd.options.display.max_rows = 100
         df = pd.read_csv(csv_dir)
         col_map = {
             'Name': 'name',
