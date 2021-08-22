@@ -2,7 +2,6 @@ from django.core.management.base import BaseCommand
 from ampdb.models import Proteins
 import pandas as pd
 
-
 class Command(BaseCommand):
     help = "Load the data file to as a database to ampdb."
 
