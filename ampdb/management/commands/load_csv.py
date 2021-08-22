@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from ampdb.models import Proteins
-import csv
 
+import pandas as pd
 
 class Command(BaseCommand):
     help = "Load the data file to as a database to ampdb."
@@ -12,54 +12,53 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         csv_file = kwargs['csv_dir']
 
-        with open(csv_file, "r") as file:
-            reader = csv.reader(file)
+        data = pd.read_csv(csv_file)
             try:
-                for row in reader:
+                for index, row in data.iterrows():
                     _, created = Proteins.objects.get_or_create(
-                        name=row[0],
-                        sequence=row[1],
-                        hydrolitic_activity=row[2],
-                        mic_value=row[3],
-                        solubility=row[4],
-                        tiny=row[5],
-                        small=row[6],
-                        aliphatic=row[7],
-                        aromatic=row[8],
-                        non_polar=row[9],
-                        polar=row[10],
-                        charged_aa=row[11],
-                        basic=row[12],
-                        acidic=row[13],
-                        mol_weight_timy=row[14],
-                        mol_weight_small=row[15],
-                        mol_weight_apliphatic=row[16],
-                        mol_weight_aromatic=row[17],
-                        mol_weight_non_polar=row[18],
-                        mol_weight_polar=row[19],
-                        mol_weight_charged=row[20],
-                        mol_weight_basic=row[21],
-                        mol_weight_acidic=row[22],
-                        molecular_weight=row[23],
-                        length=row[24],
-                        charge=row[25],
-                        p_i=row[26],
-                        a_index=row[27],
-                        instaIndex=row[28],
-                        BomanIndex=row[29],
-                        hydrophobicity=row[30],
-                        hmoment_angle=row[31],
-                        transmembrane=row[32],
-                        extracellular=row[33],
-                        cytoplasmic=row[34],
-                        hydrophobic_plots=row[35],
-                        hydropathy_plots=row[36],
-                        disulfide_end=row[37],
-                        toxicity=row[38],
-                        rmsf=row[39],
-                        flexibility=row[40],
-                        pdb_name=row[41],
-                        links=row[42]
+                        name=row['Name'],
+                        sequence=row['Sequence'],
+                        hydrolitic_activity=row['HydrolyticActivity'],
+                        mic_value=row['MICValue'],
+                        solubility=row['Solubility'],
+                        tiny=row['Tiny'],
+                        small=row['Small'],
+                        aliphatic=row['Aliphatic'],
+                        aromatic=row['Aromatic'],
+                        non_polar=row['NonPolar'],
+                        polar=row['Polar'],
+                        charged_aa=row['ChargedAA'],
+                        basic=row['Basic'],
+                        acidic=row['Acidic'],
+                        mol_weight_timy=row['MolWeightTiny'],
+                        mol_weight_small=row['MolWeightSmall'],
+                        mol_weight_apliphatic=row['MolWeightAliphatic'],
+                        mol_weight_aromatic=row['MolWeightAromatic'],
+                        mol_weight_non_polar=row['MolWeightNonPolar'],
+                        mol_weight_polar=row['MolWeightPolar'],
+                        mol_weight_charged=row['MolWeightCharged'],
+                        mol_weight_basic=row['MolWeightBasic'],
+                        mol_weight_acidic=row['MolWeightAcidic'],
+                        molecular_weight=row['MolecularWeight'],
+                        length=row['Length'],
+                        charge=row['Charge'],
+                        p_i=row['pI'],
+                        a_index=row['AIndex'],
+                        instaIndex=row['InstaIndex'],
+                        BomanIndex=row['BomanIndex'],
+                        hydrophobicity=row['Hydrophobicity'],
+                        hmoment_angle=row['HydrophobicMoment'],
+                        transmembrane=row['Transmembrane'],
+                        extracellular=row['Extracellular'],
+                        cytoplasmic=row['Cytoplasmic'],
+                        hydrophobic_plots=row['HydrophobicPlots'],
+                        hydropathy_plots=row['HydropathyPlots'],
+                        disulfide_end=row['DisulfideEnd'],
+                        toxicity=row['Toxicity'],
+                        rmsf=row['RMSF'],
+                        flexibility=row['Flexibility'],
+                        pdb_name=row['PDBName'],
+                        links=row['Links']
                     )
             except Exception as e:
                 print(e)
