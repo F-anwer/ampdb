@@ -27,6 +27,11 @@
                 <img src="{% static 'img/logo.png' %}" width="200">
             </a>
 
+            <form class="d-flex" method="POST" action="/ampdb/query/">
+                {%  csrf_token %}
+                <input class="form-control me-2" type="search" placeholder="Search peptide" aria-label="Search">
+                <button class="btn btn-outline-secondary" type="submit">Submit</button>
+            </form>
             <div class="avbar-nav ml-auto mb-2 mb-lg-0 justify-content-right" id="navbarNav">
                 <ul class="nav nav-tabs">
                     <li class="nav-item">

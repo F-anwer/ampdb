@@ -91,7 +91,7 @@ class ProteinView(generic.TemplateView):
 #     model = PDBQuery
 #     template_name = "ampdb/results.html"
 #
-#     def get_context_data(self, **kwargs):
+#     def get_context_data(self, **kwargs):  e
 #         context = super().get_context_data(**kwargs)
 #         try:
 #             context["protein"] = Proteins.objects.get(
