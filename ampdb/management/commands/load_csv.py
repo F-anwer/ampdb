@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from ampdb.models import Proteins
-import csv
+import pandas as pd
 
 
 class Command(BaseCommand):
@@ -9,57 +9,74 @@ class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('csv_dir', type=str, help='Path to csv data file.')
 
-    def handle(self, *args, **kwargs):
-        csv_file = kwargs['csv_dir']
-
-        with open(csv_file, "r") as file:
-            reader = csv.reader(file)
-            try:
-                for row in reader:
-                    _, created = Proteins.objects.get_or_create(
-                        name=row[0],
-                        sequence=row[1],
-                        hydrolitic_activity=row[2],
-                        mic_value=row[3],
-                        solubility=row[4],
-                        tiny=row[5],
-                        small=row[6],
-                        aliphatic=row[7],
-                        aromatic=row[8],
-                        non_polar=row[9],
-                        polar=row[10],
-                        charged_aa=row[11],
-                        basic=row[12],
-                        acidic=row[13],
-                        mol_weight_timy=row[14],
-                        mol_weight_small=row[15],
-                        mol_weight_apliphatic=row[16],
-                        mol_weight_aromatic=row[17],
-                        mol_weight_non_polar=row[18],
-                        mol_weight_polar=row[19],
-                        mol_weight_charged=row[20],
-                        mol_weight_basic=row[21],
-                        mol_weight_acidic=row[22],
-                        molecular_weight=row[23],
-                        length=row[24],
-                        charge=row[25],
-                        p_i=row[26],
-                        a_index=row[27],
-                        instaIndex=row[28],
-                        BomanIndex=row[29],
-                        hydrophobicity=row[30],
-                        hmoment_angle=row[31],
-                        transmembrane=row[32],
-                        extracellular=row[33],
-                        cytoplasmic=row[34],
-                        hydrophobic_plots=row[35],
-                        hydropathy_plots=row[36],
-                        disulfide_end=row[37],
-                        toxicity=row[38],
-                        rmsf=row[39],
-                        flexibility=row[40],
-                        pdb_name=row[41],
-                        links=row[42]
-                    )
-            except Exception as e:
-                print(e)
+    def handle(self, *args, csv_dir=None, **kwargs):
+        pd.options.display.max_rows = 100
+        df = pd.read_csv(csv_dir)
+        col_map = {
+            'Name': 'name',
+            'Sequence': 'sequence',
+            'Hemolytic activity (0-1)': 'hydrolitic_activity',  # ?
+            'MIC value': 'mic_value',
+            'Solubility': 'solubility',
+            'Tiny-aa': 'tiny',
+            'Small-aa': 'small',
+            'Aliphtic-aa': 'aliphatic',
+            'Aromatic-aa': 'aromatic',
+            'Non_Polar-aa': 'non_polar',
+            'Polar-aa': 'polar',
+            'Charged-aa': 'charged_aa',
+            'Basic-aa': 'basic',
+            'Acidic-aa': 'acidic',
+            'Mole%-Tiny_aa': 'mol_weight_tiny',
+            'Mole%-Small_aa': 'mol_weight_small',
+            'Mole%-Aliphtic_aa': 'mol_weight_apliphatic',
+            'Mole%-Aromatic_aa': 'mol_weight_aromatic',
+            'Mole%-Non_Polar_aa': 'mol_weight_non_polar',
+            'Mole%-Polar_aa': 'mol_weight_polar',
+            'Mole%-Charged_aa': 'mol_weight_charged',
+            'Mole%-Basic_aa': 'mol_weight_basic',
+            'Mole%-Acidic_aa': 'mol_weight_acidic',
+            'mw <10KDa': 'molecular_weight',
+            'length (12-50aa)': 'length',
+            'charge': 'charge',
+            'Isolelectric point': 'p_i',
+            'aliphatic Index': 'a_index',
+            'instability Index ': 'instaIndex',
+            'BomanIndex ': 'BomanIndex',
+            'hydrophobicity ': 'hydrophobicity',
+            'hydrophobic moment': 'hmoment_angle',
+            'Transmembrane': 'transmembrane',
+            'Extracellular': 'extracellular',
+            'Cytoplasmic': 'cytoplasmic',
+            'HydrophobicityPlot': 'hydrophobic_plots',
+            'HydrophobicityPlot2': 'hydropathy_plots',
+            'Presence of disulphide bridges': 'disulfide_end',
+            'Toxicity': 'toxicity',
+            'RMSF': 'rmsf',
+            'Flexibility ': 'flexibility',
+            'PDBName': 'pdb_name',
+            'Links': 'links',
+        }
+        for i, row in df.iterrows():
+            # there are more rows than there are data, stop when we reach the lines without names
+            if str(row['Name']) == 'nan':
+                break
+            protein = Proteins()
+            for df_name, orm_name in col_map.items():
+                value = row[df_name]
+                # these bools are encoded in varying cases, eg. TRUE, True, etc.
+                # the nans need to be checked in detail
+                if df_name in {'Cytoplasmic', 'Extracellular'}:
+                    boolmap = {
+                        'true': True,
+                        'false': False,
+                        'nan': None,
+                    }
+                    try:
+                        value = boolmap[str(value).strip().lower()]
+                    except:
+                        print('found unparseable bool:', value)
+                        raise
+                # print(f'{df_name} -> {orm_name}: {value}')
+                setattr(protein, orm_name, value)
+            protein.save()
