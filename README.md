@@ -2,14 +2,24 @@
 Django framework for the protein AMPs database. With a clean and easy GUI, AMPdb provides an easy lookup for structural AMPs with its tabulated properties in each entry. 
 
 ## Introudction 
-A clean and easy to use GUI interface that has been heavily tested gives the following prompt for query entry:
-Query page
-![image](https://user-images.githubusercontent.com/25282805/127473181-79da0e94-18c8-40c0-b7a9-e6187bd171dc.png)
+AbAMPdb is the manually-curated database for antimicrobial peptides (AMPs) specifically against Acinetobacter baumannii. The database provides predicted information related to antimicrobial potentials, homology-based modelled structures and the peptide protein interactions of these AMPs.
 
+## interface
+The AMPdb app looks as follows: 
+
+### Home page
+
+
+![image](https://user-images.githubusercontent.com/25282805/130806245-0cdac0a2-be04-4d7e-9671-7edd1d3976c3.png)
 
 ### Results page
-![image](https://user-images.githubusercontent.com/25282805/127473059-46d95570-d026-48a0-a8ce-410d3d053cf1.png)
 
+
+![image](https://user-images.githubusercontent.com/25282805/130806466-baf02c4b-efd5-45d8-95db-8569e563da51.png)
+
+### Docking tab
+
+![image](https://user-images.githubusercontent.com/25282805/130806645-0a79effd-b446-4211-afef-672718c7b146.png)
 
 ## Installation 
 Installation is easy, just follow these steps: 
@@ -18,7 +28,18 @@ Installation is easy, just follow these steps:
     $ cd ampdb 
     $ conda env import environment.yml 
 ```
-To access the database, just run the following command>: 
+Activate the Conda environment by 
+```
+    $ conda activate db
+```
+
+Then to access the database, just run the following command>: 
 ````
   $ python manage.py runserver
 ````
+
+## Motivation 
+
+
+## Goals 
+
