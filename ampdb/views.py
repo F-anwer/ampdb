@@ -1,19 +1,20 @@
-from django.shortcuts import get_object_or_404
-from .models import PDBQuery, Proteins
-
-from django import forms
-from django.views import generic
-from django.urls import reverse
-from django.http import HttpResponse, HttpResponseRedirect
+import urllib
 from wsgiref.util import FileWrapper
 
-import urllib
+from django import forms
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+from django.urls import reverse
+from django.views import generic
+
+from .models import PDBQuery, Proteins
 
 
 class IndexView(generic.TemplateView):
     """Index first page view of the AMPdb tool"""
 
     template_name = "ampdb/index.html"
+
 
 class LoginInView(generic.TemplateView):
     """Index first page view of the AMPdb tool"""
@@ -27,12 +28,19 @@ class AboutUsView(generic.TemplateView):
     template_name = "ampdb/about_us.html"
 
 
+class StatsView(generic.TemplateView):
+    """About Us view of the AMPdb tool"""
+
+    template_name = "ampdb/stats.html"
+
+
 class ContactView(generic.TemplateView):
     """Contact section of the AMPdb tool."""
 
     model = PDBQuery
     template_name = "ampdb/contact.html"
     context_object_name = "queries"
+
 
 class TutorialView(generic.TemplateView):
     """Contact section of the AMPdb tool."""

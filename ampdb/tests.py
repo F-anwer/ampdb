@@ -1,7 +1,6 @@
 from django.test import TestCase
 
-from .models import Proteins
-from .models import PDBQuery
+from .models import PDBQuery, Proteins
 
 
 class ProteinsTests(TestCase):
