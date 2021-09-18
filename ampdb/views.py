@@ -68,6 +68,12 @@ class SearchView(generic.edit.FormView):
     template_name = "ampdb/search.html"
     success_url = "/ampdb/"
 
+    def get_context_data(self, **kwargs):
+        context = super(SearchView, self).get_context_data(**kwargs)
+        context['proteins'] = Proteins.objects.all()
+
+        return context
+
     def form_valid(self, form):
         """creates a query object and returns a redirect to the detail
         view"""
