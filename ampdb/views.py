@@ -72,7 +72,12 @@ class SearchView(generic.edit.FormView):
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
         context['proteins'] = Proteins.objects.all()
-
+        try:
+            context["protein"] = Proteins.objects.get(
+                name=self.request.GET.getlist("pdb_name")
+            )
+        except Proteins.DoesNotExist:
+            context["protein"] = None
         return context
 
     def form_valid(self, form):
@@ -95,12 +100,11 @@ class ProteinView(generic.TemplateView):
         context = super().get_context_data(**kwargs)
         try:
             context["protein"] = Proteins.objects.get(
-                name=self.request.GET.getlist("name", None)
+                name=self.request.GET.get("pdb_name", None)
             )
         except Proteins.DoesNotExist:
             context["protein"] = None
         return context
-
 
 # class ResultsView(generic.DetailView):
 #     model = PDBQuery
