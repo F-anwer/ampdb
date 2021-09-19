@@ -52,11 +52,12 @@ class SearchForm(forms.Form):
     """Search view showing the top results from the main page of the AMPdb tool."""
 
     query_id = forms.CharField()
+    print(query_id)
 
     def create_query(self):
         """the form fields get put into self.cleaned_data, make a new
         PDBQuery object from those fields and return"""
-        query = PDBQuery(query_id=self.cleaned_data["query_id"])
+        query = Proteins(name=self.cleaned_data["pdb_name"])
         query.save()
         return query
 
@@ -81,7 +82,7 @@ class SearchView(generic.edit.FormView):
         return HttpResponseRedirect(
             reverse("ampdb:protein")
             + "?"
-            + urllib.parse.urlencode({"name": query.query_id})
+            + urllib.parse.urlencode({"name": query.pdb_name})
         )
 
 
@@ -94,7 +95,7 @@ class ProteinView(generic.TemplateView):
         context = super().get_context_data(**kwargs)
         try:
             context["protein"] = Proteins.objects.get(
-                name=self.request.GET.get("name", None)
+                name=self.request.GET.getlist("name", None)
             )
         except Proteins.DoesNotExist:
             context["protein"] = None

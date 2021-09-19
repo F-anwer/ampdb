@@ -10,29 +10,50 @@
                 {% csrf_token %}
 
                 <div class="form-check">
-                    {#                    <label class="form-check-label" for="exampleRadios2">#}
-                    {% for protein in proteins %}
 
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th scope="col">AMP ID</th>
+                            <th scope="col">AMP Name</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for protein in proteins %}
 
-                        <label class="form-check-label"  for= {{ protein.name }}>
-                            {{ protein.name }}
-                        </label>
-                    {% endfor %}
-                    #{#                    </label>#}
+                            <tr>
+                                <td>AMP{{ protein.id }}</td>
+                                <td><input type="checkbox" name="pdb_name" value="{{ protein.name }}"></td>
+
+                                <td>{{ protein.name }}</td>
+                            </tr>
+                            </tbody>
+                        {% endfor %}
+                    </table>
                 </div>
 
-                <div class="form-check">
+                {#                <div class="form-check">#}
+                {#                    <label class="form-check-label" for="exampleRadios2">#}
+                {##}
+                {#                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"#}
+                {#                               value="option1"#}
+                {#                               checked>#}
+                {#                        <input type="text" class="form-control" name="query_id" value="{{ query_id }}"#}
+                {#                               placeholder="Choose AMP">#}
+                {#                    </label>#}
+                {#                </div>#}
+                {#                <div class="form-check">#}
+                {##}
+                {#                    <label class="form-check-label" for="exampleRadios2">#}
+                {#                        <input name="email" class="form-control" type="text" placeholder="Chose target protein">#}
+                {##}
+                {#                    </label>#}
+                {#                </div>#}
 
-                    <label class="form-check-label" for="exampleRadios2">
-                        <input name="email" class="form-control" type="text" placeholder="Chose target protein">
 
-                    </label>
-                </div>
-
-
-{#                <div class="input-group-append">#}
-                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
-{#                </div>#}
+                {#                <div class="input-group-append">#}
+                <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                {#                </div>#}
 
             </div>
         </form>
