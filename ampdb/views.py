@@ -6,6 +6,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views import generic
+import itertools
 
 from .models import PDBQuery, Proteins
 
@@ -52,7 +53,8 @@ class SearchForm(forms.Form):
     """Search view showing the top results from the main page of the AMPdb tool."""
 
     query_id = forms.CharField()
-    print(query_id)
+    pdb_name = forms.CharField()
+    target_protein = forms.CharField()
 
     def create_query(self):
         """the form fields get put into self.cleaned_data, make a new
@@ -62,15 +64,30 @@ class SearchForm(forms.Form):
         return query
 
 
-class SearchView(generic.edit.FormView):
+class SearchView(generic.FormView):
     """Search view of the AMPdb tool."""
 
-    form_class = SearchForm
     template_name = "ampdb/search.html"
-    success_url = "/ampdb/"
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
+        rows = []
+
+        target_proteins = [
+            'Omp38',
+            'OmpW',
+            'OmpA',
+            'Omp33-36',
+            'Oxa51like',
+        ]
+
+        for protein, name in itertools.zip_longest(Proteins.objects.all(), target_proteins):
+            rows.append({
+                'left': protein,
+                'right': name,
+            })
+        context['rows'] = rows
+
         context['proteins'] = Proteins.objects.all()
         try:
             context["protein"] = Proteins.objects.get(
@@ -83,12 +100,13 @@ class SearchView(generic.edit.FormView):
     def form_valid(self, form):
         """creates a query object and returns a redirect to the detail
         view"""
-        query = form.create_query()
+
         return HttpResponseRedirect(
             reverse("ampdb:protein")
             + "?"
-            + urllib.parse.urlencode({"name": query.pdb_name})
-        )
+            + urllib.parse.urlencode({
+                "pdb_name": form['pdb_name'].value(),
+                "target_protein": form['target_protein'].value()}))
 
 
 class ProteinView(generic.TemplateView):
