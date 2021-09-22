@@ -66,8 +66,9 @@ class SearchForm(forms.Form):
 
 class SearchView(generic.FormView):
     """Search view of the AMPdb tool."""
-
+    form_class = SearchForm
     template_name = "ampdb/search.html"
+    success_url = "/ampdb"
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
