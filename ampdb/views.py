@@ -52,7 +52,7 @@ class TutorialView(generic.TemplateView):
 class SearchForm(forms.Form):
     """Search view showing the top results from the main page of the AMPdb tool."""
 
-    query_id = forms.CharField()
+    # query_id = forms.CharField()
     pdb_name = forms.CharField()
     target_protein = forms.CharField()
 
