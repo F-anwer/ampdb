@@ -125,28 +125,3 @@ class ProteinView(generic.TemplateView):
             context["protein"] = None
         return context
 
-# class ResultsView(generic.DetailView):
-#     model = PDBQuery
-#     template_name = "ampdb/results.html"
-#
-#     def get_context_data(self, **kwargs):  e
-#         context = super().get_context_data(**kwargs)
-#         try:
-#             context["protein"] = Proteins.objects.get(
-#                 name=self.request.GET.get("name", None)
-#             )
-#         except Proteins.DoesNotExist:
-#             context["protein"] = None
-#
-#         return context
-
-# def search(self):
-#     if request.method == 'GET':
-#     try:
-#         query = PDBQuery.objects.get(name = query_id)
-#         if query_id == search_id:
-#             return get_object_or_404(html)
-#     except PDBQuery.DoesNotExist:
-#         return HttpResponse("no such protein available")
-# else:
-#     return render(request, 'ampdb/index.html')
