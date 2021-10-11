@@ -26,6 +26,7 @@ Installation is easy, just follow these steps:
 ```
     $ git clone https://github.com/nadzhou/ampdb.git
     $ cd ampdb 
+    $ 
     $ conda env import environment.yml 
 ```
 Activate the Conda environment by 

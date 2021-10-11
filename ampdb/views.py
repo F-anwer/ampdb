@@ -40,7 +40,6 @@ class ContactView(generic.TemplateView):
 
     model = PDBQuery
     template_name = "ampdb/contact.html"
-    context_object_name = "queries"
 
 
 class TutorialView(generic.TemplateView):
@@ -54,7 +53,7 @@ class SearchForm(forms.Form):
 
     # query_id = forms.CharField()
     pdb_name = forms.CharField()
-    target_protein = forms.CharField()
+
 
     def create_query(self):
         """the form fields get put into self.cleaned_data, make a new
@@ -82,10 +81,10 @@ class SearchView(generic.FormView):
             'Oxa51like',
         ]
 
-        for protein, name in itertools.zip_longest(Proteins.objects.all(), target_proteins):
+        for peptide, protein in itertools.zip_longest(Proteins.objects.all(), target_proteins):
             rows.append({
-                'left': protein,
-                'right': name,
+                'left': peptide,
+                'right': protein,
             })
         context['rows'] = rows
 
@@ -106,8 +105,7 @@ class SearchView(generic.FormView):
             reverse("ampdb:protein")
             + "?"
             + urllib.parse.urlencode({
-                "pdb_name": form['pdb_name'].value(),
-                "target_protein": form['target_protein'].value()}))
+                "pdb_name": form['pdb_name'].value()}))
 
 
 class ProteinView(generic.TemplateView):

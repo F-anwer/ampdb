@@ -5,6 +5,13 @@
 
         <form class="form-inline" method="POST" action="/ampdb/search/">
             {% csrf_token %}
+  <div class="col">
+    <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+  </div>
+  <div class="col">
+    <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+  </div>
+
             <input name="email" class="form-control" type="text" placeholder="Email">
 
             <div class="input-group-append">
