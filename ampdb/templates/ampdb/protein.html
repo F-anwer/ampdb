@@ -2,19 +2,7 @@
 {% block content %}
     {% if protein %}
         <h1>{{ protein.name }}</h1>
-        <div class="container p-2">
-            <ul class="nav nav-tabs nav-justified">
-                <li class="nav-item mr-1">
-                    <a class="nav-link" role="tab" data-toggle="tab" href="#physio">Physiochemical
-                        Parameters</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#struct" role="tab" data-toggle="tab">Peptide>Structure</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#docking" role="tab" data-toggle="tab">Docking</a>
-                </li>
-            </ul>
+
             <div class="tab-content shadow-lg">
                 <div class="tab-pane fade show bg-white text-dark active" role="tab" id="physio">
                     <div class="nav nav-tabs flex-content">
@@ -144,7 +132,7 @@
 
                             <tr>
                                 <td>Molecular Weight</td>
-                                <td>{{ protein.molecular_weight }}</td>+++++++++++
+                                <td>{{ protein.molecular_weight }}</td>
                             </tr>
 
                             <tr>
@@ -216,7 +204,7 @@
                                     success: function (data) {
                                         let v = viewer;
                                         v.addModel(data, "pdb");                       /* load data */
-                                        v.setStyle({}, {cartoon: {color: 'spectrum'}});  /* style all atoms */
+                                        v.setStyle({}, {cartoon: {color: 'purple'}});  /* style all atoms */
                                         v.zoomTo();                                      /* set camera */
                                         v.render();                                      /* render scene */
                                         v.zoom(1.2, 1000);                             /* slight zoom */
@@ -277,7 +265,6 @@
                     </a>
                 </div>
             </div>
-        </div>
     {% else %}
         no such protein
     {% endif %}

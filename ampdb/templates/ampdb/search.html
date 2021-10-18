@@ -5,6 +5,7 @@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <div class="row justify-content-around">
 
+
         <form class="form-inline" method="POST" action="/ampdb/search/">
             <div class="form-group mx-sm-3 mb-2">
                 {% csrf_token %}
@@ -22,6 +23,7 @@
                             <th scope="col">View</th>
                         </tr>
                         </thead>
+
                         <tbody>
                         {% for row in rows %}
 
@@ -35,10 +37,27 @@
                                 <td><button type="submit" class="btn btn-link">View</button>
                                 </div></td>
                             </tr>
+
                             </tbody>
+
                         {% endfor %}
                     </table>
                 </div>
+<!--                <div class="pagination">-->
+<!--							<p class="counter">-->
+<!--					            Page 1 of 3</p>-->
+<!--						<ul class="pagination-list">-->
+<!--                            <li class="disabled"><a><i class="icon-first"></i></a>-->
+<!--                            </li><li class="disabled"><a><i class="icon-previous"></i></a>-->
+<!--                            </li><li class="active"><a>1</a></li>-->
+<!--                            <li><a title="2" href="/ampdb/search/start=20" class="pagenav">2</a></li>-->
+<!--                            <li><a title="3" href="/ampdb/search/start=30" class="pagenav">3</a></li>-->
+<!--                            <li><a title="Next" href="/ampdb/search/start=10" class="pagenav"><i class="icon-next"></i></a></li>-->
+<!--                            <li><a title="End" href="/ampdb/search/start=20" class="pagenav"><i class="icon-last"></i></a></li>-->
+<!--                        </ul>-->
+<!--                        </div>-->
+
+
 
 <!--                {#                <div class="form-check">#}-->
 <!--                {#                    <label class="form-check-label" for="exampleRadios2">#}-->
