@@ -39,8 +39,4 @@ Then to access the database, just run the following command>:
   $ python manage.py runserver
 ````
 
-## Motivation 
-
-
-## Goals 
 
