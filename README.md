@@ -1,4 +1,4 @@
-![Status](https://github.com/nadzhou/ampdb/blob/main/.github/workflows/main.yml/badge.svg)
+![Status](https://github.com/nadzhou/ampdb/.github/workflows/main.yml/badge.svg)
 
 # AMPdb - Database for structure-calculated AMPs 
 Django framework for the protein AMPs database. With a clean and easy GUI, AMPdb provides an easy lookup for structural AMPs with its tabulated properties in each entry. 
