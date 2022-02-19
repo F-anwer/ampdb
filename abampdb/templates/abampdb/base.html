@@ -24,20 +24,20 @@
     <div class="sticky-top">
         <nav class="nav navbar-expand-lg navbar-dark bg-dark">
             <li class="nav-item">
-                <a class="nav-link active" href="{% url 'ampdb:stats' %}">Statistics</a>
+                <a class="nav-link active" href="{% url 'abampdb:stats' %}">Statistics</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'ampdb:tutorial' %}">Tutorials</a>
+                <a class="nav-link" href="{% url 'abampdb:tutorial' %}">Tutorials</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'ampdb:about_us' %}">About Us</a>
+                <a class="nav-link" href="{% url 'abampdb:about_us' %}">About Us</a>
             </li>
             <div class="navbar-nav ml-auto mb-2 mb-lg-0 justify-content-right"></div>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'ampdb:login' %}">login</a>
+                <a class="nav-link" href="{% url 'abampdb:login' %}">login</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'ampdb:contact' %}">Contact</a>
+                <a class="nav-link" href="{% url 'abampdb:contact' %}">Contact</a>
             </li>
         </nav>
     </div>
@@ -47,13 +47,13 @@
                 <button class="navbar-toggler" type="button" data-toggle="collapse " data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-                <a class="navbar-brand" height="100" href="{% url 'ampdb:index' %}">
+                <a class="navbar-brand" height="100" href="{% url 'abampdb:index' %}">
                     <img src="{% static 'img/logo.png' %}" width="120">
                 </a>
                 <div class="navbar-nav mb-2 mb-lg-0 justify-content-center " id="navbarNav">
                     <ul class="nav nav-tabs">
                         <li class="nav-item active">
-                            <a class="nav-link" role="tab" data-toggle="tab" href="{% url 'ampdb:search' %}">Search AMP-Target protein</a>
+                            <a class="nav-link" role="tab" data-toggle="tab" href="{% url 'abampdb:search' %}">Search AMP-Target protein</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" role="tab" data-toggle="tab" href="#physio">Physiochemical

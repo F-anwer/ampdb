@@ -102,7 +102,7 @@ class SearchView(generic.FormView):
         view"""
 
         return HttpResponseRedirect(
-            reverse("ampdb:protein")
+            reverse("abampdb:protein")
             + "?"
             + urllib.parse.urlencode({
                 "pdb_name": form['pdb_name'].value()}))
