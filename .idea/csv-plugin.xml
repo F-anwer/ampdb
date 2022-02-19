@@ -3,14 +3,14 @@
   <component name="CsvFileAttributes">
     <option name="attributeMap">
       <map>
-        <entry key="/ampdb/static/ampdb.csv">
+        <entry key="/abampdb/static/ampdb.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />
             </Attribute>
           </value>
         </entry>
-        <entry key="/ampdb/static/data.csv">
+        <entry key="/abampdb/static/data.csv">
           <value>
             <Attribute>
               <option name="separator" value="," />

@@ -1,7 +1,7 @@
 from django.test import TestCase
 from django.utils import timezone
 
-from ampdb.models import PDBQuery
+from abampdb.models import PDBQuery
 
 
 class QuestionModelTests(TestCase):

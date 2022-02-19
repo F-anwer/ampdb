@@ -1,11 +1,11 @@
 import pandas as pd
 from django.core.management.base import BaseCommand
 
-from ampdb.models import Proteins
+from abampdb.models import Proteins
 
 
 class Command(BaseCommand):
-    help = "Load the data file to as a database to ampdb."
+    help = "Load the data file to as a database to abampdb."
 
     def add_arguments(self, parser):
         parser.add_argument("csv_dir", type=str, help="Path to csv data file.")

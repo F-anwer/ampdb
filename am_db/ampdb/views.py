@@ -2,12 +2,11 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
-
 from .models import PDBQuery
 
 
 class IndexView(generic.ListView):
-    template_name = "ampdb/index.html"
+    template_name = "abampdb/index.html"
 
     def get_queryset(self):
         return PDBQuery.objects.all()
@@ -15,7 +14,7 @@ class IndexView(generic.ListView):
 
 class DetailView(generic.DetailView):
     model = PDBQuery
-    template_name = "ampdb/results.html"
+    template_name = "abampdb/results.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -31,4 +30,4 @@ class DetailView(generic.DetailView):
     #     except PDBQuery.DoesNotExist:
     #         return HttpResponse("no such protein available")
     # else:
-    #     return render(request, 'ampdb/index.html')
+    #     return render(request, 'abampdb/index.html')

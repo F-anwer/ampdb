@@ -14,38 +14,38 @@ from .models import PDBQuery, Proteins
 class IndexView(generic.TemplateView):
     """Index first page view of the AMPdb tool"""
 
-    template_name = "ampdb/index.html"
+    template_name = "abampdb/index.html"
 
 
 class LoginInView(generic.TemplateView):
     """Index first page view of the AMPdb tool"""
 
-    template_name = "ampdb/login.html"
+    template_name = "abampdb/login.html"
 
 
 class AboutUsView(generic.TemplateView):
     """About Us view of the AMPdb tool"""
 
-    template_name = "ampdb/about_us.html"
+    template_name = "abampdb/about_us.html"
 
 
 class StatsView(generic.TemplateView):
     """About Us view of the AMPdb tool"""
 
-    template_name = "ampdb/stats.html"
+    template_name = "abampdb/stats.html"
 
 
 class ContactView(generic.TemplateView):
     """Contact section of the AMPdb tool."""
 
     model = PDBQuery
-    template_name = "ampdb/contact.html"
+    template_name = "abampdb/contact.html"
 
 
 class TutorialView(generic.TemplateView):
     """Contact section of the AMPdb tool."""
 
-    template_name = "ampdb/tutorial.html"
+    template_name = "abampdb/tutorial.html"
 
 
 class SearchForm(forms.Form):
@@ -66,8 +66,8 @@ class SearchForm(forms.Form):
 class SearchView(generic.FormView):
     """Search view of the AMPdb tool."""
     form_class = SearchForm
-    template_name = "ampdb/search.html"
-    success_url = "/ampdb"
+    template_name = "abampdb/search.html"
+    success_url = "/abampdb"
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
@@ -111,7 +111,7 @@ class SearchView(generic.FormView):
 class ProteinView(generic.TemplateView):
     """Protein entry view for each result with all the properties."""
 
-    template_name = "ampdb/protein.html"
+    template_name = "abampdb/protein.html"
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

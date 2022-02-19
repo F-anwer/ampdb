@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+from pickle import TRUE
 import django_heroku
 from pathlib import Path
 
@@ -25,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-iazodh9$*0bg6vise2x80n$d%ciq=24u+($=@_4@pfj_qzrm0c"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = TRUE
 
 ALLOWED_HOSTS = ["127.0.0.1"]
 
@@ -33,7 +34,7 @@ ALLOWED_HOSTS = ["127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
-    "ampdb.apps.AmpdbConfig",
+    "abampdb.apps.AmpdbConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -141,7 +142,7 @@ TEMPLATE_DIRS = (
 )
 
 INSTALLED_APPS = [
-    "ampdb.apps.AmpdbConfig",
+    "abampdb.apps.AmpdbConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",

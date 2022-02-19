@@ -1,1 +1,1 @@
-web: gunicorn ampdb.wsgi
+web: gunicorn abampdb.wsgi

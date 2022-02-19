@@ -2,8 +2,8 @@ import json
 
 from django.test import TestCase
 
-from ampdb.management.commands.load_csv import Command
-from ampdb.models import Proteins
+from abampdb.management.commands.load_csv import Command
+from abampdb.models import Proteins
 
 
 class Test(TestCase):
@@ -57,7 +57,7 @@ class Test(TestCase):
         expected["cytoplasmic"] = eval(str(expected["cytoplasmic"]).title())
         # expected['extracellular'] = expected['extracellular'].upper()
         command.handle(csv_dir="ampdb-Final.csv")
-        # command.handle(csv_dir='ampdb/static/data.csv')
+        # command.handle(csv_dir='abampdb/static/data.csv')
         self.maxDiff = None
         protein = Proteins.objects.all()[0]
         actual = protein.__dict__
