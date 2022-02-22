@@ -4,7 +4,7 @@ from django.urls import path
 
 from . import views
 
-app_name = "ampdb"
+app_name = "abampdb"
 urlpatterns = [
     path("", views.IndexView.as_view(), name="index"),
     path("login/", views.LoginInView.as_view(), name="login"),

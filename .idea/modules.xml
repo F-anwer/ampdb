@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/ampdb.iml" filepath="$PROJECT_DIR$/.idea/ampdb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/abampdb.iml" filepath="$PROJECT_DIR$/.idea/abampdb.iml" />
     </modules>
   </component>
 </project>
