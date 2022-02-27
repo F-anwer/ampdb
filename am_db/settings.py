@@ -23,12 +23,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-iazodh9$*0bg6vise2x80n$d%ciq=24u+($=@_4@pfj_qzrm0c"
 
+with open(os.path.join(BASE_DIR 'secret_key.txt')) as f:
+    SECRET_KEY = f.read().strip()
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = TRUE
 
-ALLOWED_HOSTS = ["127.0.0.1"]
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
+
+
+
+ALLOWED_HOSTS = ["127.0.0.1", 'www.mgbioinfo.com']
 
 
 # Application definition
@@ -133,8 +137,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
-MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+STATIC_ROOT = os.path.join(BASE_DIR, "static/")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 MEDIA_URL = "/media/"
 
 TEMPLATE_DIRS = (
@@ -150,6 +154,13 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
+SECURE_HSTS_SECONDS = 3153600 #1 year
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
