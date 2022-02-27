@@ -1,1 +1,1 @@
-web: gunicorn --pythonpath ghiblimovs abampdb.wsgi --log-file -
+web: gunicorn gettingstarted.wsgi
