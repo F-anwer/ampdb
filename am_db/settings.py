@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 import os
 from pickle import TRUE
-import django_heroku
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,16 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-# SECRET_KEY = "django-insecure-iazodh9$*0bg6vise2x80n$d%ciq=24u+($=@_4@pfj_qzrm0c"
+SECRET_KEY = "django-insecure-iazodh9$*0bg6vise2x80n$d%ciq=24u+($=@_4@pfj_qzrm0c"
+
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
-
-
-
-ALLOWED_HOSTS = ["127.0.0.1", 'www.mgbioinfo.com']
-
-
+DEBUG = TRUE
+ALLOWED_HOSTS = ["127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
@@ -153,13 +148,4 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
-SECURE_SSL_REDIRECT = True
 
-SECURE_HSTS_SECONDS = 3153600 #1 year
-SECURE_HSTS_PRELOAD = True
-SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-
-# Activate Django-Heroku.
-django_heroku.settings(locals())
