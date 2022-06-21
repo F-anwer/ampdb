@@ -1,3 +1,4 @@
+[![Package](https://github.com/nadzhou/ampdb/actions/workflows/package.yml/badge.svg)](https://github.com/nadzhou/ampdb/actions/workflows/package.yml)
 # AMPdb - Database for structure-calculated AMPs 
 Django framework for the protein AMPs database. With a clean and easy GUI, AMPdb provides an easy lookup for structural AMPs with its tabulated properties in each entry. 
 
@@ -39,8 +40,4 @@ Then to access the database, just run the following command>:
   $ python manage.py runserver
 ````
 
-## Motivation 
-
-
-## Goals 
 
