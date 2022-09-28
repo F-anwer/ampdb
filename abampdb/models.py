@@ -1,7 +1,7 @@
-import datetime
+# import datetime
 
 from django.db import models
-from django.utils import timezone
+# from django.utils import timezone
 
 
 class PDBQuery(models.Model):
@@ -55,7 +55,46 @@ class Proteins(models.Model):
     rmsf = models.FloatField(("RMSF"))
     flexibility = models.FloatField(("Flexibility"))
     pdb_name = models.CharField(("PDBName"), max_length=256)
-    links = models.URLField(("Links"), max_length=128, db_index=True, blank=True)
+    score = models.IntegerField(("Score"))
+    docked = models.CharField(("Docked"), max_length=256)
 
     def __str__(self):
         return self.name
+
+
+class Dock_Proteins(models.Model):
+
+    pdb_name = models.ForeignKey(Proteins, on_delete=models.CASCADE)
+    dock_1 = models.CharField(("dock_1"), max_length=256, default='SOME STRING')
+    dock_2 = models.CharField(("dock_2"), max_length=256, default='SOME STRING')
+    dock_3 = models.CharField(("dock_3"), max_length=256, default='SOME STRING')
+    dock_4 = models.CharField(("dock_4"), max_length=256, default='SOME STRING')
+    dock_5 = models.CharField(("dock_5"), max_length=256, default='SOME STRING')
+    dock_6 = models.CharField(("dock_6"), max_length=256, default='SOME STRING')
+    dock_7 = models.CharField(("dock_7"), max_length=256, default='SOME STRING')
+    dock_8 = models.CharField(("dock_8"), max_length=256, default='SOME STRING')
+    dock_9 = models.CharField(("dock_9"), max_length=256, default='SOME STRING')
+    dock_10 = models.CharField(("dock_10"), max_length=256, default='SOME STRING')
+    dock_11 = models.CharField(("dock_11"), max_length=256, default='SOME STRING')
+    dock_12 = models.CharField(("dock_12"), max_length=256, default='SOME STRING')
+    dock_13 = models.CharField(("dock_13"), max_length=256, default='SOME STRING')
+    dock_14 = models.CharField(("dock_14"), max_length=256, default='SOME STRING')
+    dock_15 = models.CharField(("dock_15"), max_length=256, default='SOME STRING')
+    dock_16 = models.CharField(("dock_16"), max_length=256, default='SOME STRING')
+    dock_17 = models.CharField(("dock_17"), max_length=256, default='SOME STRING')
+    dock_18 = models.CharField(("dock_18"), max_length=256, default='SOME STRING')
+    dock_19 = models.CharField(("dock_19"), max_length=256, default='SOME STRING')
+    dock_20 = models.CharField(("dock_20"), max_length=256, default='SOME STRING')
+    dock_21 = models.CharField(("dock_21"), max_length=256, default='SOME STRING')
+    dock_22 = models.CharField(("dock_22"), max_length=256, default='SOME STRING')
+    dock_23 = models.CharField(("dock_23"), max_length=256, default='SOME STRING')
+    dock_24 = models.CharField(("dock_24"), max_length=256, default='SOME STRING')
+    dock_25 = models.CharField(("dock_25"), max_length=256, default='SOME STRING')
+    dock_26 = models.CharField(("dock_26"), max_length=256, default='SOME STRING')
+    dock_27 = models.CharField(("dock_27"), max_length=256, default='SOME STRING')
+    dock_28 = models.CharField(("dock_28"), max_length=256, default='SOME STRING')
+    dock_29 = models.CharField(("dock_29"), max_length=256, default='SOME STRING')
+    dock_30 = models.CharField(("dock_30"), max_length=256, default='SOME STRING')
+    
+    def __str__(self):
+        return self.pdb_name

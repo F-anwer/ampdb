@@ -1,14 +1,15 @@
 import urllib
-from wsgiref.util import FileWrapper
+# from wsgiref.util import FileWrapper
 
 from django import forms
-from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+# from django.http import HttpResponse, HttpResponseRedirect
+# from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views import generic
 import itertools
+from django.http import HttpResponseRedirect
 
-from .models import PDBQuery, Proteins
+from .models import PDBQuery, Proteins, Dock_Proteins
 
 
 class IndexView(generic.TemplateView):
@@ -53,8 +54,7 @@ class SearchForm(forms.Form):
 
     # query_id = forms.CharField()
     pdb_name = forms.CharField()
-
-
+    
     def create_query(self):
         """the form fields get put into self.cleaned_data, make a new
         PDBQuery object from those fields and return"""
@@ -72,6 +72,10 @@ class SearchView(generic.FormView):
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
         rows = []
+        # proteinpdbs = Dock_Proteins.objects.get( pdb_name=self.request.GET.getlist("pdb_name") )
+       # for pdb in proteinpdbs:
+      #      print(pdb)
+            # docks = Dock_Proteins.objects.get( name=self.request.GET.getlist("dock_1") )
 
         target_proteins = [
             'Omp38',
@@ -79,6 +83,31 @@ class SearchView(generic.FormView):
             'OmpA',
             'Omp33-36',
             'Oxa51like',
+            'oprD',
+            'cat1',
+            'cm1A',
+            'FBN',
+            'fic',
+            'fimH',
+            'gentamicin',
+            'IMP',
+            'LptD',
+            'Oxa-51 like M',
+            'adeA',
+            'adeC',
+            'adeR',
+            'adeS',
+            'ampC',
+            'baeR',
+            'baeS',
+            'bfmR',
+            'bfmS',
+            'blaOXA-33',
+            'cpaA',
+            'gacA',
+            'gacS',
+            'intl1',
+            'smpA',
         ]
 
         for peptide, protein in itertools.zip_longest(Proteins.objects.all(), target_proteins):

@@ -55,7 +55,8 @@ class Command(BaseCommand):
             "RMSF": "rmsf",
             "Flexibility ": "flexibility",
             "PDBName": "pdb_name",
-            "Links": "Links",
+            "Score": "score",
+            "Docked": "docked",
         }
         for i, row in df.iterrows():
             # there are more rows than there are data, stop when we reach the lines without names

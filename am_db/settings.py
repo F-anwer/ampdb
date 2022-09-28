@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
-from pickle import TRUE
 from pathlib import Path
+import django
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,8 +27,11 @@ SECRET_KEY = "django-insecure-iazodh9$*0bg6vise2x80n$d%ciq=24u+($=@_4@pfj_qzrm0c
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-DEBUG = TRUE
+DEBUG = True
 ALLOWED_HOSTS = ["127.0.0.1"]
+
+APPEND_SLASH = False
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -77,9 +80,13 @@ WSGI_APPLICATION = "am_db.wsgi.application"
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'abampdb',
+        'USER': 'postgres',
+        'PASSWORD': 'Nust@123',
+        'HOST': 'localhost',
+        'PORT': '5432',
     }
 }
 

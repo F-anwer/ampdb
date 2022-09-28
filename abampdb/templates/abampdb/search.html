@@ -5,7 +5,7 @@
 <div class="row justify-content-around">
 
     <div class="alert alert-danger" role="alert">
-        <div class="blink_me">Total 30 AMPs were evaluated from screening of literature and interacted with 15 target proteins of <em>A.baumannii</em></div>
+        <div class="blink_me">Total 30 AMPs were evaluated from screening of literature and interacted with 30 target proteins of <em>A.baumannii</em></div>
     </div>
     <style>
         .blink_me {
@@ -31,9 +31,9 @@
                             <th scope="col">Select AMP</th>
                             <th scope="col">AMP name</th>
                             <th scope="col">AMP-Sequence</th>
-                            <th scope="col">Select target Protein</th>
                             <th scope="col">Score</th>
-                            <th scope="col">View</th>
+                            <th scope="col">Select target Protein</th>
+                            <th scope="col" style="padding-left: 20px;"> View</th>
                         </tr>
                     </thead>
 
@@ -45,6 +45,7 @@
                             <td><input type="radio" name="pdb_name" value="{{ row.left.name }}"></td>
                             <td>{{ row.left.name }}</td>
                             <td>{{ row.left.sequence }}</td>
+                            <td>{{ row.left.score }}</td>
                             {% if row.right %}
 
                             <td>
@@ -52,13 +53,12 @@
                                 {{ row.right }}
 
                             </td>
-                            {% else %}
-                            <td>&nbsp;</td>
+                            <!-- {% else %} -->
                             {% endif %}
-                            <td>7</td>
-                            <div class="input-group-append">
-                                <td><button type="submit" class="btn btn-link">View</button>
-                            </div>
+                            <td>
+                                <!-- <div class="input-group-append"> -->
+                                <td><button type="submit" class="btn btn-link">View</button></td>
+                                <!-- </div> -->
                             </td>
                         </tr>
 
