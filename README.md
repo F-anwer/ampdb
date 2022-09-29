@@ -11,16 +11,19 @@ The AMPdb app looks as follows:
 ### Home page
 
 
-![image](https://user-images.githubusercontent.com/25282805/130806245-0cdac0a2-be04-4d7e-9671-7edd1d3976c3.png)
+![image](https://github.com/nadzhou/ampdb/blob/main/static/img/interface1.png)
 
-### Results page
+### Select AMP and protein tab
 
 
-![image](https://user-images.githubusercontent.com/25282805/130806466-baf02c4b-efd5-45d8-95db-8569e563da51.png)
+![image](https://github.com/nadzhou/ampdb/blob/main/static/img/interface2.png)
 
-### Docking tab
+### Physicochemical parameter tab
 
-![image](https://user-images.githubusercontent.com/25282805/130806645-0a79effd-b446-4211-afef-672718c7b146.png)
+![image](https://github.com/nadzhou/ampdb/blob/main/static/img/interface3.png)
+### AMP-Target protein Interaction tab
+
+![image](https://github.com/nadzhou/ampdb/blob/main/static/img/interface4.png)
 
 ## Installation 
 Installation is easy, just follow these steps: 
