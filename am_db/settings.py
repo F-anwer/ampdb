@@ -30,8 +30,6 @@ SECRET_KEY = "django-insecure-iazodh9$*0bg6vise2x80n$d%ciq=24u+($=@_4@pfj_qzrm0c
 DEBUG = True
 ALLOWED_HOSTS = ["127.0.0.1"]
 
-APPEND_SLASH = False
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,6 +42,9 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "import_export",
 ]
+
+APPEND_SLASH = False
+REMOVE_SLASH = True
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",

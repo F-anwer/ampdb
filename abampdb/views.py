@@ -67,7 +67,7 @@ class SearchView(generic.FormView):
     """Search view of the AMPdb tool."""
     form_class = SearchForm
     template_name = "abampdb/search.html"
-    success_url = "/abampdb"
+    success_url = ''
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
@@ -75,7 +75,7 @@ class SearchView(generic.FormView):
         # proteinpdbs = Dock_Proteins.objects.get( pdb_name=self.request.GET.getlist("pdb_name") )
        # for pdb in proteinpdbs:
       #      print(pdb)
-            # docks = Dock_Proteins.objects.get( name=self.request.GET.getlist("dock_1") )
+# docks = Dock_Proteins.objects.get( name=self.request.GET.getlist("dock_1") )
 
         target_proteins = [
             'Omp38',
