@@ -209,6 +209,38 @@
                             <td>Mole% Acidic</td>
                             <td>{{ protein.mol_weight_acidic }}</td>
                         </tr>
+                        <tr>
+                            <td>MolecularWeight</td>
+                            <td>{{ protein.molecular_weight }}</td>
+                        </tr>
+                        <tr>
+                            <td>Length</td>
+                            <td>{{ protein.length }}</td>
+                        </tr>
+                        <tr>
+                            <td>Charge</td>
+                            <td>{{ protein.charge }}</td>
+                        </tr>
+                        <tr>
+                            <td>pI</td>
+                            <td>{{ protein.p_i }}</td>
+                        </tr>
+                        <tr>
+                            <td>AIndex</td>
+                            <td>{{ protein.a_index }}</td>
+                        </tr>
+                        <tr>
+                            <td>InstaIndex</td>
+                            <td>{{ protein.instaIndex }}</td>
+                        </tr>
+                        <tr>
+                            <td>BomanIndex</td>
+                            <td>{{ protein.BomanIndex }}</td>
+                        </tr>
+                        <tr>
+                            <td>BomanIndex</td>
+                            <td>{{ protein.BomanIndex }}</td>
+                        </tr>
 
                         <tr>
                             <td>Hydrophobicity</td>
@@ -219,12 +251,6 @@
                             <td>Hydrophobic Moment</td>
                             <td>{{ protein.hmoment_angle }}</td>
                         </tr>
-
-                        <tr>
-                            <td>Molecular Weight</td>
-                            <td>{{ protein.molecular_weight }}</td>
-                        </tr>
-
                         <tr>
                             <td>Transmembrane</td>
                             <td>{{ protein.transmembrane }}</td>
@@ -248,7 +274,7 @@
                         </tr>
 
                         <tr>
-                            <td>Disulfide bridges</td>
+                            <td>DisulfideEnd</td>
                             <td>{{ protein.disulfide_end }}</td>
                         </tr>
 
@@ -257,7 +283,7 @@
                             <td>{{ protein.toxicity }}</td>
                         </tr>
                         <tr>
-                            <td>Root Mean Squared Fluctuation</td>
+                            <td>RMSF</td>
                             <td>{{ protein.rmsf }}</td>
                         </tr>
                         <tr>
@@ -419,7 +445,7 @@
 
                 <div class="container-fluid physico-chemical-property-container m-t-50" align="center" style="position: relative;">
                     <div>
-                        <a role="button" href="/static/dock/dock_{{ protein.pdb_name }}" download="/static/dock/dock_{{ protein.pdb_name }}" class="btn btn-light text-dark ml-0">
+                        <a role="button" href="/static/dock/dock_{{  }}_{{ protein.pdb_name }}" download="/static/dock/dock_{{ protein.pdb_name }}" class="btn btn-light text-dark ml-0">
                 Download PDB
              </a>
                     </div>

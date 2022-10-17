@@ -50,13 +50,11 @@ class Command(BaseCommand):
             "Cytoplasmic": "cytoplasmic",
             "HydrophobicityPlot": "hydrophobic_plots",
             "HydrophobicityPlot2": "hydropathy_plots",
-            "Presence of disulphide bridges": "disulfide_end",
+            "disulphides": "disulfide_end",
             "Toxicity": "toxicity",
             "RMSF": "rmsf",
             "Flexibility": "flexibility",
-            "PDBName": "pdb_name",
             "Score": "score",
-            "Docked": "docked",
         }
         for i, row in df.iterrows():
             # there are more rows than there are data, stop when we reach the lines without names

@@ -50,13 +50,12 @@ class Proteins(models.Model):
     cytoplasmic = models.BooleanField(("Cytoplasmic"))
     hydrophobic_plots = models.FloatField(("HydrophobicPlots"))
     hydropathy_plots = models.FloatField(("HydropathyPlots"))
-    disulfide_end = models.CharField(("DisulfideEnd"), max_length=256)
+    disulfide_end = models.CharField(("disulphides"), max_length=256)
     toxicity = models.CharField(("Toxicity"), max_length=256)
     rmsf = models.FloatField(("RMSF"))
-    flexibility = models.FloatField(("Flexibility"))
-    pdb_name = models.CharField(("PDBName"), max_length=256)
+    flexibility = models.FloatField(("Flexibility"))    
     score = models.IntegerField(("Score"))
-    docked = models.CharField(("Docked"), max_length=256)
+    pdb_name = models.CharField(("PDBName"), max_length=256)
 
     def __str__(self):
         return self.name
