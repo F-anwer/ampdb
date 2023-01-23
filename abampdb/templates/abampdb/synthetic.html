@@ -1,0 +1,96 @@
+{% extends './base.html' %} {% block content %} {% if protein %} {% load static %}
+<h1>{{ synthetic.name }}</h1>
+<div id="accordion">
+    <div class="card">
+        <div class="card-header" id="headingOne">
+            <h5 class="mb-0">
+                <button class="btn btn-dark" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Description
+        </button>
+            </h5>
+        </div>
+
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+            <div class="card-body">
+                Aurein 1.2 is a short cationic peptide of 15 amino acids. It is one of the most effective antimicrobial peptides. It exhibits the highest activity against A. baumanni with an MIC value of 2 μg/mL.
+                <div class="tab-pane fade show flex center" id="struct">
+                    <div class="nav nav-tabs flex-content">
+                        <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+                        <div id="container-01" class="mol-container"></div>
+                        <div>
+                            <a role="button" href='/static/pdb/{{ protein.pdb_name }}' download='/static/pdb/{{ protein.pdb_name }}' class="btn btn-light text-dark ml-0">
+                        Download PDB
+                    </a></div>
+
+                        <style>
+                            #container-01 {
+                                width: 50%;
+                                height: 300px;
+                                position: relative;
+                                left: 60px;
+                                top: 10px;
+                                bottom: 30px;
+                            }
+                            
+                            .card-body {
+                                padding: 1.5rem
+                            }
+                            
+                            .btn.btn-light.text-dark.ml-0 {
+                                margin-left: 0px;
+                                margin-top: 60px;
+                                margin-bottom: 1px;
+                                margin-right: 690px;
+                            }
+                            
+                            .element.style {
+                                left: -122px;
+                            }
+                            
+                            .card-body {
+                                margin-bottom: -225px;
+                            }
+                            
+                            .nav-tabs {
+                                border-bottom: 1px solid #ffffff;
+                            }
+                        </style>
+                        <div style="position: relative;right:100px;left:10px;bottom:300px;margin-right: -50px;margin-left: 700px;margin-top: -100px;">
+                            <table>
+                                <tbody>
+                                    </td>
+                                    <td> &nbsp;&nbsp;</td>
+                                    <br><br><br><br>
+                                    <td valign="top">
+                                        <table class="table table-bordered">
+                                            <tbody>
+                                                <tr>
+                                                    <td align="middle">ID</td>
+                                                    <td align="middle">AbAMP1</td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle">Name</td>
+                                                    <td align="middle">{{ synthetic.name }}</td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle">AMP-Type</td>
+                                                    <td align="middle">Predicted
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="middle">Length</td>
+                                                    <td align="middle">{{ synthetic.synthetic_length }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>

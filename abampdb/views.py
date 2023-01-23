@@ -8,32 +8,64 @@ from django.urls import reverse
 from django.views import generic
 import itertools
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
+from django.contrib import messages
+from django.contrib.auth import authenticate,login,logout
+from .models import *
 
 from .models import PDBQuery, Proteins, Dock_Proteins
+import uuid
+from django.shortcuts import redirect
+from django.http import HttpResponse
+from django.contrib.auth.decorators import login_required
 
+@login_required(login_url='/login/')
+def EnterPage(request):
+    return render(request, "abampdb/search.html")
 
-class IndexView(generic.TemplateView):
-    """Index first page view of the AMPdb tool"""
+def SignupPage(request):
+    if request.method=='POST':
+        uname=request.POST.get('username')
+        email=request.POST.get('email')
+        pass1=request.POST.get('password1')
+        pass2=request.POST.get('password2')
 
-    template_name = "abampdb/index.html"
+        if pass1!=pass2:
+            return HttpResponse("Your password and confrom password are not Same!!")
+        else:
+            my_user=User.objects.create_user(uname,email,pass1)
+            my_user.save()
+            return redirect('/login/')
+    return render(request, 'abampdb/signup.html')
 
+def LoginPage(request):
 
-class LoginInView(generic.TemplateView):
-    """Index first page view of the AMPdb tool"""
+    if request.method=='POST':
+        username=request.POST.get('username')
+        pass1=request.POST.get('pass')
+        user=authenticate(request,username=username,password=pass1)
+        if user is not None:
+            login(request,user)
+            return redirect('/search/')
+        else:
+            return HttpResponse ("Username or Password is incorrect!!!")
+    return render (request,'abampdb/login.html')
 
-    template_name = "abampdb/login.html"
+def LogoutPage(request):
+    logout(request)
+    return redirect('/login/')
 
+@login_required(login_url='/login/')
+def IndexPage(request):
+    return render(request, "abampdb/index.html") 
 
-class AboutUsView(generic.TemplateView):
-    """About Us view of the AMPdb tool"""
+@login_required(login_url='/login/')   
+def AboutUsPage(request):
+    return render(request, "abampdb/about_us.html")  
 
-    template_name = "abampdb/about_us.html"
-
-
-class StatsView(generic.TemplateView):
-    """About Us view of the AMPdb tool"""
-
-    template_name = "abampdb/stats.html"
+@login_required(login_url='/login/')   
+def StatsPage(request):
+    return render(request, "abampdb/stats.html")  
 
 
 class ContactView(generic.TemplateView):
@@ -47,6 +79,88 @@ class TutorialView(generic.TemplateView):
     """Contact section of the AMPdb tool."""
 
     template_name = "abampdb/tutorial.html"
+
+class PredictedForm(forms.Form):
+    """Search view showing the top results from the main page of the AMPdb tool."""
+
+    # query_id = forms.CharField()
+    synthetic_pdb_name = forms.CharField()
+    
+    def create_query(self):
+        """the form fields get put into self.cleaned_data, make a new
+        PDBQuery object from those fields and return"""
+        query = Synthetic(name=self.cleaned_data["synthetic_pdb_name"])
+        query.save()
+        return query
+
+
+class PredictedView(generic.TemplateView):
+    """About Us view of the AMPdb tool"""  
+    form_class = PredictedForm
+    template_name = "abampdb/predicted.html"
+    success_url = "/"
+
+    def get_context_data(self, **kwargs):
+        context = super(PredictedView, self).get_context_data(**kwargs)
+        rows = []
+
+        target_proteins = ['Omp38',
+            'OmpW',
+            'OmpA',
+            'Omp33-36',
+            'Oxa51like',
+            'oprD',
+            'cat1',
+            'cm1A',
+            'FBN',
+            'fic',
+            'fimH',
+            'gentamicin',
+            'IMP',
+            'LptD',
+            'Oxa-51 like M',
+            'adeA',
+            'adeC',
+            'adeR',
+            'adeS',
+            'ampC',
+            'baeR',
+            'baeS',
+            'bfmR',
+            'bfmS',
+            'blaOXA-33',
+            'cpaA',
+            'gacA',
+            'gacS',
+            'intl1',
+            'smpA',
+        ]
+
+        for peptide, protein in itertools.zip_longest(Synthetic.objects.all(), target_proteins):
+            rows.append({
+                'left': peptide,
+                'right': protein,
+            })
+        context['rows'] = rows
+
+        context['name'] = Synthetic.objects.all()
+        try:
+            context["name"] = Synthetic.objects.get(
+                name=self.request.GET.getlist("synthetic_pdb_name")
+            )
+        except Synthetic.DoesNotExist:
+            context["name"] = None
+        return context
+
+    def form_valid(self, form):
+        """creates a query object and returns a redirect to the detail
+        view"""
+
+        return HttpResponseRedirect(
+            reverse("ampdb:predicted")
+            + "?"
+            + urllib.parse.urlencode({
+                "synthetic_pdb_name": form['synthetic_pdb_name'].value()}))
 
 
 class SearchForm(forms.Form):
@@ -63,11 +177,12 @@ class SearchForm(forms.Form):
         return query
 
 
+
 class SearchView(generic.FormView):
     """Search view of the AMPdb tool."""
     form_class = SearchForm
     template_name = "abampdb/search.html"
-    success_url = "/abampdb"
+    success_url = "/"
 
     def get_context_data(self, **kwargs):
         context = super(SearchView, self).get_context_data(**kwargs)
@@ -151,4 +266,3 @@ class ProteinView(generic.TemplateView):
         except Proteins.DoesNotExist:
             context["protein"] = None
         return context
-

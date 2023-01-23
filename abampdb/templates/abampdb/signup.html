@@ -1,11 +1,10 @@
 {% extends './base.html' %} {% block content %} {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <!-- Design by foolishdeveloper.com -->
-    <title>Login Page</title>
+    <title>Signup Page</title>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -42,19 +41,19 @@
         
         .shape:first-child {
             background: linear-gradient( #1845ad, #23a2f6);
-            left: -100px;
+            left: -80px;
             top: -0px;
         }
         
         .shape:last-child {
             background: linear-gradient( to right, #ff512f, #f09819);
-            right: -100px;
-            bottom: -145px;
+            right: -70px;
+            bottom: -140px;
         }
         
         form {
-            height: 520px;
-            width: 400px;
+            height: 600px;
+            width: 450px;
             background-color: rgba(255, 255, 255, 0.13);
             position: absolute;
             transform: translate(-50%, -50%);
@@ -91,12 +90,12 @@
         
         input {
             display: block;
-            height: 50px;
+            height: 40px;
             width: 100%;
             background-color: rgba(255, 255, 255, 0.07);
             border-radius: 3px;
             padding: 0 10px;
-            margin-top: 8px;
+            margin-top: 2px;
             font-size: 14px;
             font-weight: 300;
         }
@@ -106,7 +105,7 @@
         }
         
         button {
-            margin-top: 50px;
+            margin-top: 14px;
             width: 100%;
             background-color: #ffffff;
             color: #080710;
@@ -151,43 +150,27 @@
         <div class="shape"></div>
         <div class="shape"></div>
     </div>
-    <form method="post">
-        <h3>Login Here</h3>
+    <form action="" method="post">
         {% csrf_token %}
+        <h3>Signup Here</h3>
+
         <label for="username">Username</label>
-        <input type="text" placeholder="Enter Username" id="username" name="username">
+        <input type="text" placeholder="Username" name="username" id="username">
 
-        <label for="password">Password</label>
-        <input type="password" placeholder="Password" id="password" name="pass">
+        <label for="email">Email</label>
+        <input type="email" placeholder="Email or Phone" name="email" id="email">
 
-        <button type="submit">Log In</button>
-        <!-- <input type="button" value=""> -->
-        <!-- <div class="social">
-          <div class="go"><i class="fab fa-google"></i>  Google</div>
-          <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
-        </div> -->
-        <a href="{% url 'abampdb:signup' %}">Create a account</a>
+        <label for="password1">Password</label>
+        <input type="password" placeholder="Password" id="password1" name="password1">
+
+
+        <label for="password2">Confrom Password</label>
+        <input type="password" placeholder="Confrom Password" id="password2" name="password2">
+        <button type="submit">Signup</button>
+
+        <a href="{% url 'abampdb:login' %}">i have already account</a>
     </form>
 </body>
 
 </html>
 {% endblock %}
-
-<!-- <div class="row justify-content-center">
-
-    <form class="form-inline" method="GET" action="/login/">
-        {% csrf_token %}
-        <div class="col">
-            <input type="text" class="form-control" placeholder="First name" aria-label="First name">
-        </div>
-        <div class="col">
-            <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
-        </div>
-
-        <input name="email" class="form-control" type="text" placeholder="Email">
-
-        <div class="input-group-append">
-            <button type="submit" href="{% url 'abampdb:search' %}" class="btn btn-primary btn-lg">Submit</button>
-        </div>
-    </form>
-</div> -->

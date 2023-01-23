@@ -32,7 +32,10 @@
             </li>
             <div class="navbar-nav ml-auto mb-2 mb-lg-0 justify-content-right"></div>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'abampdb:login' %}">login</a>
+                <a class="nav-link" href="{% url 'abampdb:login' %}">login {{request.user}}</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'abampdb:logout' %}">logout</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{% url 'abampdb:contact' %}">Contact</a>
@@ -49,8 +52,8 @@
                     <img src="{% static 'img/logo.png' %}" width="120">
                 </a>
                 <div class="navbar-nav mb-2 mb-lg-0 justify-content-center " id="navbarNav">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item active">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
                             <a class="nav-link" role="tab" data-toggle="tab" href="{% url 'abampdb:search' %}">Select AMP-Target protein</a>
                         </li>
                         <li class="nav-item">
@@ -58,14 +61,14 @@
                         Parameters of AMP</a>
                         </li>
 
-                        <li class="nav-item ">
+                        <li class="nav-item">
                             <a class="nav-link" href="#docking" role="tab" data-toggle="tab">AMP-Target protein interaction</a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="#docking" role="tab" data-toggle="tab">Predicted AMPs</a>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{% url 'abampdb:predicted' %}" data-toggle="tab" role="tab">Predicted_AMPs</a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link active" href="{% url 'abampdb:stats' %}">Statistics</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'abampdb:stats' %}">Statistics</a>
                         </li>
                     </ul>
                 </div>

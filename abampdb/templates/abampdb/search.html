@@ -5,7 +5,7 @@
 <div class="row justify-content-around">
 
     <div class="alert alert-danger" role="alert">
-        <div class="blink_me">Total 30 AMPs were evaluated from screening of literature and interacted with 30 target proteins of <em>A.baumannii</em></div>
+        <div class="blink_me">Total 30 Experimental AMPs were evaluated from screening of literature and interacted with 30 target proteins of <em>A.baumannii</em></div>
     </div>
     <style>
         .blink_me {
@@ -17,15 +17,25 @@
                 opacity: 0;
             }
         }
+        
+        .table-responsive-xl {
+            max-width: fit-content
+        }
+        
+        .row {
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -50px;
+        }
     </style>
 
-    <form class="form-inline" method="POST" action="/abampdb/search/">
+    <form class="form-inline" method="POST" action="/search/">
         <div class="form-group mx-sm-3 mb-2">
             {% csrf_token %}
-
             <div class="form-check">
-                <table class="table table-hover">
-                    <thead>
+                <div class="table-responsive-xl"></div>
+                <table class="table table-striped">
+                    <thead class="thead-dark">
                         <tr>
                             <th scope="col">AMP ID</th>
                             <th scope="col">Select AMP</th>

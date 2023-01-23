@@ -18,8 +18,8 @@
                         <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
                         <div id="container-01" class="mol-container"></div>
                         <div>
-                            <a role="button" href="/static/pdb/{{ protein.pdb_name }}" download="/static/pdb/{{ protein.pdb_name }}" class="btn btn-light text-dark ml-0">
-                        Download PDB
+                            <a role="button" href='/static/pdb/{{ protein.pdb_name }}' download='/static/pdb/{{ protein.pdb_name }}' class="btn btn-light text-dark ml-0">
+                        Download pdb
                     </a></div>
 
                         <style>
@@ -70,7 +70,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td align="middle">Name</td>
-                                                    <td align="middle">Aurein 1.2</td>
+                                                    <td align="middle">{{ protein.name }}</td>
                                                 </tr>
                                                 <tr>
                                                     <td align="middle">AMP-Type</td>
@@ -79,7 +79,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td align="middle">Length</td>
-                                                    <td align="middle">15</td>
+                                                    <td align="middle">{{ protein.length }}</td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -316,7 +316,7 @@
                         backgroundColor: "White"
                     };
                     let viewer = $3Dmol.createViewer(element, config);
-                    let pdbUri = "/static/pdb/{{ protein.pdb_name }}";
+                    let pdbUri = '/static/pdb/{{ protein.pdb_name }}';
                     jQuery.ajax(pdbUri, {
                         success: function(data) {
                             let v = viewer;
@@ -421,7 +421,7 @@
                             backgroundColor: "White"
                         };
                         let viewer = $3Dmol.createViewer(element, config);
-                        let pdbUri = "/static/dock/dock_{{ protein.pdb_name}}";
+                        let pdbUri = '/static/dock/dock_{{ protein.pdb_name }}';
                         jQuery.ajax(pdbUri, {
                             success: function(data) {
                                 let v = viewer;
@@ -445,7 +445,7 @@
 
                 <div class="container-fluid physico-chemical-property-container m-t-50" align="center" style="position: relative;">
                     <div>
-                        <a role="button" href="/static/dock/dock_{{  }}_{{ protein.pdb_name }}" download="/static/dock/dock_{{ protein.pdb_name }}" class="btn btn-light text-dark ml-0">
+                        <a role="button" href='/static/dock/dock_{{ protein.pdb_name }}' download='/static/dock/dock_{{ protein.pdb_name }}' class="btn btn-light text-dark ml-0">
                 Download PDB
              </a>
                     </div>

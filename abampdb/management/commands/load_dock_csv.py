@@ -13,7 +13,7 @@ class Command(BaseCommand):
     def handle(self, *args, csv_dir=None, **kwargs):
         df = pd.read_csv(csv_dir)
         col_map = {
-            "PDBName": "pdb_name",
+            "Name": "name",
             "Dock_1": "dock_1",
             "Dock_2": "dock_2",
             "Dock_3": "dock_3",
