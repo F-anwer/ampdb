@@ -58,9 +58,12 @@ class Proteins(models.Model):
     flexibility = models.FloatField(("Flexibility"))
     score = models.IntegerField(("Score"))
     pdb_name = models.CharField(("PDBName"), max_length=256)
+    
 
-    def __str__(self):
-        return self.name
+
+class Dock_Proteins(models.Model):
+    name = models.CharField(max_length=255)
+    proteins = models.ManyToManyField(Proteins, related_name='dock_protein')
 
 class PDBSQuery(models.Model):
     query_id = models.CharField(max_length=200)
@@ -77,7 +80,7 @@ class Synthetic(models.Model):
     synthetic_Tiny = models.IntegerField(("Tiny"))
     synthetic_Small = models.IntegerField(("Small"))
     synthetic_Aliphtic = models.IntegerField(("Synthetic_aliphatic"))
-    synthetic_Aromatic = models.CharField(("Synthetic_aromatic"), max_length=500)
+    synthetic_Aromatic = models.IntegerField(("Synthetic_aromatic"))
     synthetic_non_polar = models.IntegerField(("Synthetic_Non_Polar-aa"))
     synthetic_polar = models.IntegerField(("Synthetic_Polar-aa"))
     synthetic_charged_aa = models.IntegerField(("Synthetic_Charged-aa"))
@@ -91,7 +94,7 @@ class Synthetic(models.Model):
     synthetic_mol_weight_polar = models.FloatField(("Synthetic_Mole%-Polar_aa"), max_length=255)
     synthetic_mol_weight_charged = models.FloatField(("Synthetic_Mole%-Charged_aa"), max_length=255)
     synthetic_mol_weight_basic = models.FloatField(("Synthetic_Mole%-Basic_aa"), max_length=255, default=None)
-    synthetic_mol_weight_acidic = models.FloatField(("Synthetic_Mole%-Acidic_aa"), max_length=255, default=None)
+    synthetic_mol_weight_acidic = models.IntegerField(("Synthetic_Mole%-Acidic_aa"), default=None)
     synthetic_molecular_weight = models.FloatField(("Synthetic_mw"), max_length=255, default=None)
     synthetic_length = models.IntegerField(("Synthetic_length"), default=None)
     synthetic_charge = models.FloatField(("Synthetic_Charge"), max_length=255, default=None)
@@ -105,37 +108,3 @@ class Synthetic(models.Model):
     synthetic_hemolytic_activity = models.FloatField(("Synthetic_Hemolytic activity"), max_length=255)
     synthetic_score = models.IntegerField(("Synthetic_Score"), default=None)
     synthetic_pdb_name = models.CharField(("Synthetic_PDBName"), max_length=255, default=None)
-
-class Dock_Proteins(models.Model):
-	title = models.CharField(_("title"), max_length=255)
-	dock_1 = models.CharField(_("dock_1"), max_length=255)
-	dock_2 = models.CharField(_("dock_2"), max_length=256)
-	dock_3 = models.CharField(_("dock_3"), max_length=256)
-	dock_4 = models.CharField(_("dock_4"), max_length=256)
-	dock_5 = models.CharField(_("dock_5"), max_length=256)
-	dock_6 = models.CharField(_("dock_6"), max_length=256)
-	dock_7 = models.CharField(_("dock_7"), max_length=256)
-	dock_8 = models.CharField(_("dock_8"), max_length=256)
-	dock_9 = models.CharField(_("dock_9"), max_length=256)
-	dock_10 = models.CharField(_("dock_10"), max_length=256)
-	dock_11 = models.CharField(_("dock_11"), max_length=256)
-	dock_12 = models.CharField(_("dock_12"), max_length=256)
-	dock_13 = models.CharField(_("dock_13"), max_length=256)
-	dock_14 = models.CharField(_("dock_14"), max_length=256)
-	dock_15 = models.CharField(_("dock_15"), max_length=256)
-	dock_16 = models.CharField(_("dock_16"), max_length=256)
-	dock_17 = models.CharField(_("dock_17"), max_length=256)
-	dock_18 = models.CharField(_("dock_18"), max_length=256)
-	dock_19 = models.CharField(_("dock_19"), max_length=256)
-	dock_20 = models.CharField(_("dock_20"), max_length=256)
-	dock_21 = models.CharField(_("dock_21"), max_length=256)
-	dock_22 = models.CharField(_("dock_22"), max_length=256)
-	dock_23 = models.CharField(_("dock_23"), max_length=256)
-	dock_23 = models.CharField(_("dock_23"), max_length=256)
-	dock_24 = models.CharField(_("dock_24"), max_length=256)
-	dock_25 = models.CharField(_("dock_25"), max_length=256)
-	dock_26 = models.CharField(_("dock_26"), max_length=256)
-	dock_27 = models.CharField(_("dock_27"), max_length=256)
-	dock_28 = models.CharField(_("dock_28"), max_length=256)
-	dock_29 = models.CharField(_("dock_29"), max_length=256)
-	dock_30 = models.CharField(_("dock_30"), max_length=256)

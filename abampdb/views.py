@@ -18,6 +18,8 @@ import uuid
 from django.shortcuts import redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
+import os
 
 @login_required(login_url='/login/')
 def EnterPage(request):
@@ -68,6 +70,7 @@ def StatsPage(request):
     return render(request, "abampdb/stats.html")  
 
 
+
 class ContactView(generic.TemplateView):
     """Contact section of the AMPdb tool."""
 
@@ -75,10 +78,8 @@ class ContactView(generic.TemplateView):
     template_name = "abampdb/contact.html"
 
 
-class TutorialView(generic.TemplateView):
-    """Contact section of the AMPdb tool."""
-
-    template_name = "abampdb/tutorial.html"
+def TutorialPage(request):
+    return render(request, "abampdb/tutorial.html")
 
 class PredictedForm(forms.Form):
     """Search view showing the top results from the main page of the AMPdb tool."""

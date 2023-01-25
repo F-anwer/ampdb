@@ -2,7 +2,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.urls import path
 from .views import *
-from . import views
+from .import views
 
 app_name = "abampdb"
 urlpatterns = [
@@ -18,7 +18,7 @@ urlpatterns = [
     path("predicted/", views.PredictedView.as_view(), name="predicted"),
     path("stats/", views.StatsPage, name="stats"),
     path("about/", views.AboutUsPage, name="about_us"),
-    path("tutorial/", views.TutorialView.as_view(), name="tutorial"),
+    path("tutorial/", views.TutorialPage, name="tutorial"),
     path("contact/", views.ContactView.as_view(), name="contact"),
 ]
 

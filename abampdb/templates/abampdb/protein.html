@@ -297,7 +297,7 @@
                             <td>{{ protein.score }}</td>
                             <td>
                                 <div class="btn-right">
-                                    <br><button type="button" class="btn btn-primary">Download PDF</button>
+                                    <br><button type="button" href='/static/ampdb.csv' class="btn btn-primary">Download</button>
                                 </div>
                             </td>
                         </tr>
@@ -480,7 +480,7 @@
                                         <th class="sorting_disabled" rowspan="1" colspan="1" style="width: 67.9062px;">HB</th>
                                     </tr>
                                     <tr>
-                                        <td align="middle">AbAMP1_OMP 33-36</td>
+                                        <td align="middle">{{ protein.name }}_OMP 33-36</td>
                                         <td align="middle">-14.18</td>
                                         <td align="middle">-6.94</td>
                                         <td align="middle">6.11</td>

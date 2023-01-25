@@ -1,57 +1,19 @@
-{% extends './base.html' %}
-{% block content %}
+{% extends './base.html' %} {% block content %} {% load static %}
+<style>
 
-    <h1>
-        Tutorial
-    </h1>
-    <h2>
-        Homology model docking complex
-    </h2>
+</style>
 
-    <p>
-        Homology modeled docking complex of peptide (purple) and protein (multicolored) highlight the high-quality
-        predicted structures.
-    </p>
+<div class="container">
+    <div class="overlay">
 
-    <div class="container">
-    <div class="embed-responsive embed-responsive-4by3">
-    <iframe class="embed-responsive-item"
-            src="https://www.youtube.com/watch?v=u51ZlZOhThY
-                            allowfullscreen></iframe>
-        </div>
     </div>
-
-    <h2>
-        Surface of the protein-ligand complex
-    </h2>
-
-    <p>
-        Surface of the protein (green), and peptide (blue) employed to visualize the active pocket of the protein
-        where the peptide bind.
-    </p>
-
-    <div class=" container">
-        <div class="embed-responsive embed-responsive-4by3">
-        <iframe class="embed-responsive-item"
-                src="https://www.youtube.com/watch?v=u51ZlZOhThY
-                        allowfullscreen></iframe>
-        </div>
-    </div>
-
-    <h2>
-        Surface of the protein-ligand complex
-    </h2>
-
-    <p>
-    Surface of the protein (green), and peptide (blue) employed to visualize the active pocket of the
-    protein where the peptide bind.
-    </p>
-
-    <div class=" container">
-        <div class="embed-responsive embed-responsive-4by3">
-        <iframe class="embed-responsive-item"
-        src="https://www.youtube.com/watch?v=u51ZlZOhThY
-                allowfullscreen></iframe>
-        </div>
-    </div>
+    <ul class="piclist">
+        <li><img src="{% static 'img/Picture1.png' %}" alt=""></li>
+        <li><img src="{% static 'img/Picture2.png' %}" alt=""></li>
+        <li><img src="{% static 'img/Picture3.png' %}" alt=""></li>
+        <li><img src="{% static 'img/Picture4.png' %}" alt=""></li>
+        <li><img src="{% static 'img/Picture5.png' %}" alt=""></li>
+        <li><img src="{% static 'img/Picture6.png' %}" alt=""></li>
+    </ul>
+</div>
 {% endblock %}
