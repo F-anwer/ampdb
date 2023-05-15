@@ -130,7 +130,6 @@ Generic Styling, for Desktops/Laptops
                 {{ form.as_p }}
                 <tbody>
                     {% for protein in protein_list %}
-
                     <tr class="table-info">
                         <td>AMP{{ protein.id }}</td>
                         <td><input type="radio" name="proteins_id" value="{{ proteins.id }}"></td>
@@ -138,46 +137,32 @@ Generic Styling, for Desktops/Laptops
                         <td>{{ protein.sequence }}</td>
                         <td>{{ protein.score }}</td>
 
-
                         <td>
-                            <select id="mySelect">
-                            <option value="">Select an option...</option>
-                            {% for dock in dock_list %}
-                              <option value="{{ dock.id }}">{{ dock.dock_1 }}</option>
-                            {% endfor %}
-                          </select>
+                            <select class="mySelect">
+                                <option value="">Select an option...</option>
+                                {% for dock in dock_list %}
+                                    <option value="{{ dock.id }}">{{ dock.dock_1 }}</option>
+                                {% endfor %}
+                            </select>
                         </td>
                         <script>
-                            var selectElement = document.getElementById("mySelect");
-                            selectElement.addEventListener("change", function() {
-                                var selectedValue = this.value;
-                                if (selectedValue) {
-                                    var url = "{% url 'abampdb:show-dock' 0 %}".replace("0", selectedValue);
-                                    window.location.href = url;
-                                }
-                            });
+                            var selectElements = document.getElementsByClassName("mySelect");
+                            for (var i = 0; i < selectElements.length; i++) {
+                                selectElements[i].addEventListener("change", function() {
+                                    var selectedValue = this.value;
+                                    if (selectedValue) {
+                                        var url = "{% url 'abampdb:show-dock' 0 %}".replace("0", selectedValue);
+                                        window.location.href = url;
+                                    }
+                                });
+                            }
                         </script>
 
-
-                        <!-- <div class="input-group-append"> -->
                         <td><a href="{% url 'abampdb:protein' proteins_id=protein.pk %}">View Peptide</a></td>
-        </div>
-        </td>
-        </tr>
-
-
-        <!-- <script>
-                        $(document).ready(function() {
-                            $('.select2').select2({
-                                placeholder: "Select a category...",
-                                allowClear: true
-                            });
-                        });
-                    </script> -->
-
-        </tbody>
-        {% endfor %}
-        </table>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
         </div>
         </div>
