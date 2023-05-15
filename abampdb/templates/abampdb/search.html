@@ -1,115 +1,191 @@
 {% extends './base.html' %} {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<div class="row justify-content-around">
+<div class="row">
 
-    <div class="alert alert-danger" role="alert">
-        <div class="blink_me">Total 30 Experimental AMPs were evaluated from screening of literature and interacted with 30 target proteins of <em>A.baumannii</em></div>
-    </div>
-    <style>
-        .blink_me {
-            animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate;
-        }
-        
-        @keyframes blinker {
-            to {
-                opacity: 0;
-            }
-        }
-        
-        .table-responsive-xl {
-            max-width: fit-content
-        }
-        
-        .row {
-            flex-wrap: wrap;
-            margin-right: -15px;
-            margin-left: -50px;
-        }
-    </style>
-
-    <form class="form-inline" method="POST" action="/search/">
-        <div class="form-group mx-sm-3 mb-2">
-            {% csrf_token %}
-            <div class="form-check">
-                <div class="table-responsive-xl"></div>
-                <table class="table table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">AMP ID</th>
-                            <th scope="col">Select AMP</th>
-                            <th scope="col">AMP name</th>
-                            <th scope="col">AMP-Sequence</th>
-                            <th scope="col">Score</th>
-                            <th scope="col">Select target Protein</th>
-                            <th scope="col" style="padding-left: 20px;"> View</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {% for row in rows %}
-
-                        <tr>
-                            <td>AMP{{ row.left.id }}</td>
-                            <td><input type="radio" name="pdb_name" value="{{ row.left.name }}"></td>
-                            <td>{{ row.left.name }}</td>
-                            <td>{{ row.left.sequence }}</td>
-                            <td>{{ row.left.score }}</td>
-                            {% if row.right %}
-
-                            <td>
-                                <input type="radio" name="target_protein" value="{{ row.right }}"></input>
-                                {{ row.right }}
-
-                            </td>
-                            <!-- {% else %} -->
-                            {% endif %}
-                            <td>
-                                <!-- <div class="input-group-append"> -->
-                                <td><button type="submit" class="btn btn-link">View</button></td>
-                                <!-- </div> -->
-                            </td>
-                        </tr>
-
-                    </tbody>
-
-                    {% endfor %}
-                </table>
-            </div>
-            <!--                <div class="pagination">-->
-            <!--							<p class="counter">-->
-            <!--					            Page 1 of 3</p>-->
-            <!--						<ul class="pagination-list">-->
-            <!--                            <li class="disabled"><a><i class="icon-first"></i></a>-->
-            <!--                            </li><li class="disabled"><a><i class="icon-previous"></i></a>-->
-            <!--                            </li><li class="active"><a>1</a></li>-->
-            <!--                            <li><a title="2" href="/abampdb/search/start=20" class="pagenav">2</a></li>-->
-            <!--                            <li><a title="3" href="/abampdb/search/start=30" class="pagenav">3</a></li>-->
-            <!--                            <li><a title="Next" href="/abampdb/search/start=10" class="pagenav"><i class="icon-next"></i></a></li>-->
-            <!--                            <li><a title="End" href="/abampdb/search/start=20" class="pagenav"><i class="icon-last"></i></a></li>-->
-            <!--                        </ul>-->
-            <!--                        </div>-->
-
-
-
-            <!--                {#                <div class="form-check">#}-->
-            <!--                {#                    <label class="form-check-label" for="exampleRadios2">#}-->
-            <!--                {##}-->
-            <!--                {#                        <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1"#}-->
-            <!--                {#                               value="option1"#}-->
-            <!--                {#                               checked>#}-->
-            <!--                {#                        <input type="text" class="form-control" name="query_id" value="{{ query_id }}"#}-->
-            <!--                {#                               placeholder="Choose AMP">#}-->
-            <!--                {#                    </label>#}-->
-            <!--                {#                </div>#}-->
-            <!--                {#-->
-            <!--                {#                <div class="input-group-append">#}-->
-            <!--                <button type="submit" class="btn btn-primary btn-lg">Submit</button>-->
-            <!--                {#                </div>#}-->
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+        <div class="alert alert-info back-widget-set text-center">
+            <i class="fa fa-history fa-spin fa-3x"></i>
+            <h9>30</h9>
+            Experimental AMPs identified
 
         </div>
-    </form>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+        <div class="alert alert-success back-widget-set text-center">
+            <i class="fa fa fa-bars fa-3x"></i>
+            <h9>30</h9>
+            Experimental AMPs identified
+
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+        <div class="alert alert alert-warning back-widget-set text-center">
+            <i class="fa fa-history fa-spin fa-3x"></i>
+            <h9>30</h9>
+            Experimental AMPs identified
+
+        </div>
+    </div>
+    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
+        <div class="alert alert alert-danger back-widget-set text-center">
+            <i class="fa fa-history fa-spin fa-3x"></i>
+            <h9>30</h9>
+            Experimental AMPs identified
+
+        </div>
+    </div>
+
 </div>
+
+<style>
+    /* 
+Generic Styling, for Desktops/Laptops 
+*/
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 200px;
+    }
+    /* Zebra striping */
+    
+    tr:nth-of-type(odd) {
+        background: #eee;
+    }
+    
+    th {
+        background: #333;
+        color: white;
+        font-weight: bold;
+    }
+    
+    td,
+    th {
+        padding: 6px;
+        border: 1px solid #ccc;
+        text-align: left;
+    }
+    
+    .alert {
+        position: relative;
+        top: 180px;
+        /* adjust the top value as needed */
+    }
+    
+    .blink_me {
+        animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate;
+    }
+    
+    @keyframes blinker {
+        to {
+            opacity: 0;
+        }
+    }
+    
+    .back-widget-set {
+        background-color: transparent;
+        height: min-content;
+        font-size: 8px;
+    }
+    
+    .panel-success {
+        border-color: #d6e9c6;
+    }
+    
+    th {
+        background: #4D5061;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        font-size: small;
+    }
+    
+    body {
+        padding-top: 40px;
+    }
+</style>
+
+<div class="alert alert-danger" role="alert">
+    <div class="blink_me">Total 39 predicted AMPs were evaluated from screening of literature and interacted with 30 target proteins of <em>A.baumannii</em></div>
+</div>
+
+<body>
+    <form class="form-inline" method="POST" action="abampdb/search">
+        {% csrf_token %}
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-success"></div>
+
+            <table class="table table-striped w-auto">
+                <thead>
+                    <tr>
+                        <th scope="col">AMP ID</th>
+                        <th scope="col">Select&nbsp;AMP</th>
+                        <th scope="col">AMP name</th>
+                        <th scope="col">AMP-Sequence</th>
+                        <th scope="col">Score</th>
+                        <th scope="col">View Peptide</th>
+                        <th scope="col" style="padding-left: 20px;"> Select Peptide-Protein complex</th>
+                    </tr>
+                </thead>
+                {{ form.as_p }}
+                <tbody>
+                    {% for protein in protein_list %}
+
+                    <tr class="table-info">
+                        <td>AMP{{ protein.id }}</td>
+                        <td><input type="radio" name="proteins_id" value="{{ proteins.id }}"></td>
+                        <td>{{ protein.name }}</td>
+                        <td>{{ protein.sequence }}</td>
+                        <td>{{ protein.score }}</td>
+
+
+                        <td>
+                            <select id="mySelect">
+                            <option value="">Select an option...</option>
+                            {% for dock in dock_list %}
+                              <option value="{{ dock.id }}">{{ dock.dock_1 }}</option>
+                            {% endfor %}
+                          </select>
+                        </td>
+                        <script>
+                            var selectElement = document.getElementById("mySelect");
+                            selectElement.addEventListener("change", function() {
+                                var selectedValue = this.value;
+                                if (selectedValue) {
+                                    var url = "{% url 'abampdb:show-dock' 0 %}".replace("0", selectedValue);
+                                    window.location.href = url;
+                                }
+                            });
+                        </script>
+
+
+                        <!-- <div class="input-group-append"> -->
+                        <td><a href="{% url 'abampdb:protein' proteins_id=protein.pk %}">View Peptide</a></td>
+        </div>
+        </td>
+        </tr>
+
+
+        <!-- <script>
+                        $(document).ready(function() {
+                            $('.select2').select2({
+                                placeholder: "Select a category...",
+                                allowClear: true
+                            });
+                        });
+                    </script> -->
+
+        </tbody>
+        {% endfor %}
+        </table>
+        </div>
+        </div>
+        </div>
+
+        </div>
+
+    </form>
+    </div>
+</body>
 
 {% endblock %}

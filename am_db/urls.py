@@ -19,6 +19,6 @@ from django.urls import include, path
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('', include("abampdb.urls")),
+    path('', include("abampdb.urls", namespace="abampdb")),
     path("admin/", admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

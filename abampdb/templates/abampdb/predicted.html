@@ -1,80 +1,80 @@
 {% extends './base.html' %} {% block content %}
 
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<div class="row justify-content-around">
-
-    <div class="alert alert-danger" role="alert">
-        <div class="blink_me">Total 39 predicted AMPs were evaluated from screening of literature and interacted with 30 target proteins of <em>A.baumannii</em></div>
-    </div>
-    <style>
-        .blink_me {
-            animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate;
-        }
-        
-        @keyframes blinker {
-            to {
-                opacity: 0;
-            }
-        }
-        
-        .table-responsive-xl {
-            max-width: fit-content
-        }
-        
-        .row {
-            flex-wrap: wrap;
-            margin-right: -15px;
-            margin-left: -100px;
-        }
-    </style>
-
-    <form class="form-inline" method="POST" action="/predicted/">
-        <div class="form-group mx-sm-3 mb-2">
-            {% csrf_token %}
-            <div class="form-check">
-                <div class="table-responsive-xl"></div>
-                <table class="table table-striped">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">AMP ID</th>
-                            <th scope="col">Select AMP</th>
-                            <th scope="col">AMP name</th>
-                            <th scope="col">AMP-Sequence</th>
-                            <th scope="col">Score</th>
-                            <th scope="col">Select target Protein</th>
-                            <th scope="col" style="padding-left: 20px;"> View</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for row in rows %}
-
-                        <tr>
-                            <td>AMP{{ row.left.title }}</td>
-                            <td><input type="radio" name="synthetic_pdb_name" value="{{ row.left.synthetic_name }}"></td>
-                            <td>{{ row.left.name }}</td>
-                            <td>{{ row.left.synthetic_Sequence }}</td>
-                            <td>{{ row.left.synthetic_score }}</td>
-                            {% if row.right %}
-
-                            <td>
-                                <input type="radio" name="target_protein" value="{{ row.right }}"></input>
-                                {{ row.right }}
-
-                            </td>
-                            {% endif %}
-                            <td>
-                                <td><button type="submit" class="btn btn-link">View</button></td>
-                            </td>
-                        </tr>
-
-                    </tbody>
-
-                    {% endfor %}
-                </table>
-            </div>
-        </div>
-    </form>
+<div class="alert alert-danger" role="alert">
+    <div class="blink_me">Total 39 predicted AMPs were evaluated from screening of literature and interacted with 30 target proteins of <em>A.baumannii</em></div>
 </div>
 
-{% endblock %}
+<style>
+    /* 
+Generic Styling, for Desktops/Laptops 
+*/
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 200px;
+    }
+    /* Zebra striping */
+    
+    tr:nth-of-type(odd) {
+        background: #eee;
+    }
+    
+    th {
+        background: #333;
+        color: white;
+        font-weight: bold;
+    }
+    
+    td,
+    th {
+        padding: 6px;
+        border: 1px solid #ccc;
+        text-align: left;
+    }
+    
+    .alert {
+        position: relative;
+        top: 180px;
+        /* adjust the top value as needed */
+    }
+    
+    .blink_me {
+        animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate;
+    }
+    
+    @keyframes blinker {
+        to {
+            opacity: 0;
+        }
+    }
+</style>
+<!--Table-->
+<form class="form-inline" method="GET" action="abampdb/predicted"></form>
+{% csrf_token %}
+<table class="table table-striped w-auto">
+
+    <!--Table head-->
+    <thead>
+        <tr>
+            <th>AMP ID</th>
+            <th>Select AMP</th>
+            <th>AMP name</th>
+            <th>AMP-Sequence</th>
+            <th>Score</th>
+            <th>View</th>
+        </tr>
+    </thead>
+    <!--Table body-->
+    <tbody>
+        {% for synthetic in synthetic_list %} {{ protein.id }}
+        <tr class="table-info">
+            <td>Synthetic_AMP{{ synthetic.id }}</td>
+            <td><input type="radio" name="synthetic_id" value="{{ synthetic.id }}"></td>
+            <td>{{ synthetic.name }}</td>
+            <td>{{ synthetic.synthetic_Sequence }}</td>
+            <td>{{ synthetic.synthetic_score }}</td>
+            <td><a href="{% url 'abampdb:show-synthetic' synthetic.id %}">View Synthetic Peptide</a></td>
+
+        </tr>
+        {% endfor %} {% endblock %}

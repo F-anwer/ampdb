@@ -1,96 +1,178 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
-
+<html lang="en">
 {% load static %}
 
-<head>
-    <style>
-        .bg {
-            width: 100%;
-            height: 90px;
-        }
-        
-        .nav-link {
-            color: white;
-        }
-        
-        .nav-link:hover {
-            color: white;
-        }
-    </style>
 
+<style>
+    .navbar-top {
+        background: #4D5061;
+        border-bottom: 4px solid #60B078;
+        color: #FFF;
+        color: rgb(255, 255, 255);
+    }
+    
+    .nav-link {
+        color: white;
+    }
+    
+    .text-white {
+        color: #fff;
+    }
+    
+    .navbar-doublerow>.navbar {
+        display: block;
+        padding: 0px auto;
+        margin: 0px auto;
+        min-height: 25px;
+    }
+    
+    .navbar-doublerow .navbar-top ul>li:first-child>a {
+        color: #fff;
+    }
+    
+    .navbar-doublerow .navbar-top ul>li:nth-child(2)>a {
+        color: #fff;
+    }
+    
+    .navbar-doublerow .navbar-top ul>li:nth-child(3)>a {
+        color: #fff;
+    }
+    /*Down nav*/
+    
+    .navbar-doublerow .navbar-down .navbar-brand {
+        /*navbar brand*/
+        padding: 0px auto;
+        float: left;
+        color: #60B078;
+        font-size: 30px;
+    }
+    
+    .navbar-doublerow .navbar-down ul>li>a {
+        /*Menu items*/
+        font-size: 12.5px;
+        color: #000;
+    }
+    
+    .navbar-doublerow .navbar-down ul>li>a:hover {
+        /*menu hover*/
+        border-bottom: 1px solid #60B078;
+        color: #60B078;
+    }
+    
+    .navbar-brand {
+        position: absolute;
+        left: 10%;
+        margin-top: -12px;
+        /* position the brand at the center of the navbar */
+        transform: translateX(-50%);
+    }
+</style>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<nav class="navbar navbar-default navbar-doublerow navbar-trans navbar-fixed-top">
+    <!-- Master nav -->
+    <!-- top nav -->
+    <nav class="navbar navbar-top">
 
+        <div class="container">
+            <!-- left nav top -->
+            <ul class="nav navbar-nav pull-left">
+                <li>
+                    <a class="nav-link" href=" {% url 'abampdb:tutorial' %} ">Tutorials</a></li>
+                <li><a class="nav-link " href="{% url 'abampdb:about_us' %} ">About Us</a></li>
+                <li><a class="nav-link " href="{% url 'abampdb:contact' %} ">Contact</a></li>
+            </ul>
+            <!-- right nav top -->
+            <ul class="nav navbar-nav pull-right " style="padding:9px; ">
 
-    <div class="sticky-top">
-        <nav class="nav navbar-expand-lg navbar-dark bg-dark">
+                <a href="{% url 'abampdb:login' %} " class="btn btn-sm btn-success "><span class="glyphicon glyphicon-log-in "></span> LogIn</a>
+                <a href="{% url 'abampdb:logout' %} " class="btn btn-sm btn-primary "><span class="glyphicon glyphicon-log-out "></span> LogOut</a>
+            </ul>
+        </div>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'abampdb:tutorial' %}">Tutorials</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'abampdb:about_us' %}">About Us</a>
-            </li>
-            <div class="navbar-nav ml-auto mb-2 mb-lg-0 justify-content-right"></div>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'abampdb:login' %}">login {{request.user}}</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'abampdb:logout' %}">logout</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url 'abampdb:contact' %}">Contact</a>
-            </li>
-        </nav>
-    </div>
-    <div class="wrapper">
-        <div class="top_nav">
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <button class="navbar-toggler" type="button" data-toggle="collapse " data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-                <a class="navbar-brand" height="100" href="{% url 'abampdb:index' %}">
-                    <img src="{% static 'img/logo.png' %}" width="120">
-                </a>
-                <div class="navbar-nav mb-2 mb-lg-0 justify-content-center " id="navbarNav">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link" role="tab" data-toggle="tab" href="{% url 'abampdb:search' %}">Select AMP-Target protein</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" role="tab" data-toggle="tab" href="#physio">Physiochemical
-                        Parameters of AMP</a>
-                        </li>
+    </nav>
+    <!-- down nav -->
+    <nav class="navbar navbar-down ">
+        <div class="container ">
+            <div class="flex-container ">
+                <div class="navbar-header flex-item ">
+                    <button type="button " class="navbar-toggle collapsed " data-toggle="collapse " data-target="#navbar-collapse ">
+                        <span class="sr-only ">Toggle navigation</span>
+                        <span class="icon-bar "></span>
+                        <span class="icon-bar "></span>
+                        <span class="icon-bar "></span>
+                    </button>
+                    <a class="navbar-brand " href="{% url 'abampdb:index' %} ">
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="#docking" role="tab" data-toggle="tab">AMP-Target protein interaction</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="{% url 'abampdb:predicted' %}" data-toggle="tab" role="tab">Predicted_AMPs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'abampdb:stats' %}">Statistics</a>
-                        </li>
+                        <img src="{% static 'img/logo.png' %} " width="120 ">
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse " id="navbar-collapse ">
+                    <ul class="nav navbar-nav flex-item hidden-xs navbar-right ">
+                        <li><a href="{% url 'abampdb:search' %} ">Select AMP-Target protein</a></li>
+                        <li><a href="#physio " role="tab ">Physiochemical Parameters of AMP</a></li>
+                        <li><a href="#docking ">AMP-Target protein interaction</a></li>
+                        <li><a href="{% url 'abampdb:stats' %} ">Statistics</a></li>
+                        <li><a href="{% url 'abampdb:predicted' %} ">Predicted_AMPs</a></li>
+                        <li><a href="">Predicted_AMPs_Parameters</a></li>
                     </ul>
                 </div>
+
+                </ul>
+            </div>
         </div>
-        </nav>
-        <!-- Required meta tags -->
-        <meta charset="utf-8 ">
-        <meta name="viewport " content="width=device-width, initial-scale=1, shrink-to-fit=no ">
-        <link rel="stylesheet " href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css " integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T " crossorigin="anonymous ">
-        <link rel="stylesheet " href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css ">
+        </div>
+    </nav>
+</nav>
 
-    </div>
-    <div class="bg "></div>
-    <div class="container ">
+<!-- /master nav -->
 
-        {% block content %} {% endblock %}
-    </div>
+<div class="bg "></div>
+<div class="container ">
+    {% block content %} {% endblock %}
 
-    <script src=" https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js " integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM " crossorigin="anonymous "></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
-    </body>
-</head>
+</div>
+</div>
+</div>
+<script>
+    // Define breakpoints for small, medium, and large screens
+    const breakpoints = {
+        small: '(max-width: 600px)',
+        medium: '(min-width: 600px) and (max-width: 991px)',
+        large: '(min-width: 992px)'
+    }
 
-</html>
+    // Get the navbar items
+    const navbarItems = document.querySelectorAll('.navbar-down ul.navbar-nav li')
+
+    // Add event listener to the window to check for screen size changes
+    window.addEventListener('resize', handleScreenSize)
+
+    // Call the function on page load to apply initial styles
+    handleScreenSize()
+
+    function handleScreenSize() {
+        // Loop through the navbar items
+        navbarItems.forEach(item => {
+            // Check the screen size and apply styles accordingly
+            if (window.matchMedia(breakpoints.small).matches) {
+                // Small screen styles
+                item.style.width = '100%'
+                item.style.textAlign = 'center'
+                item.style.borderBottom = '1px solid #eee'
+            } else if (window.matchMedia(breakpoints.medium).matches) {
+                // Medium screen styles
+                item.style.width = '50%'
+                item.style.textAlign = 'center'
+                item.style.borderBottom = 'none'
+            } else if (window.matchMedia(breakpoints.large).matches) {
+                // Large screen styles
+                item.style.width = 'auto'
+                item.style.textAlign = 'left'
+                item.style.borderBottom = 'none'
+            }
+        })
+    }
+</script>

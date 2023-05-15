@@ -1,6 +1,6 @@
 import pandas as pd
 from django.core.management.base import BaseCommand
-from abampdb.models import Dock_Proteins
+from abampdb.models import Docks
 
 
 class Command(BaseCommand):
@@ -10,18 +10,24 @@ class Command(BaseCommand):
         parser.add_argument("csv_dir", type=str, help="Path to csv data file.")
 
     def handle(self, *args, csv_dir=None, **kwargs):
-        df = pd.read_csv(csv_dir)
+        df = pd.read_csv(csv_dir, encoding='latin-1')
         col_map = {
-            "Name": "name",
+            "Dock": "dock_1",
+            "Image": "image",
+            "Attractive_VdW": "attr_vdw",
+            "Global_Energy": "global_energy",
+            "Repulsive_VdW": "repl_vdw",
+            "ACE": "binding_energy",
+            "HB": "hydrogen_bonding",
         }
         for i, row in df.iterrows():
             # there are more rows than there are data, stop when we reach the lines without names
-            if str(row["Name"]) == "nan":
+            if str(row["Dock"]) == "nan":
                 break
-            dock_proteins = Dock_Proteins()
+            docks = Docks()
             for df_name, orm_name in col_map.items():
                 value = row[df_name]
                 # these bools are encoded in varying cases, eg. TRUE, True, etc.
                 # the nans need to be checked in detail
-                setattr(dock_proteins, orm_name, value)
-            dock_proteins.save()
+                setattr(docks, orm_name, value)
+            docks.save()

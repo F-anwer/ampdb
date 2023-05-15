@@ -145,8 +145,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATICFILES_DIR = os.path.join(BASE_DIR, "static")
-MEDIAFILES_DIR= os.path.join(BASE_DIR, "media")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
 
@@ -162,5 +162,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    'drf_multiple_model',
+    'rest_framework',
 ]
-

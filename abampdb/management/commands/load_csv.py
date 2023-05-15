@@ -13,9 +13,10 @@ class Command(BaseCommand):
     def handle(self, *args, csv_dir=None, **kwargs):
         df = pd.read_csv(csv_dir)
         col_map = {
+            "AMP": "amp",
             "Name": "name",
             "Sequence": "sequence",
-            "Hemolytic activity": "hydrolitic_activity",  # ?
+            "Hemolytic activity": "hemolytic_activity",  # ?
             "MIC value": "mic_value",
             "Solubility": "solubility",
             "Tiny-aa": "tiny",
