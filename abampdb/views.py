@@ -28,7 +28,7 @@ from django.db.models import Q
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 from django.views.generic.edit import FormView
-from drf_multiple_model.views import ObjectMultipleModelAPIView
+
 
 
 def EnterPage(request):
