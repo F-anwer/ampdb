@@ -1,43 +1,6 @@
 {% extends './base.html' %} {% block content %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-<div class="row">
-
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
-        <div class="alert alert-info back-widget-set text-center">
-            <i class="fa fa-history fa-spin fa-3x"></i>
-            <h9>30</h9>
-            Experimental AMPs identified
-
-        </div>
-    </div>
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
-        <div class="alert alert-success back-widget-set text-center">
-            <i class="fa fa fa-bars fa-3x"></i>
-            <h9>30</h9>
-            Experimental AMPs identified
-
-        </div>
-    </div>
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
-        <div class="alert alert alert-warning back-widget-set text-center">
-            <i class="fa fa-history fa-spin fa-3x"></i>
-            <h9>30</h9>
-            Experimental AMPs identified
-
-        </div>
-    </div>
-    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-8">
-        <div class="alert alert alert-danger back-widget-set text-center">
-            <i class="fa fa-history fa-spin fa-3x"></i>
-            <h9>30</h9>
-            Experimental AMPs identified
-
-        </div>
-    </div>
-
-</div>
-
 <style>
     /* 
 Generic Styling, for Desktops/Laptops 
@@ -46,7 +9,7 @@ Generic Styling, for Desktops/Laptops
     table {
         width: 100%;
         border-collapse: collapse;
-        margin-top: 200px;
+        margin-top: 150px;
     }
     /* Zebra striping */
     
@@ -101,13 +64,11 @@ Generic Styling, for Desktops/Laptops
     }
     
     body {
-        padding-top: 40px;
+        padding-top: -10px;
+        margin-top: -10px;
     }
 </style>
 
-<div class="alert alert-danger" role="alert">
-    <div class="blink_me">Total 39 predicted AMPs were evaluated from screening of literature and interacted with 30 target proteins of <em>A.baumannii</em></div>
-</div>
 
 <body>
     <form class="form-inline" method="POST" action="abampdb/search">
@@ -118,30 +79,28 @@ Generic Styling, for Desktops/Laptops
             <table class="table table-striped w-auto">
                 <thead>
                     <tr>
-                        <th scope="col">AMP ID</th>
-                        <th scope="col">Select&nbsp;AMP</th>
+                        <th scope="col">select AMP</th>
                         <th scope="col">AMP name</th>
                         <th scope="col">AMP-Sequence</th>
-                        <th scope="col">Score</th>
-                        <th scope="col">View Peptide</th>
-                        <th scope="col" style="padding-left: 20px;"> Select Peptide-Protein complex</th>
+                        <th scope="col">Score ≥5-10</th>
+                        <th scope="col" style="padding-left: 20px;"> Select Target protein</th>
                     </tr>
                 </thead>
-                {{ form.as_p }}
+
                 <tbody>
-                    {% for protein in protein_list %}
+                    {% for protein in proteins %}
                     <tr class="table-info">
-                        <td>AMP{{ protein.id }}</td>
-                        <td><input type="radio" name="proteins_id" value="{{ proteins.id }}"></td>
+                        <td><a href="{% url 'abampdb:protein' proteins_id=protein.pk %}">AMPs{{ protein.id }}</a></td>
                         <td>{{ protein.name }}</td>
                         <td>{{ protein.sequence }}</td>
                         <td>{{ protein.score }}</td>
 
+                        <a href="{% url 'abampdb:protein' proteins_id=protein.pk %}">Go to result page</a>
                         <td>
                             <select class="mySelect">
                                 <option value="">Select an option...</option>
-                                {% for dock in dock_list %}
-                                    <option value="{{ dock.id }}">{{ dock.dock_1 }}</option>
+                                {% for target in targets %}
+                                    <option value="{{ target.id }}">{{ target.targets }}</option>
                                 {% endfor %}
                             </select>
                         </td>
@@ -151,14 +110,14 @@ Generic Styling, for Desktops/Laptops
                                 selectElements[i].addEventListener("change", function() {
                                     var selectedValue = this.value;
                                     if (selectedValue) {
-                                        var url = "{% url 'abampdb:show-dock' 0 %}".replace("0", selectedValue);
+                                        var url = "".replace("0", selectedValue);
                                         window.location.href = url;
                                     }
                                 });
                             }
                         </script>
 
-                        <td><a href="{% url 'abampdb:protein' proteins_id=protein.pk %}">View Peptide</a></td>
+
                     </tr>
                     {% endfor %}
                 </tbody>
@@ -170,7 +129,20 @@ Generic Styling, for Desktops/Laptops
         </div>
 
     </form>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <select name="dock">
+            {% for dock in docks %}
+            <option value="{{ dock.id }}">{{ dock }}</option>
+            {% endfor %}
+        </select>
+        <input type="submit">
+    </form>
     </div>
+
+
+
 </body>
 
 {% endblock %}

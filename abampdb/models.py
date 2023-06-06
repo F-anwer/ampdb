@@ -2,6 +2,20 @@
 
 from django.db import models
 
+
+class PDBTQuery(models.Model):
+    query_id = models.CharField(max_length=1000)
+    # email = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.query_id
+
+class Targetproteins(models.Model):
+    targets = models.CharField(("Targets"), max_length=1000)
+
+    def __str__(self):
+        return self.targets
+
 class PDBQuery(models.Model):
     query_id = models.CharField(max_length=1000)
     # email = models.CharField(max_length=200)
@@ -11,6 +25,7 @@ class PDBQuery(models.Model):
     
 
 class Proteins(models.Model):
+    dock = models.ManyToManyField('Docks', related_name='dock')
     amp = models.CharField(("AMP"), max_length=1000)
     name = models.CharField(("Name"), max_length=1000)
     sequence = models.CharField(("Sequence"), max_length=1000)
@@ -56,6 +71,11 @@ class Proteins(models.Model):
     score = models.IntegerField(("Score"), null=True)
     pdb_name = models.CharField(("PDBName"), max_length=1000)
 
+
+    def __str__(self):
+        return self.amp
+
+
 class PDBDQuery(models.Model):
     query_id = models.CharField(max_length=1000)
     # email = models.CharField(max_length=200)
@@ -65,6 +85,7 @@ class PDBDQuery(models.Model):
 
 
 class Docks(models.Model):
+    targets = models.ManyToManyField('Targetproteins')
     dock_1 = models.CharField(("Dock"), max_length=1000)
     image = models.CharField(("Image"), max_length=1000)
     global_energy = models.CharField(("Global_Energy"), max_length=1000)
@@ -72,6 +93,9 @@ class Docks(models.Model):
     repl_vdw = models.CharField(("Repulsive_VdW"), max_length=1000)
     binding_energy = models.CharField(("ACE"), max_length=1000)
     hydrogen_bonding = models.CharField(("HB"), max_length=1000)
+
+    def __str__(self):
+        return self.dock_1
 
 
 class PDBSQuery(models.Model):
@@ -140,3 +164,23 @@ class Synthetic(models.Model):
     synthetic_score = models.IntegerField(("Synthetic_Score"), default=None)
     synthetic_pdb_name = models.CharField(
         ("Synthetic_PDBName"), max_length=255, default=None)
+
+class PDBSDQuery(models.Model):
+    query_id = models.CharField(max_length=1000)
+    # email = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.query_id
+
+
+class Sdock(models.Model):
+    id = models.CharField(("ID"), primary_key=True, max_length=1000)
+    s_dock = models.CharField(("S_dock"), max_length=1000)
+    image1 = models.CharField(("Image1"), max_length=1000)
+    image2 = models.CharField(("Image2"), max_length=1000)
+    rmsf_min = models.CharField(("RSMF_min"), max_length=1000)
+    total_score_before_refinement = models.CharField(("Total_score_before_Refinement"), max_length=1000)
+    i_sc_before_refinement = models.CharField(("I_sc_before_Refinement"), max_length=1000)
+    bb_rmsd_before_refinement = models.CharField(("bb_RMSD_before_Refinement"), max_length=1000)
+    total_score_after_refinement = models.CharField(("Total_score_after_Refinement"), max_length=1000)
+    bb_rmsd_after_refinement = models.CharField(("bb_RMSD_after_Refinement"), max_length=1000)

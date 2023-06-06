@@ -15,7 +15,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from .models import *
 
-from .models import PDBQuery, Proteins, Docks, PDBDQuery, Synthetic
+from .models import PDBQuery, Proteins, Docks, PDBDQuery, Synthetic, Sdock, PDBSDQuery, Targetproteins
 import uuid
 from django.shortcuts import redirect
 from django.http import HttpResponse
@@ -27,6 +27,7 @@ from django.db.models import Q
 
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
+from abampdb.forms import SearchForm
 from django.views.generic.edit import FormView
 
 
@@ -91,32 +92,36 @@ class ContactView(generic.TemplateView):
 def TutorialPage(request):
     return render(request, "abampdb/tutorial.html")
 
-def show_protein(request, proteins_id):
-    protein = Proteins.objects.get(pk=proteins_id)
-    return render(request, 'abampdb/protein.html', {'protein': protein})
-
-
 def search_view(request):
+    return render(request, "abampdb/search.html", {
+        "targets": Targetproteins.objects.all(),
+        "proteins": Proteins.objects.all()
+    })
 
-    protein_list = Proteins.objects.all()
-    dock_list = Docks.objects.all()
-    return render(request, 'abampdb/search.html', {'protein_list': protein_list, 'dock_list': dock_list,})
-       
+def protein(request, proteins_id):
+    protein = Proteins.objects.get(pk=proteins_id)
+    return render(request, "abampdb/protein.html", {
+        "protein": protein,
+        "dock": protein.dock.all(),
+    })
+
+def target_proteins(request, proteins_id):
+    protein = get_object_or_404(Proteins, pk=proteins_id)
+
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            amp = form.cleaned_data['amp']
+            target_proteins = form.cleaned_data['target_proteins']
+            docks = Docks.objects.filter(targets__in=target_proteins, proteins=amp)
+            # Do something with the filtered docks
+    else:
+        form = SearchForm()
+    return render(request, 'search.html', {'form': form})
 
 
-def show_dock(request, docks_id):
-    dock = Docks.objects.get(pk=docks_id)
-    return render(request, 'abampdb/docking.html', {'dock': dock})
 
 
-def show_synthetic(request, synthetic_id):
-    synthetic = Synthetic.objects.get(pk=synthetic_id)
-    return render(request, 'abampdb/synthetic.html', {'synthetic': synthetic})
-
-def syntheticsearch(request):
-
-    synthetic_list = Synthetic.objects.all()
-    return render(request, 'abampdb/predicted.html', {'synthetic_list': synthetic_list})
 
 
   

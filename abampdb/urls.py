@@ -12,17 +12,16 @@ urlpatterns = [
     path('signup/',views.SignupPage,name='signup'),
     path('enter/',views.EnterPage,name='enter'),
     path("home/", views.search_view, name="home"),
-    path("protein/<proteins_id>", views.show_protein, name="protein"),
-    # path("docking/", views.DockDetailView.as_view(), name="docking"),
-    path("search/", views.search_view, name="search"),
-    path("show_synthetic/<synthetic_id>", views.show_synthetic, name="show-synthetic"),
-    path("predicted/", views.syntheticsearch, name="predicted"),
+    path("<int:proteins_id>", views.protein, name='protein'),
+    path('search/', views.search_view, name='search'),
+    path('<int:proteins_id>/target_proteins', views.target_proteins, name='target_proteins'),
+
     path("stats/", views.StatsPage, name="stats"),
     path("about/", views.AboutUsPage, name="about_us"),
     path("tutorial/", views.TutorialPage, name="tutorial"),
     path("contact/", views.ContactView.as_view(), name="contact"),
 
-    path('show_dock/<docks_id>', views.show_dock, name='show-dock'),
+
     
 ]
 

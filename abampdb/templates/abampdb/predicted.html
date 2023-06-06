@@ -1,8 +1,5 @@
 {% extends './base.html' %} {% block content %}
 
-<div class="alert alert-danger" role="alert">
-    <div class="blink_me">Total 39 predicted AMPs were evaluated from screening of literature and interacted with 30 target proteins of <em>A.baumannii</em></div>
-</div>
 
 <style>
     /* 
@@ -32,22 +29,6 @@ Generic Styling, for Desktops/Laptops
         border: 1px solid #ccc;
         text-align: left;
     }
-    
-    .alert {
-        position: relative;
-        top: 180px;
-        /* adjust the top value as needed */
-    }
-    
-    .blink_me {
-        animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate;
-    }
-    
-    @keyframes blinker {
-        to {
-            opacity: 0;
-        }
-    }
 </style>
 <!--Table-->
 <form class="form-inline" method="GET" action="abampdb/predicted"></form>
@@ -57,24 +38,44 @@ Generic Styling, for Desktops/Laptops
     <!--Table head-->
     <thead>
         <tr>
-            <th>AMP ID</th>
+
             <th>Select AMP</th>
             <th>AMP name</th>
             <th>AMP-Sequence</th>
-            <th>Score</th>
-            <th>View</th>
+            <th>Score ≥5-10</th>
+            <th scope="col" style="padding-left: 20px;"> Select Target protein</th>
         </tr>
     </thead>
     <!--Table body-->
     <tbody>
         {% for synthetic in synthetic_list %} {{ protein.id }}
         <tr class="table-info">
-            <td>Synthetic_AMP{{ synthetic.id }}</td>
-            <td><input type="radio" name="synthetic_id" value="{{ synthetic.id }}"></td>
+            <td><a href="{% url 'abampdb:show-synthetic' synthetic.id %}">Synthetic_AMP{{ synthetic.id }}</a></td>
             <td>{{ synthetic.name }}</td>
             <td>{{ synthetic.synthetic_Sequence }}</td>
             <td>{{ synthetic.synthetic_score }}</td>
-            <td><a href="{% url 'abampdb:show-synthetic' synthetic.id %}">View Synthetic Peptide</a></td>
+
+            <td>
+                <select class="mySelect">
+                    <option value="">Select an option...</option>
+                    {% for sdock in sdock_list %}
+                        <option value="{{ sdock.id }}">{{ sdock.s_dock }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+            <script>
+                var selectElements = document.getElementsByClassName("mySelect");
+                for (var i = 0; i < selectElements.length; i++) {
+                    selectElements[i].addEventListener("change", function() {
+                        var selectedValue = this.value;
+                        if (selectedValue) {
+                            var url = "{% url 'abampdb:show-dock' 0 %}".replace("0", selectedValue);
+                            window.location.href = url;
+                        }
+                    });
+                }
+            </script>
+
 
         </tr>
         {% endfor %} {% endblock %}

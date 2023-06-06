@@ -1,15 +1,7 @@
 # forms.py
 from django import forms
-from .models import Proteins, Docks
+from .models import Proteins, Targetproteins
 
-
-class ProteinsForm(forms.ModelForm):
-    class Meta:
-        model = Proteins
-        fields = "__all__"
-
-
-class DocksForm(forms.ModelForm):
-    class Meta:
-        model = Docks
-        fields = "__all__"
+class SearchForm(forms.Form):
+    amp = forms.ModelChoiceField(queryset=Proteins.objects.all())
+    target_proteins = forms.ModelMultipleChoiceField(queryset=Targetproteins.objects.all())
