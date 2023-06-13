@@ -71,7 +71,7 @@ Generic Styling, for Desktops/Laptops
 
 
 <body>
-    <form class="form-inline" method="POST" action="abampdb/search">
+    <form class="form-inline" method="POST" action="/create_protien/">
         {% csrf_token %}
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-success"></div>
@@ -94,17 +94,29 @@ Generic Styling, for Desktops/Laptops
                         <td>{{ protein.name }}</td>
                         <td>{{ protein.sequence }}</td>
                         <td>{{ protein.score }}</td>
+                        <input type="hidden" name="protein_id" value="{{ protein.id }}">
+                        <input type="hidden" name="protein_name" value="{{ protein.name }}">
+                        <input type="hidden" name="score" value="{{ protein.score }}">
+                        <input type="hidden" name="sequence" value="{{ protein.sequence }}">
 
                         <a href="{% url 'abampdb:protein' proteins_id=protein.pk %}">Go to result page</a>
                         <td>
-                            <select class="mySelect">
+                            <select class="mySelect", name="target_id">
                                 <option value="">Select an option...</option>
                                 {% for target in targets %}
                                     <option value="{{ target.id }}">{{ target.targets }}</option>
                                 {% endfor %}
                             </select>
                         </td>
-                        <script>
+                       
+                        {% comment %} <td>
+                            <select name="dock">
+                                {% for dock in docks %}
+                                <option value="{{ dock.id }}">{{ dock }}</option>
+                                {% endfor %}
+                            </select>
+                        </td {% endcomment %}
+                        {% comment %} <script>
                             var selectElements = document.getElementsByClassName("mySelect");
                             for (var i = 0; i < selectElements.length; i++) {
                                 selectElements[i].addEventListener("change", function() {
@@ -115,13 +127,12 @@ Generic Styling, for Desktops/Laptops
                                     }
                                 });
                             }
-                        </script>
-
-
-                    </tr>
-                    {% endfor %}
+                        </script> {% endcomment %}
+                    
+                    {% endfor %}    
                 </tbody>
             </table>
+            <input type="submit" value="Submit">
         </div>
         </div>
         </div>
@@ -130,7 +141,7 @@ Generic Styling, for Desktops/Laptops
 
     </form>
 
-    <form action="" method="post">
+    {% comment %} <form action="" method="post">
         {% csrf_token %}
         <select name="dock">
             {% for dock in docks %}
@@ -138,7 +149,7 @@ Generic Styling, for Desktops/Laptops
             {% endfor %}
         </select>
         <input type="submit">
-    </form>
+    </form> {% endcomment %}
     </div>
 
 

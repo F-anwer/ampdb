@@ -25,6 +25,7 @@ class PDBQuery(models.Model):
     
 
 class Proteins(models.Model):
+    target_protein = models.ForeignKey(Targetproteins, on_delete=models.SET_NULL, null=True, blank=True)
     dock = models.ManyToManyField('Docks', related_name='dock')
     amp = models.CharField(("AMP"), max_length=1000)
     name = models.CharField(("Name"), max_length=1000)
