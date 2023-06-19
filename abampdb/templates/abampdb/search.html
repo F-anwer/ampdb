@@ -64,15 +64,20 @@ Generic Styling, for Desktops/Laptops
     }
     
     body {
-        padding-top: -10px;
-        margin-top: -10px;
+        padding-top: -30px;
+        margin-top: -70px;
+    }
+    
+    hr {
+        border: 1px solid #4D5061;
+        margin: 10px 0;
     }
 </style>
 
 
 <body>
-    <form class="form-inline" method="POST" action="/create_protien/">
-        {% csrf_token %}
+    {% comment %}
+    <form class="form-inline" method="POST" action="/create_protien/"> {% endcomment %} {% comment %} {% csrf_token %} {% endcomment %}
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="panel panel-success"></div>
 
@@ -84,75 +89,60 @@ Generic Styling, for Desktops/Laptops
                         <th scope="col">AMP-Sequence</th>
                         <th scope="col">Score ≥5-10</th>
                         <th scope="col" style="padding-left: 20px;"> Select Target protein</th>
+                        <th scope="col">Submit</th>
                     </tr>
                 </thead>
 
                 <tbody>
                     {% for protein in proteins %}
                     <tr class="table-info">
-                        <td><a href="{% url 'abampdb:protein' proteins_id=protein.pk %}">AMPs{{ protein.id }}</a></td>
+                        <td> AMP{{ protein.id }}
+                        </td>
                         <td>{{ protein.name }}</td>
                         <td>{{ protein.sequence }}</td>
                         <td>{{ protein.score }}</td>
-                        <input type="hidden" name="protein_id" value="{{ protein.id }}">
-                        <input type="hidden" name="protein_name" value="{{ protein.name }}">
-                        <input type="hidden" name="score" value="{{ protein.score }}">
-                        <input type="hidden" name="sequence" value="{{ protein.sequence }}">
+
 
                         <a href="{% url 'abampdb:protein' proteins_id=protein.pk %}">Go to result page</a>
                         <td>
-                            <select class="mySelect", name="target_id">
-                                <option value="">Select an option...</option>
+                            <select class="mySelect" name="dropdown" onchange="updateHiddenInput(this, {{ protein.id }})" required>
+                                <option value="" disabled selected>Select an option</option>
                                 {% for target in targets %}
-                                    <option value="{{ target.id }}">{{ target.targets }}</option>
+                                <option value="{{ target.id }}">{{ target.targets }}</option>
                                 {% endfor %}
                             </select>
                         </td>
-                       
-                        {% comment %} <td>
-                            <select name="dock">
-                                {% for dock in docks %}
-                                <option value="{{ dock.id }}">{{ dock }}</option>
-                                {% endfor %}
-                            </select>
-                        </td {% endcomment %}
-                        {% comment %} <script>
-                            var selectElements = document.getElementsByClassName("mySelect");
-                            for (var i = 0; i < selectElements.length; i++) {
-                                selectElements[i].addEventListener("change", function() {
-                                    var selectedValue = this.value;
-                                    if (selectedValue) {
-                                        var url = "".replace("0", selectedValue);
-                                        window.location.href = url;
-                                    }
-                                });
-                            }
-                        </script> {% endcomment %}
-                    
-                    {% endfor %}    
+                        <td>
+                            <form class="form-inline" method="POST" action="/create_protien/">
+                                {% csrf_token %}
+                                <input type="hidden" name="protein_id" value="{{ protein.id }}">
+                                <input type="hidden" name="target_id" id="hidden_target_id_{{ protein.id }}">
+                                <input type="submit">
+                            </form>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
-            <input type="submit" value="Submit">
         </div>
         </div>
         </div>
 
         </div>
-
-    </form>
-
-    {% comment %} <form action="" method="post">
-        {% csrf_token %}
-        <select name="dock">
-            {% for dock in docks %}
-            <option value="{{ dock.id }}">{{ dock }}</option>
-            {% endfor %}
-        </select>
-        <input type="submit">
-    </form> {% endcomment %}
+        {% comment %} </form> {% endcomment %}
     </div>
 
-
+    <script>
+        function updateHiddenInput(selectElement, proteinId) {
+            var hiddenInput = document.getElementById('hidden_target_id_' + proteinId);
+            hiddenInput.value = selectElement.value;
+            console.log("hiddenInput.value:", hiddenInput.value);
+        }
+    </script>
+    <section>
+        <hr />
+    </section>
 
 </body>
 

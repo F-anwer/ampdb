@@ -16,45 +16,70 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous"
         referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+
+
     <style>
-        .owl-carousel .owl-item img {
-            transform: translate3d(-1080px, 10px, 10px);
+        #owl-demo .item img {
+            display: block;
+            width: 100%;
+            height: 310px;
             object-fit: cover;
-            width: 50%;
-            height: 300px;
-            position: relative;
-            top: 10px;
-            bottom: 50px;
+            object-position: center;
         }
         
-        .third-item img {
-            width: 400px;
-            height: 300px;
-            padding-top: 80px;
-            left: -35%;
+        hr {
+            border: 1px solid #4D5061;
+            margin: 10px 0;
         }
     </style>
-    <style>
-        .owl-carousel .owl-item img {
-            transform: translate3d(-1080px, 10px, 10px);
-            object-fit: cover;
-            width: 50%;
-            height: 300px;
-            position: relative;
-            top: 10px;
-            bottom: 50px;
-        }
-        
-        .third-item img {
-            width: 400px;
-            height: 300px;
-            padding-top: 80px;
-            left: -35%;
-        }
-    </style>
+
 </head>
+<table class="table table-striped w-auto">
+    <thead style="background-color: #4D5061; color: white;" font-weight="normal" font-size="small">
+
+        <tr>
+            <th scope="col" style="font-size: small; font-weight: normal;">select AMP</th>
+            <th scope="col" style="font-size: small; font-weight: normal;">AMP name</th>
+            <th scope="col" style="font-size: small; font-weight: normal;">AMP-Sequence</th>
+            <th scope="col" style="font-size: small; font-weight: normal;">Score ≥5-10</th>
+            <th scope="col" style="font-size: small; font-weight: normal; padding-left: 20px;"> Select Target protein</th>
+            <th scope="col" style="font-size: small; font-weight: normal;">Export Results</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="table-info">
+            <td>AMP{{ protein.id }}</td>
+            <td>{{ protein.name }}</td>
+            <td>{{ protein.sequence }}</td>
+            <td>{{ protein.score }}</td>
+            <a href="{% url 'abampdb:protein' proteins_id=protein.pk %}"></a>
+            <td>
+                <select class="mySelect" name="dropdown" onchange="updateHiddenInput(this, {{ protein.id }})" required>
+                                
+                                {% for dock in dock %}
+                                <option value="{{ dock.id }}">{{ dock.dock_1 }}</option>
+                                {% endfor %}
+                            </select>
+            </td>
+            <td><button onclick="exportTableToCSV('table-data.csv')" style="background-color: #f9f9f9; font-size:28px; margin: 0; padding: 0;"><i class="fas fa-file-csv" style="color: rgb(17, 44, 35); margin-top: -10px;"></i></button>
+                <button onclick="exportTableToXML('table-data.xml')" style="background-color: #f9f9f9; font-size: 28px; margin: 0; padding: 0;">
+                    <i class="fas fa-file-code" style="color: rgb(34, 26, 145); margin-top: -10px;"></i>
+                  </button>
+                <button onclick="exportTableToPDF('table-data.pdf')" style="background-color: #f9f9f9; font-size: 28px; margin: 0; padding: 0;">
+                    <i class="fas fa-file-pdf" style="color: rgb(61, 6, 6); margin-top: -10px;"></i>
+                  </button>
+
+            </td>
+    </tbody>
+</table>
+
+<hr />
 
 <body>
+
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-20">
             <div class="panel panel-primary">
@@ -78,7 +103,7 @@
                     <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
                     <div id="container-01" class="mol-container"></div>
                     <div>
-                        <a role="button" href='/static/pdb/{{ protein.pdb_name }}' download='/static/pdb/{{ protein.pdb_name }}' class="btn btn-light text-dark ml-0">
+                        <a style="background-color: #4D5061; color: #f9f9f9; margin: 20px; margin-left: 3px;" role="button" href='/static/pdb/{{ protein.pdb_name }}' download='/static/pdb/{{ protein.pdb_name }}' class="btn btn-light text-dark ml-0">
                             Download pdb
                         </a></div>
                     <div>
@@ -315,6 +340,7 @@
                                 <tr>
                                     <td>Score</td>
                                     <td>{{ protein.score }}</td>
+                                </tr>
 
                             </tbody>
                         </table>
@@ -325,227 +351,380 @@
 
         </div>
         <div>
-            {% for dock in protein.dock.all %}
         </div>
-        <style>
-            #container-01 {
-                width: 90%;
-                height: 300px;
-                position: relative;
-                left: 10px;
-                top: 10px;
-                bottom: 50px;
-            }
-            
-            .headerFont {
-                font-family: "Copperplate Gothic Bold";
-                color: #4B6887;
-                font-size: 24px;
-            }
-            
-            a:link {
-                text-decoration: none;
-            }
-            
-            a:visited {
-                text-decoration: none;
-            }
-            
-            a:hover {
-                text-decoration: none;
-            }
-            
-            body {
-                padding-top: 150px;
-                padding-bottom: 150px;
-            }
-            
-            button {
-                background-color: #4B6887;
-                color: white;
-                border: none;
-                padding: 10px 20px;
-                text-align: center;
-                text-decoration: none;
-                display: inline-block;
-                font-size: 16px;
-                margin: 4px 2px;
-                cursor: pointer;
-            }
-        </style>
+    </div>
+    <style>
+        #container-01 {
+            width: 90%;
+            height: 300px;
+            position: relative;
+            left: 10px;
+            top: 10px;
+            bottom: 50px;
+        }
+        
+        .headerFont {
+            font-family: "Copperplate Gothic Bold";
+            color: #4B6887;
+            font-size: 24px;
+        }
+        
+        a:link {
+            text-decoration: none;
+        }
+        
+        a:visited {
+            text-decoration: none;
+        }
+        
+        a:hover {
+            text-decoration: none;
+        }
+        
+        body {
+            padding-top: 150px;
+        }
+        
+        button {
+            background-color: #4B6887;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
 
-        <div class="row">
-            <div class="col-md-12 col-sm-12 col-xs-20">
-                <div class="panel panel-primary">
-                    <div class="panel-heading" align="center">
-                        {{ dock.dock_1}}
-                    </div>
+    {% for dock in dock %}
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-20">
+            <div class="panel panel-primary">
+                <div class="panel-heading" align="center">
+                    Docking
                 </div>
             </div>
         </div>
+    </div>
 
 
 
-        <div class="row">
-            <div class="col-md-5 col-sm-5 col-xs-12">
-                <div class="panel panel-default" style="height: 400px;">
-                    <div class="panel-heading">
-                        {{ dock.name }}
-                    </div>
-                    <div class="container-fluid"></div>
-                    <div id="docking">
-                        <div class="nav nav-tabs content-center">
-                            <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
-                            <div id="container-02" class="mol-container"></div>
-                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                            <script>
-                                jQuery(function() {
-                                    let element = jQuery("#container-02");
-                                    let config = {
-                                        backgroundColor: "White",
+    <div class="row">
+        <div class="col-md-6 col-sm-4 col-xs-13">
+            <div class="panel panel-default" style="height: 400px;">
+                <div class="panel-heading">
+                    {{ dock.dock_1 }}
+                </div>
+                <div class="container-fluid"></div>
+                <div id="docking">
+                    <div class="nav nav-tabs content-center">
+                        <script src="https://3Dmol.org/build/3Dmol-min.js"></script>
+                        <div id="container-02" class="mol-container"></div>
+                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                        <script>
+                            jQuery(function() {
+                                let element = jQuery("#container-02");
+                                let config = {
+                                    backgroundColor: "White",
 
-                                    };
-                                    let viewer = $3Dmol.createViewer(element, config);
-                                    let pdbUri = '/static/dock/{{ dock.dock_1 }}';
-                                    jQuery.ajax(pdbUri, {
-                                        success: function(data) {
-                                            let v = viewer;
-                                            v.addModel(data, "pdb"); /* load data */
-                                            v.setStyle({
-                                                chain: 'A'
-                                            }, {
-                                                cartoon: {
-                                                    color: "grey" // Replace with the desired color for Chain A
-                                                }
-                                            });
+                                };
+                                let viewer = $3Dmol.createViewer(element, config);
+                                let pdbUri = '/static/dock/{{ dock.dock_1 }}';
+                                jQuery.ajax(pdbUri, {
+                                    success: function(data) {
+                                        let v = viewer;
+                                        v.addModel(data, "pdb"); /* load data */
+                                        v.setStyle({
+                                            chain: 'A'
+                                        }, {
+                                            cartoon: {
+                                                color: "grey" // Replace with the desired color for Chain A
+                                            }
+                                        });
 
-                                            // Set style for Chain B
-                                            v.setStyle({
-                                                chain: 'B'
-                                            }, {
-                                                cartoon: {
-                                                    color: "purple" // Replace with the desired color for Chain B
-                                                }
-                                            }); /* style all atoms */
-                                            v.zoomTo(); /* set camera */
-                                            v.render(); /* render scene */
-                                            v.zoom(1.2, 1000); /* slight zoom */
-                                        },
-                                        error: function(hdr, status, err) {
-                                            console.error("Failed to load PDB " + pdbUri + ": " + err);
-                                        },
-                                    });
+                                        // Set style for Chain B
+                                        v.setStyle({
+                                            chain: 'B'
+                                        }, {
+                                            cartoon: {
+                                                color: "purple" // Replace with the desired color for Chain B
+                                            }
+                                        }); /* style all atoms */
+                                        v.zoomTo(); /* set camera */
+                                        v.render(); /* render scene */
+                                        v.zoom(1.2, 1000); /* slight zoom */
+                                    },
+                                    error: function(hdr, status, err) {
+                                        console.error("Failed to load PDB " + pdbUri + ": " + err);
+                                    },
                                 });
-                            </script>
+                            });
+                        </script>
 
 
-                            <div class="container-fluid physico-chemical-property-container m-t-50" align="left" style="position: relative;">
-                                <div>
+                        <div class="container-fluid physico-chemical-property-container m-t-50" align="left" style="position: relative;">
+                            <div>
 
-                                    <a role="button" href='/static/dock/{{ dock.dock_1 }}' download='/static/dock/{{ dock.dock_1 }}' class="btn btn-light text-dark ml-0">
+                                <a style="background-color: #4D5061; color: #f9f9f9; margin: 20px; margin-left: -10px;" role="button" href='/static/dock/{{ dock.dock_1 }}' download='/static/dock/{{ dock.dock_1 }}' class="btn btn-light text-dark ml-0">
 				Download PDB
 			 </a>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- First panel goes here -->
+            </div>
+            <!-- First panel goes here -->
+        </div>
+
+        <div class="col-md-6 col-sm-5 col-xs-10">
+            <div class="panel panel-success" style="height: 400px;">
+                <div class="panel-heading">
+                    {{dock.image}}
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <div id="owl-demo" class="owl-carousel owl-theme">
+
+                            <div class="item">
+                                <img src="{% static 'img/Image/'|add:dock.image %}" alt="Dock Image" style="margin-left: -50px;">
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
             </div>
 
-            <div class="col-md-7 col-sm-7 col-xs-12">
-                <div class="panel panel-success" style="height: 400px;">
-                    <div class="panel-heading">
-                        {{dock.image}}
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript">
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            responsive: {
+                600: {
+                    items: 1
+                }
+            }
+        })
+    </script>
+    <script>
+        $(document).ready(function() {
+
+            $("#owl-demo").owlCarousel({
+
+                navigation: true, // Show next and prev buttons
+
+                slideSpeed: 300,
+                paginationSpeed: 400,
+
+                items: 1,
+                itemsDesktop: false,
+                itemsDesktopSmall: false,
+                itemsTablet: false,
+                itemsMobile: false
+
+            });
+
+        });
+    </script>
+
+    <style>
+        hr {
+            border: none;
+            border-top: 1px solid #5f5e5e;
+            /* change color as needed */
+            margin: 20px 0;
+        }
+    </style>
+
+    <section>
+        <div class="col-md-13 col-sm-13 col-xs-18">
+            <div class="panel panel-success" style="height: 150px;">
+                <div class="panel-heading">
+                    Docking Scores
+                </div>
+                <div class="panel-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Attractive_VdW
+                                        <sup><i style="color: rgb(0, 0, 0);" class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Attractive van der Waals forces should be negative"></i>
+                                            </sup>
+                                    </th>
+                                    <th>Global_Energy
+                                        <sup><i style="color: rgb(0, 0, 0);" class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Binding energy and it should be negative"></i>
+                                            </sup>
+                                    </th>
+                                    <th>Repulsive_VdW
+                                        <sup><i style="color: rgb(0, 0, 0);" class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Repulsive van der Waals forces should be positive"></i>
+                                            </sup>
+                                    </th>
+                                    <th>ACE
+                                        <sup><i style="color: rgb(0, 0, 0);" class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="contribution of the atomic contact energy (ACE) to the global binding energy"></i>
+                                            </sup>
+                                    </th>
+                                    <th>hydrogen bonding
+                                        <sup><i style="color: rgb(0, 0, 0);" class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="contribution of the hydrogen bonds to the global binding energy"></i>
+                                            </sup>
+                                    </th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{dock.attr_vdw}}</td>
+                                    <td>{{dock.global_energy}}</td>
+                                    <td>{{dock.repl_vdw}}</td>
+                                    <td>{{dock.binding_energy}}</td>
+                                    <td>{{dock.hydrogen_bonding}}</td>
+
+
+                                </tr>
+
+                                <script>
+                                    function convertToCSV(rows) {
+                                        var csv = [];
+
+                                        for (var i = 0; i < rows.length; i++) {
+                                            var row = [];
+                                            var cells = rows[i].getElementsByTagName('td');
+
+                                            for (var j = 0; j < cells.length; j++) {
+                                                row.push(cells[j].innerText);
+                                            }
+
+                                            csv.push(row.join(','));
+                                        }
+
+                                        return csv.join('\n');
+                                    }
+
+                                    function downloadCSV(csv, filename) {
+                                        var csvFile = new Blob([csv], {
+                                            type: 'text/csv'
+                                        });
+                                        var downloadLink = document.createElement('a');
+
+                                        downloadLink.download = filename;
+                                        downloadLink.href = window.URL.createObjectURL(csvFile);
+                                        downloadLink.style.display = 'none';
+
+                                        document.body.appendChild(downloadLink);
+                                        downloadLink.click();
+                                        document.body.removeChild(downloadLink);
+                                    }
+
+                                    function exportTableToCSV(filename) {
+                                        var rows = document.querySelectorAll('.table tbody tr');
+                                        var csv = convertToCSV(rows);
+
+                                        downloadCSV(csv, filename);
+                                    }
+                                </script>
+                                <script>
+                                    function convertToXML(rows) {
+                                        var xml = '<?xml version="1.0" encoding="UTF-8"?>\n<Table>\n';
+
+                                        for (var i = 0; i < rows.length; i++) {
+                                            var cells = rows[i].getElementsByTagName('td');
+                                            xml += '  <Row>\n';
+
+                                            for (var j = 0; j < cells.length; j++) {
+                                                var cellValue = cells[j].innerText;
+                                                var cellTag = '    <Cell' + j + '>' + cellValue + '</Cell' + j + '>\n';
+                                                xml += cellTag;
+                                            }
+
+                                            xml += '  </Row>\n';
+                                        }
+
+                                        xml += '</Table>';
+                                        return xml;
+                                    }
+
+                                    function downloadXML(xml, filename) {
+                                        var xmlFile = new Blob([xml], {
+                                            type: 'application/xml'
+                                        });
+                                        var downloadLink = document.createElement('a');
+
+                                        downloadLink.download = filename;
+                                        downloadLink.href = window.URL.createObjectURL(xmlFile);
+                                        downloadLink.style.display = 'none';
+
+                                        document.body.appendChild(downloadLink);
+                                        downloadLink.click();
+                                        document.body.removeChild(downloadLink);
+                                    }
+
+                                    function exportTableToXML(filename) {
+                                        var rows = document.querySelectorAll('.table tbody tr');
+                                        var xml = convertToXML(rows);
+
+                                        downloadXML(xml, filename);
+                                    }
+                                </script>
+                                <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+                                <script>
+                                    function exportTableToPDF(filename) {
+                                        var doc = new jsPDF();
+                                        var table = document.querySelector('.table');
+                                        var rows = table.querySelectorAll('tbody tr');
+
+                                        var header = [];
+                                        var data = [];
+
+                                        // Extract table header
+                                        var headerCells = table.querySelectorAll('thead th');
+                                        headerCells.forEach(function(cell) {
+                                            header.push(cell.innerText);
+                                        });
+
+                                        // Extract table data
+                                        rows.forEach(function(row) {
+                                            var rowData = [];
+                                            var cells = row.querySelectorAll('td');
+                                            cells.forEach(function(cell) {
+                                                rowData.push(cell.innerText);
+                                            });
+                                            data.push(rowData);
+                                        });
+
+                                        doc.autoTable({
+                                            head: [header],
+                                            body: data,
+                                        });
+
+                                        doc.save(filename + '.pdf');
+                                    }
+                                </script>
+
+
+
+
+                            </tbody>
+                        </table>
+
                     </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <div class="owl-carousel owl-theme">
-
-                                <div class="item">
-                                    <img src="{% static 'img/Image/'|add:dock.image %}" alt="Dock Image">
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-
 
                 </div>
-
             </div>
         </div>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-        <script type="text/javascript">
-            $('.owl-carousel').owlCarousel({
-                loop: true,
-                margin: 10,
-                nav: true,
-                responsive: {
-                    600: {
-                        items: 1
-                    }
-                }
-            })
-        </script>
 
-        <style>
-            hr {
-                border: none;
-                border-top: 1px solid #5f5e5e;
-                /* change color as needed */
-                margin: 20px 0;
-            }
-        </style>
-
-        <section>
-            <h3 align="center">Docking Scores</h3>
-            <p></p>
-            <hr>
-        </section>
-
-
-        <section>
-            <div class="col-md-12 col-sm-11 col-xs-18">
-                <div class="panel panel-success" style="height: 400px;overflow: scroll;">
-                    <div class="panel-heading">
-                        Responsive Table Example
-                    </div>
-                    <div class="panel-body">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Attractive_VdW</th>
-                                        <th>Global_Energy</th>
-                                        <th>Repulsive_VdW</th>
-                                        <th>Binding energy</th>
-                                        <th>hydrogen bonding</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{{dock.attr_vdw}}</td>
-                                        <td>{{dock.global_energy}}</td>
-                                        <td>{{dock.repl_vdw}}</td>
-                                        <td>{{dock.binding_energy}}</td>
-                                        <td>{{dock.hydrogen_bonding}}</td>
-
-                                    </tr>
-
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-    </div>
-    </div>
+        </div>
+        </div>
     </section>
+
 
     </div>
 
@@ -574,6 +753,7 @@
         }
     </style>
     {% endfor %}
+    <hr />
 </body>
 
 </html>

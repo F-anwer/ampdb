@@ -101,13 +101,18 @@ def search_view(request):
 def protein(request, proteins_id):
     protein = Proteins.objects.get(pk=proteins_id)
     target_protien = protein.target_protein.id
-    dock = Docks.objects.filter(targets=target_protien)
-    dock_id = dock[0].id
-    protein_data= Proteins.objects.get(dock=dock_id)
+    protein_name = protein.amp[2:]
+    dock = Docks.objects.filter(Q(targets=target_protien) &  Q(dock_1__icontains=f"_{protein_name}.pdb"))
+    print("target_protien", target_protien)
+    print("protein.amp[2:]", protein.amp[2:])
+    print("dock", dock)
+    
+    # dock_id = dock[0].id
+    # protein_data= Proteins.objects.get(dock=dock_id)
     
     return render(request, "abampdb/protein.html", {
-        "protein": protein_data,
-        "dock": protein.dock.all(),
+        "protein": protein,
+        "dock": dock,
     })
 
 def target_proteins(request, proteins_id):
