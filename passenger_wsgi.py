@@ -1,0 +1,1 @@
+from am_db.wsgi import application
