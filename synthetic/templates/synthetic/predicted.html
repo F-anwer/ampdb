@@ -1,0 +1,149 @@
+{% extends 'base.html' %} {% block content %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<style>
+    /* 
+Generic Styling, for Desktops/Laptops 
+*/
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 150px;
+    }
+    /* Zebra striping */
+    
+    tr:nth-of-type(odd) {
+        background: #eee;
+    }
+    
+    th {
+        background: #333;
+        color: white;
+        font-weight: bold;
+    }
+    
+    td,
+    th {
+        padding: 6px;
+        border: 1px solid #ccc;
+        text-align: left;
+    }
+    
+    .alert {
+        position: relative;
+        top: 180px;
+        /* adjust the top value as needed */
+    }
+    
+    .blink_me {
+        animation: blinker 1.7s cubic-bezier(.5, 0, 1, 1) infinite alternate;
+    }
+    
+    @keyframes blinker {
+        to {
+            opacity: 0;
+        }
+    }
+    
+    .back-widget-set {
+        background-color: transparent;
+        height: min-content;
+        font-size: 8px;
+    }
+    
+    .panel-success {
+        border-color: #d6e9c6;
+    }
+    
+    th {
+        background: #4D5061;
+        color: rgb(255, 255, 255);
+        font-weight: normal;
+        font-size: small;
+    }
+    
+    body {
+        padding-top: -30px;
+        margin-top: -70px;
+    }
+    
+    hr {
+        border: 1px solid #4D5061;
+        margin: 10px 0;
+    }
+</style>
+
+
+<body>
+    {% comment %}
+    <form class="form-inline" method="POST" action="synthetic/create_syntheticprotien/"> {% endcomment %} {% comment %} {% csrf_token %} {% endcomment %}
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="panel panel-success"></div>
+
+            <table class="table table-striped w-auto">
+                <thead>
+                    <tr>
+                        <th scope="col">select AMP</th>
+                        <th scope="col">AMP name</th>
+                        <th scope="col">AMP-Sequence</th>
+                        <th scope="col">Score ≥5-10</th>
+                        <th scope="col" style="padding-left: 20px;"> Select Target protein</th>
+                        <th scope="col">Submit</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for synthetic in synthetic %}
+                    <tr class="table-info">
+                        <td> AMP{{ synthetic.id }}
+                        </td>
+                        <td>{{ synthetic.title }}</td>
+                        <td>{{ synthetic.synthetic_Sequence }}</td>
+                        <td>{{ synthetic.synthetic_score }}</td>
+
+
+                        <a href="{% url 'synthetic:submit_synthetic' synthetic_id=synthetic.pk %}">Go to result page</a>
+                        <td>
+                            <select class="mySelect" name="dropdown" onchange="updateHiddenInput(this, {{ synthetic.id }})" required>
+                                <option value="" disabled selected>Select an option</option>
+                                {% for starget in starget %}
+                                <option value="{{ starget.id }}">{{ starget.stargets }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td>
+                            <form class="form-inline" method="POST" action="/synthetic/create_syntheticprotien/">
+                                {% csrf_token %}
+                                <input type="hidden" name="synthetic_id" value="{{ synthetic.id }}">
+                                <input type="hidden" name="starget_id" id="hidden_starget_id_{{ synthetic.id }}">
+                                <input type="submit">
+                            </form>
+
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
+        </div>
+
+        </div>
+        {% comment %} </form> {% endcomment %}
+    </div>
+
+    <script>
+        function updateHiddenInput(selectElement, syntheticId) {
+            var hiddenInput = document.getElementById('hidden_starget_id_' + syntheticId);
+            hiddenInput.value = selectElement.value;
+            console.log("hiddenInput.value:", hiddenInput.value);
+        }
+    </script>
+    <section>
+        <hr />
+    </section>
+
+</body>
+
+{% endblock %}

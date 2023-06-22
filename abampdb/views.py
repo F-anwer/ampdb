@@ -15,7 +15,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from .models import *
 
-from .models import PDBQuery, Proteins, Docks, PDBDQuery, Synthetic, Sdock, PDBSDQuery, Targetproteins
+from .models import PDBQuery, Proteins, Docks, PDBDQuery, Targetproteins
 import uuid
 from django.shortcuts import redirect
 from django.http import HttpResponse
@@ -103,9 +103,7 @@ def protein(request, proteins_id):
     target_protien = protein.target_protein.id
     protein_name = protein.amp[2:]
     dock = Docks.objects.filter(Q(targets=target_protien) &  Q(dock_1__icontains=f"_{protein_name}.pdb"))
-    print("target_protien", target_protien)
-    print("protein.amp[2:]", protein.amp[2:])
-    print("dock", dock)
+
     
     # dock_id = dock[0].id
     # protein_data= Proteins.objects.get(dock=dock_id)
@@ -151,6 +149,8 @@ def create_protien(request):
         
     else:
             return HttpResponse('Invalid request method')
+
+
 
 
 

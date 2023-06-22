@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ["*"]
 
 INSTALLED_APPS = [
     "abampdb.apps.AmpdbConfig",
+    "synthetic.apps.SyntheticConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -61,7 +62,7 @@ ROOT_URLCONF = "am_db.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -145,10 +146,14 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 # # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/media/"
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'abampdb/static'),
+    os.path.join(BASE_DIR, 'synthetic/static'),
+]
 
 TEMPLATE_DIRS = (
     os.path.join(os.path.dirname(__file__), "../templates").replace("\\", "/"),
@@ -156,12 +161,11 @@ TEMPLATE_DIRS = (
 
 INSTALLED_APPS = [
     "abampdb.apps.AmpdbConfig",
+    "synthetic.apps.SyntheticConfig",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'drf_multiple_model',
-    'rest_framework',
 ]
