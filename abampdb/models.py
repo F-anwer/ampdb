@@ -1,6 +1,20 @@
 # import datetime
 
 from django.db import models
+from embed_video.fields import EmbedVideoField
+
+
+
+class Video(models.Model):
+    title = models.CharField(max_length=100)
+    added = models.DateTimeField(auto_now_add=True)
+    url = EmbedVideoField()
+
+    def _str____(self):
+        return str(self.title)
+
+    class Meta:
+        ordering = ['-added']
 
 
 class PDBTQuery(models.Model):
@@ -10,11 +24,13 @@ class PDBTQuery(models.Model):
     def __str__(self):
         return self.query_id
 
+
 class Targetproteins(models.Model):
     targets = models.CharField(("Targets"), max_length=1000)
 
     def __str__(self):
         return self.targets
+
 
 class PDBQuery(models.Model):
     query_id = models.CharField(max_length=1000)
@@ -22,10 +38,11 @@ class PDBQuery(models.Model):
 
     def __str__(self):
         return self.query_id
-    
+
 
 class Proteins(models.Model):
-    target_protein = models.ForeignKey(Targetproteins, on_delete=models.SET_NULL, null=True, blank=True)
+    target_protein = models.ForeignKey(
+        Targetproteins, on_delete=models.SET_NULL, null=True, blank=True)
     dock = models.ManyToManyField('Docks', related_name='dock')
     amp = models.CharField(("AMP"), max_length=1000)
     name = models.CharField(("Name"), max_length=1000)
@@ -44,7 +61,8 @@ class Proteins(models.Model):
     acidic = models.FloatField(("Acidic"), null=True)
     mol_weight_tiny = models.FloatField(("MolWeightTiny"), null=True)
     mol_weight_small = models.FloatField(("MolWeightSmall"), null=True)
-    mol_weight_apliphatic = models.FloatField(("MolWeightAliphatic"), null=True)
+    mol_weight_apliphatic = models.FloatField(
+        ("MolWeightAliphatic"), null=True)
     mol_weight_aromatic = models.FloatField(("MolWeightAromatic"), null=True)
     mol_weight_non_polar = models.FloatField(("MolWeightNonPolar"), null=True)
     mol_weight_polar = models.FloatField(("MolWeightPolar"), null=True)
@@ -71,7 +89,6 @@ class Proteins(models.Model):
     flexibility = models.FloatField(("Flexibility"), null=True)
     score = models.IntegerField(("Score"), null=True)
     pdb_name = models.CharField(("PDBName"), max_length=1000)
-
 
     def __str__(self):
         return self.amp

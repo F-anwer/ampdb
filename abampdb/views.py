@@ -15,7 +15,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from .models import *
 
-from .models import PDBQuery, Proteins, Docks, PDBDQuery, Targetproteins
+from .models import PDBQuery, Proteins, Docks, PDBDQuery, Targetproteins, Video
 import uuid
 from django.shortcuts import redirect
 from django.http import HttpResponse
@@ -90,7 +90,8 @@ class ContactView(generic.TemplateView):
 
 
 def TutorialPage(request):
-    return render(request, "abampdb/tutorial.html")
+    videos = Video.objects.all()
+    return render(request, 'abampdb/tutorial.html', context={'videos': videos})
 
 def search_view(request):
     return render(request, "abampdb/search.html", {

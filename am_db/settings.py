@@ -41,11 +41,14 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "embed_video",
     "import_export",
 ]
 
 APPEND_SLASH = False
 REMOVE_SLASH = True
+
+EMBED_VIDEO_BACKENDS = ('embed_video.backends.YoutubeBackend',)
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -70,6 +73,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                'django.template.context_processors.request',
             ],
         },
     },
