@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Synthetic AMPs</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous"
         referrerpolicy="no-referrer" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Docking</title>
+    <title></title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" integrity="sha512-tS3S5qG0BlhnQROyJXvNjeEM4UpMXHrQfTGmbQ1gKmelCxlSEBUaxhRBj/EFTzpbP4RVSrpEikbmdJobCvhE3g==" crossorigin="anonymous" referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css" integrity="sha512-sMXtMNL1zRzolHYKEujM2AqCLUR9F2C4/05cdbxjjLSRvMQIciEPCQZo++nk7go3BtSuK9kfa/s+a4f4i5pLkw==" crossorigin="anonymous"
@@ -19,6 +19,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="Blob.js"></script>
+    <script type="text/javascript" src="../script/jquery.js"></script>
+    <script type="text/javascript" src="../script/jquery.callback.js"></script>
+    <script type="text/javascript" src="../script/ExportHTMLTable.js"></script>
 
 
     <style>
@@ -37,7 +42,7 @@
     </style>
 
 </head>
-<table class="table table-striped w-auto">
+<table class="table table-striped w-auto" id="myTable">
     <thead style="background-color: #4D5061; color: white;" font-weight="normal" font-size="small">
 
         <tr>
@@ -66,8 +71,8 @@
                                 {% endfor %}
                             </select>
             </td> -->
-            <td><button onclick="exportTableToCSV('table-data.csv')" style="background-color: #f9f9f9; font-size:28px; margin: 0; padding: 0;"><i class="fas fa-file-csv" style="color: rgb(17, 44, 35); margin-top: -10px;"></i></button>
-                <button onclick="exportTableToXML('table-data.xml')" style="background-color: #f9f9f9; font-size: 28px; margin: 0; padding: 0;">
+            <td><button onclick="tableToCSV()" style="background-color: #f9f9f9; font-size:28px; margin: 0; padding: 0;"><i class="fas fa-file-csv" style="color: rgb(17, 44, 35); margin-top: -10px;"></i></button>
+                <button onclick="tableToXML()" style="background-color: #f9f9f9; font-size: 28px; margin: 0; padding: 0;">
                     <i class="fas fa-file-code" style="color: rgb(34, 26, 145); margin-top: -10px;"></i>
                   </button>
 
@@ -147,7 +152,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
-                        <table class="table table-striped table-bordered table-hover">
+                        <table class="table table-striped table-bordered table-hover" id="table_1">
                             <thead>
                                 <tr>
                                     <th>Property</th>
@@ -306,6 +311,136 @@
                             </tbody>
                         </table>
 
+                        <script src="Blob.js"></script>
+                        <script type="text/javascript">
+                            function tableToCSV() {
+
+                                // Variable to store the final csv data
+                                var csv_data = [];
+
+                                // Get each row data
+                                var rows = document.getElementsByTagName('tr');
+                                for (var i = 0; i < rows.length; i++) {
+
+                                    // Get each column data
+                                    var cols = rows[i].querySelectorAll('td,th');
+
+                                    // Stores each csv row data
+                                    var csvrow = [];
+                                    for (var j = 0; j < cols.length; j++) {
+
+                                        // Get the text data of each cell
+                                        // of a row and push it to csvrow
+                                        csvrow.push(cols[j].innerHTML);
+                                    }
+
+                                    // Combine each column value with comma
+                                    csv_data.push(csvrow.join(","));
+                                }
+
+                                // Combine each row data with new line character
+                                csv_data = csv_data.join('\n');
+
+                                // Call this function to download csv file 
+                                downloadCSVFile(csv_data);
+
+                            }
+
+                            function downloadCSVFile(csv_data) {
+
+                                // Create CSV file object and feed
+                                // our csv_data into it
+                                CSVFile = new Blob([csv_data], {
+                                    type: "text/csv"
+                                });
+
+                                // Create to temporary link to initiate
+                                // download process
+                                var temp_link = document.createElement('a');
+
+                                // Download csv file
+                                temp_link.download = "GfG.csv";
+                                var url = window.URL.createObjectURL(CSVFile);
+                                temp_link.href = url;
+
+                                // This link should not be displayed
+                                temp_link.style.display = "none";
+                                document.body.appendChild(temp_link);
+
+                                // Automatically click the link to
+                                // trigger download
+                                temp_link.click();
+                                document.body.removeChild(temp_link);
+                            }
+                        </script>
+                        <script>
+                            function tableToXML() {
+                                // Create the root element of the XML
+                                var xml_data = document.createElement('table');
+
+                                // Get each row data
+                                var rows = document.getElementsByTagName('tr');
+                                for (var i = 0; i < rows.length; i++) {
+
+                                    // Create a row element
+                                    var xmlrow = document.createElement('row');
+
+                                    // Get each column data
+                                    var cols = rows[i].querySelectorAll('td,th');
+                                    for (var j = 0; j < cols.length; j++) {
+
+                                        // Create a cell element
+                                        var xmlcell = document.createElement('cell');
+
+                                        // Get the text data of each cell
+                                        var cellText = document.createTextNode(cols[j].innerHTML);
+
+                                        // Append the text data to the cell element
+                                        xmlcell.appendChild(cellText);
+
+                                        // Append the cell element to the row element
+                                        xmlrow.appendChild(xmlcell);
+                                    }
+
+                                    // Append the row element to the root element
+                                    xml_data.appendChild(xmlrow);
+                                }
+
+                                // Convert the XML object to string
+                                var serializer = new XMLSerializer();
+                                var xmlString = serializer.serializeToString(xml_data);
+
+                                // Call this function to download the XML file
+                                downloadXMLFile(xmlString);
+                            }
+
+                            function downloadXMLFile(xmlString) {
+                                // Create XML file object and feed our xmlString into it
+                                var XMLFile = new Blob([xmlString], {
+                                    type: "text/xml"
+                                });
+
+                                // Create a temporary link to initiate the download process
+                                var temp_link = document.createElement('a');
+
+                                // Download the XML file
+                                temp_link.download = "table.xml";
+                                var url = window.URL.createObjectURL(XMLFile);
+                                temp_link.href = url;
+
+                                // This link should not be displayed
+                                temp_link.style.display = "none";
+                                document.body.appendChild(temp_link);
+
+                                // Automatically click the link to trigger the download
+                                temp_link.click();
+
+                                // Clean up
+                                document.body.removeChild(temp_link);
+                            }
+                        </script>
+
+
                     </div>
                 </div>
             </div>
@@ -360,7 +495,7 @@
         }
     </style>
 
-    {% for sdock in sdock %}
+    <!-- {% for sdock in sdock %}
     <div class="row">
         <div class="col-md-12 col-sm-12 col-xs-20">
             <div class="panel panel-primary">
@@ -438,30 +573,30 @@
                 </div>
             </div>
             <!-- First panel goes here -->
-        </div>
+    <!-- </div>
 
-        <div class="col-md-6 col-sm-5 col-xs-10">
-            <div class="panel panel-success" style="height: 400px;">
-                <div class="panel-heading">
-                    {{sdock.image}}
-                </div>
-                <div class="panel-body">
-                    <div class="table-responsive">
-                        <div id="owl-demo" class="owl-carousel owl-theme">
+    <div class="col-md-6 col-sm-5 col-xs-10">
+        <div class="panel panel-success" style="height: 400px;">
+            <div class="panel-heading">
+                {{sdock.image}}
+            </div>
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div id="owl-demo" class="owl-carousel owl-theme">
 
-                            <div class="item">
-                                <img src="" alt="Dock Image" style="margin-left: -50px;">
-                            </div>
-
+                        <div class="item">
+                            <img src="" alt="Dock Image" style="margin-left: -50px;">
                         </div>
 
                     </div>
+
                 </div>
-
-
             </div>
 
-        </div>
+
+        </div> -->
+
+    <!-- </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.4/jquery.min.js" integrity="sha512-pumBsjNRGGqkPzKHndZMaAG+bir374sORyzM3uulLV14lN5LyykqNk8eEeUlUkB3U0M4FApyaHraT65ihJhDpQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js" integrity="sha512-bPs7Ae6pVvhOSiIcyUClR7/q2OAsRiovw4vAkX+zJbw3ShAeeqezq50RIIcIURq7Oa20rW2n2q+fyXBNcU9lrw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -477,8 +612,8 @@
             }
         })
     </script>
-    <script>
-        $(document).ready(function() {
+    <script> -->
+    <!-- $(document).ready(function() {
 
             $("#owl-demo").owlCarousel({
 
@@ -550,140 +685,48 @@
                                     <td>{{dock.hydrogen_bonding}}</td>
 
 
-                                </tr>
+                                </tr> -->-->
 
-                                <script>
-                                    function convertToCSV(rows) {
-                                        var csv = [];
+    <script>
+        function exportTableToCSV() {
+            var csvContent = "data:text/csv;charset=utf-8,";
+            var rows = document.querySelectorAll("#myTable tr");
 
-                                        for (var i = 0; i < rows.length; i++) {
-                                            var row = [];
-                                            var cells = rows[i].getElementsByTagName('td');
+            rows.forEach(function(row) {
+                var rowData = [];
+                var cols = row.querySelectorAll("td, th");
 
-                                            for (var j = 0; j < cells.length; j++) {
-                                                row.push(cells[j].innerText);
-                                            }
+                cols.forEach(function(col) {
+                    rowData.push(col.innerText);
+                });
 
-                                            csv.push(row.join(','));
-                                        }
+                csvContent += rowData.join(",") + "\n";
+            });
 
-                                        return csv.join('\n');
-                                    }
-
-                                    function downloadCSV(csv, filename) {
-                                        var csvFile = new Blob([csv], {
-                                            type: 'text/csv'
-                                        });
-                                        var downloadLink = document.createElement('a');
-
-                                        downloadLink.download = filename;
-                                        downloadLink.href = window.URL.createObjectURL(csvFile);
-                                        downloadLink.style.display = 'none';
-
-                                        document.body.appendChild(downloadLink);
-                                        downloadLink.click();
-                                        document.body.removeChild(downloadLink);
-                                    }
-
-                                    function exportTableToCSV(filename) {
-                                        var rows = document.querySelectorAll('.table tbody tr');
-                                        var csv = convertToCSV(rows);
-
-                                        downloadCSV(csv, filename);
-                                    }
-                                </script>
-                                <script>
-                                    function convertToXML(rows) {
-                                        var xml = '<?xml version="1.0" encoding="UTF-8"?>\n<Table>\n';
-
-                                        for (var i = 0; i < rows.length; i++) {
-                                            var cells = rows[i].getElementsByTagName('td');
-                                            xml += '  <Row>\n';
-
-                                            for (var j = 0; j < cells.length; j++) {
-                                                var cellValue = cells[j].innerText;
-                                                var cellTag = '    <Cell' + j + '>' + cellValue + '</Cell' + j + '>\n';
-                                                xml += cellTag;
-                                            }
-
-                                            xml += '  </Row>\n';
-                                        }
-
-                                        xml += '</Table>';
-                                        return xml;
-                                    }
-
-                                    function downloadXML(xml, filename) {
-                                        var xmlFile = new Blob([xml], {
-                                            type: 'application/xml'
-                                        });
-                                        var downloadLink = document.createElement('a');
-
-                                        downloadLink.download = filename;
-                                        downloadLink.href = window.URL.createObjectURL(xmlFile);
-                                        downloadLink.style.display = 'none';
-
-                                        document.body.appendChild(downloadLink);
-                                        downloadLink.click();
-                                        document.body.removeChild(downloadLink);
-                                    }
-
-                                    function exportTableToXML(filename) {
-                                        var rows = document.querySelectorAll('.table tbody tr');
-                                        var xml = convertToXML(rows);
-
-                                        downloadXML(xml, filename);
-                                    }
-                                </script>
-                                <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.3/jspdf.umd.min.js"></script>
-                                <script>
-                                    function exportTableToPDF(filename) {
-                                        var doc = new jsPDF();
-                                        var table = document.querySelector('.table');
-                                        var rows = table.querySelectorAll('tbody tr');
-
-                                        var header = [];
-                                        var data = [];
-
-                                        // Extract table header
-                                        var headerCells = table.querySelectorAll('thead th');
-                                        headerCells.forEach(function(cell) {
-                                            header.push(cell.innerText);
-                                        });
-
-                                        // Extract table data
-                                        rows.forEach(function(row) {
-                                            var rowData = [];
-                                            var cells = row.querySelectorAll('td');
-                                            cells.forEach(function(cell) {
-                                                rowData.push(cell.innerText);
-                                            });
-                                            data.push(rowData);
-                                        });
-
-                                        doc.autoTable({
-                                            head: [header],
-                                            body: data,
-                                        });
-
-                                        doc.save(filename + '.pdf');
-                                    }
-                                </script>
+            var encodedUri = encodeURI(csvContent);
+            var link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "table.csv");
+            document.body.appendChild(link); // Required for Firefox
+            link.click();
+        }
+    </script>
 
 
 
 
-                            </tbody>
-                        </table>
 
-                    </div>
+    </tbody>
+    </table>
 
-                </div>
-            </div>
-        </div>
+    </div>
 
-        </div>
-        </div>
+    </div>
+    </div>
+    </div>
+
+    </div>
+    </div>
     </section>
 
 
