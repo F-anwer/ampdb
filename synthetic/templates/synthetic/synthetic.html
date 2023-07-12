@@ -41,36 +41,36 @@
     <thead style="background-color: #4D5061; color: white;" font-weight="normal" font-size="small">
 
         <tr>
-            <th scope="col" style="font-size: small; font-weight: normal;">select AMP</th>
+            <th scope="col" style="font-size: small; font-weight: normal;">ID</th>
+            <th scope="col" style="font-size: small; font-weight: normal;">AbAMPdbID</th>
             <th scope="col" style="font-size: small; font-weight: normal;">AMP name</th>
             <th scope="col" style="font-size: small; font-weight: normal;">AMP-Sequence</th>
             <th scope="col" style="font-size: small; font-weight: normal;">Score ≥5-10</th>
-            <th scope="col" style="font-size: small; font-weight: normal; padding-left: 20px;"> Select Target protein</th>
+            <!-- <th scope="col" style="font-size: small; font-weight: normal; padding-left: 20px;"> Select Target protein</th> -->
             <th scope="col" style="font-size: small; font-weight: normal;">Export Results</th>
         </tr>
     </thead>
     <tbody>
         <tr class="table-info">
-            <td>AMP{{ synthetic.id }}</td>
+            <td>{{ synthetic.id }}</td>
+            <td>{{ synthetic.title }}</td>
             <td>{{ synthetic.name }}</td>
-            <td>{{ synthetic.synthetic_Sequence }}</td>
+            <td>{{ synthetic.s }}</td>
             <td>{{ synthetic.synthetic_score }}</td>
             <a href="{% url 'synthetic:submit_synthetic' synthetic_id=synthetic.pk %}"></a>
-            <td>
+            <!-- <td>
                 <select class="mySelect" name="dropdown" onchange="updateHiddenInput(this, {{ synthetic.id }})" required>
                                 
                                 {% for sdock in sdock %}
                                 <option value="{{ sdock.id }}">{{ sdock.s_dock }}</option>
                                 {% endfor %}
                             </select>
-            </td>
+            </td> -->
             <td><button onclick="exportTableToCSV('table-data.csv')" style="background-color: #f9f9f9; font-size:28px; margin: 0; padding: 0;"><i class="fas fa-file-csv" style="color: rgb(17, 44, 35); margin-top: -10px;"></i></button>
                 <button onclick="exportTableToXML('table-data.xml')" style="background-color: #f9f9f9; font-size: 28px; margin: 0; padding: 0;">
                     <i class="fas fa-file-code" style="color: rgb(34, 26, 145); margin-top: -10px;"></i>
                   </button>
-                <button onclick="exportTableToPDF('table-data.pdf')" style="background-color: #f9f9f9; font-size: 28px; margin: 0; padding: 0;">
-                    <i class="fas fa-file-pdf" style="color: rgb(61, 6, 6); margin-top: -10px;"></i>
-                  </button>
+
 
             </td>
     </tbody>
@@ -157,7 +157,7 @@
                             <tbody>
                                 <tr>
                                     <td>Sequence</td>
-                                    <td>{{ synthetic.synthetic_Sequence }}</td>
+                                    <td>{{ synthetic.s }}</td>
 
                                 </tr>
                                 <tr>

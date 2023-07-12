@@ -42,24 +42,24 @@ def synthetic(request):
 def submit_synthetic(request, synthetic_id):
     synthetic = Synthetic.objects.get(pk=synthetic_id)
 
-    starget_protein = synthetic.starget_protein.id
-    print("starget_protein", starget_protein)
-    sdock = Sdock.objects.filter(Q(stargets=starget_protein))
-    sdock2 = Sdock.objects.filter(Q(s_dock__icontains=synthetic.name))
+    # starget_protein = synthetic.starget_protein.id
+    # print("starget_protein", starget_protein)
+    # sdock = Sdock.objects.filter(Q(stargets=starget_protein))
+    # sdock2 = Sdock.objects.filter(Q(s_dock__icontains=synthetic.name))
 
     # synthetic_title = synthetic.title[2:]
     # sdock = Sdock.objects.filter(Q(stargets=starget_protein) & Q(
     #     s_dock__icontains=f"_{synthetic_title}.pdb"))
 
-    print("sdock", sdock)
-    print("sdock2", sdock2)
+    # print("sdock", sdock)
+    # print("sdock2", sdock2)
 
     # dock_id = dock[0].id
     # protein_data= Proteins.objects.get(dock=dock_id)
 
     return render(request, "synthetic/synthetic.html", {
         "synthetic": synthetic,
-        "sdock": sdock,
+        # "sdock": sdock,
     })
 
 

@@ -84,11 +84,12 @@ Generic Styling, for Desktops/Laptops
             <table class="table table-striped w-auto">
                 <thead>
                     <tr>
-                        <th scope="col">select AMP</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">AbAMPdbID</th>
                         <th scope="col">AMP name</th>
                         <th scope="col">AMP-Sequence</th>
                         <th scope="col">Score ≥5-10</th>
-                        <th scope="col" style="padding-left: 20px;"> Select Target protein</th>
+                        <!-- <th scope="col" style="padding-left: 20px;"> Select Target protein</th> -->
                         <th scope="col">Submit</th>
                     </tr>
                 </thead>
@@ -96,22 +97,23 @@ Generic Styling, for Desktops/Laptops
                 <tbody>
                     {% for synthetic in synthetic %}
                     <tr class="table-info">
-                        <td> AMP{{ synthetic.id }}
+                        <td> {{ synthetic.id }}
                         </td>
                         <td>{{ synthetic.title }}</td>
-                        <td>{{ synthetic.synthetic_Sequence }}</td>
+                        <td>{{ synthetic.name }}</td>
+                        <td>{{ synthetic.s }}</td>
                         <td>{{ synthetic.synthetic_score }}</td>
 
 
                         <a href="{% url 'synthetic:submit_synthetic' synthetic_id=synthetic.pk %}">Go to result page</a>
-                        <td>
+                        <!-- <td>
                             <select class="mySelect" name="dropdown" onchange="updateHiddenInput(this, {{ synthetic.id }})" required>
                                 <option value="" disabled selected>Select an option</option>
                                 {% for starget in starget %}
                                 <option value="{{ starget.id }}">{{ starget.stargets }}</option>
                                 {% endfor %}
                             </select>
-                        </td>
+                        </td> -->
                         <td>
                             <form class="form-inline" method="POST" action="/synthetic/create_syntheticprotien/">
                                 {% csrf_token %}
