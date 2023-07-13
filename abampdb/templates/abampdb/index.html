@@ -13,24 +13,48 @@
         <h4 class="text-center"><br><br><br>AbAMPdb is the manually-curated database for antimicrobial peptides (AMPs) specifically against
             <em>Acinetobacter baumannii</em>. The database provides experimental AMPs information related to antimicrobial potentials, homology-based modelled structures and the peptide protein interactions of these AMPs<br><br></h4>
 
-        <link rel="stylesheet" type="text/css" href="{% static 'abampdb/abampdb/style.css' %}">
-        <center><img src="{% static 'img/logo.png' %}" width="40%" height="30%"></center><br>
-        <div class="cover" style="background-image: url({% static 'amp.jpg' %});
-        background-repeat: no-repeat;
-        background-attachment: fixed;
-        background-position: bottom;">
+        <link rel="stylesheet " type="text/css " href="{% static 'abampdb/abampdb/style.css' %} ">
+        <center><img src="{% static 'img/logo.png' %} " width="40% " height="30% "></center><br>
+        <div class="cover " style="background-image: url({% static 'amp.jpg' %}); background-repeat: no-repeat; background-attachment: fixed; background-position: bottom; ">
 
-            <center><a href="{% url 'abampdb:search' %}" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Enter AbAMPdb</a></center>
+            <center><a href="{% url 'abampdb:search' %} " class="btn btn-primary btn-md active " role="button " aria-pressed="true ">Enter AbAMPdb</a></center>
             {% else %}
             <p>Page unavailable. Pleasse try again soon.</p>
             {% endif %}
         </div>
 
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js " integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo " crossorigin="anonymous "></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js " integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1 " crossorigin="anonymous "></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js " integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM " crossorigin="anonymous "></script>
     </div>
+    <section>
+        <div>
+            <footer class="footer " style="margin: 0; padding: 0; padding-bottom: 0; margin-top: 0; ">
+                <p> | &copy; 2023 Microbial Genomics & Bioinformatics |<br> Integrative Biology Laboratory, Atta-ur-Rahman School of Applied Biosciences (ASAB) <br>1st floor, D Block, National University of Sciences and Technology (NUST), H-12 Islamabad.
+                </p>
+
+
+            </footer>
+            <style>
+                .footer {
+                    position: fixed;
+                    bottom: -280px;
+                    width: 100%;
+                    height: 50%;
+                    background-color: #4D5061;
+                    color: white;
+                    font-size: 14px;
+                    text-align: center;
+                }
+                
+                .container {
+                    bottom: -10px;
+                    margin-bottom: -120px;
+                }
+            </style>
+        </div>
+    </section>
 </body>
 
 </html>
