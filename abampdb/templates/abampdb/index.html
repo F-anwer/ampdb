@@ -10,7 +10,7 @@
 
 <body>
     <div class="container">
-        <h4 class="text-center" style="font-family: Calibri; font-size: 20px;"><br><br><br>AbAMPdb is the manually-curated database for antimicrobial peptides (AMPs) specifically against
+        <h4 class="text-center"><br><br><br>AbAMPdb is the manually-curated database for antimicrobial peptides (AMPs) specifically against
             <em>Acinetobacter baumannii</em>. The database provides experimental AMPs information related to antimicrobial potentials, homology-based modelled structures and the peptide protein interactions of these AMPs<br><br></h4>
 
         <link rel="stylesheet" type="text/css" href="{% static 'abampdb/abampdb/style.css' %}">
@@ -20,7 +20,7 @@
         background-attachment: fixed;
         background-position: bottom;">
 
-            <center><a href="{% url 'abampdb:search' %}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">Enter AbAMPdb</a></center>
+            <center><a href="{% url 'abampdb:search' %}" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Enter AbAMPdb</a></center>
             {% else %}
             <p>Page unavailable. Pleasse try again soon.</p>
             {% endif %}
@@ -45,7 +45,7 @@
                     color: white;
                     font-size: 14px;
                     text-align: center;
-                    padding: 10px 0;
+                    padding: 0px 0;
                 }
                 
                 @media only screen and (max-width: 600px) {
