@@ -65,7 +65,7 @@ Generic Styling, for Desktops/Laptops
     
     body {
         padding-top: -30px;
-        margin-top: -70px;
+        margin-top: -10px;
     }
     
     hr {
@@ -103,7 +103,7 @@ Generic Styling, for Desktops/Laptops
                         <td>{{ protein.score }}</td>
 
 
-                        <a href="{% url 'abampdb:protein' proteins_id=protein.pk %}">Go to result page</a>
+                        <a href="{% url 'abampdb:protein' proteins_id=protein.pk %}"></a>
                         <td>
                             <select class="mySelect" name="dropdown" onchange="updateHiddenInput(this, {{ protein.id }})" required>
                                 <option value="" disabled selected>Select an option</option>
