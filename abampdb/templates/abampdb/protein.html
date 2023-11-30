@@ -454,6 +454,14 @@
                                                 color: "purple" // Replace with the desired color for Chain B
                                             }
                                         }); /* style all atoms */
+                                        // Set style for Chain B
+                                        v.setStyle({
+                                            chain: 'P'
+                                        }, {
+                                            cartoon: {
+                                                color: "purple" // Replace with the desired color for Chain B
+                                            }
+                                        });
                                         v.zoomTo(); /* set camera */
                                         v.render(); /* render scene */
                                         v.zoom(1.2, 1000); /* slight zoom */
