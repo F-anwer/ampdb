@@ -143,6 +143,19 @@ def create_protien(request):
             protien = Proteins.objects.get(id=protein_id)
             protien.target_protein_id = target_protein_id
             protien.save()
+            
+
+            # docks_instances = Docks.objects.filter(dock_1=dock_name).values('id','dock_1')
+            target_protein = Targetproteins.objects.get(id=target_protein_id)
+            # dock = protien.dock.values('dock_1')
+            # dock_name = dock[0]['dock_1']
+            target_protein_name = target_protein.targets
+            docks_instances = Docks.objects.filter(dock_1__contains=target_protein_name)
+            for dock_instance in docks_instances:
+                dock_instance.targets.add(target_protein)
+                
+          
+
             redirect_url = reverse('abampdb:protein', kwargs={'proteins_id': protein_id})
             return redirect(redirect_url)
         except Proteins.DoesNotExist:

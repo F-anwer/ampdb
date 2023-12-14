@@ -284,8 +284,8 @@
                                     <td>{{ protein.BomanIndex }}</td>
                                 </tr>
                                 <tr>
-                                    <td>BomanIndex</td>
-                                    <td>{{ protein.BomanIndex }}</td>
+                                    <td>Hemolytic Activity</td>
+                                    <td>{{ protein.hemolytic_activity }}</td>
                                 </tr>
 
                                 <tr>
@@ -298,10 +298,10 @@
                                     <td>{{ protein.hmoment_angle }}</td>
                                 </tr>
                                 <tr>
-                                    <td>Transmembrane</td>
-                                    <td>{{ protein.transmembrane }}</td>
+                                    <td>Solubility</td>
+                                    <td>{{ protein.solubility }}</td>
                                 </tr>
-
+<!-- 
                                 <tr>
                                     <td>Extracellular</td>
                                     <td>{{ protein.extracellular }}</td>
@@ -309,20 +309,20 @@
                                 <tr>
                                     <td>Cytoplasmic</td>
                                     <td>{{ protein.cytoplasmic }}</td>
-                                </tr>
-                                <tr>
+                                </tr> -->
+                                <!-- <tr>
                                     <td>Hydrophobic Plots</td>
                                     <td>{{ protein.hydrophobic_plots }}</td>
-                                </tr>
-                                <tr>
+                                </tr> -->
+                                <!-- <tr>
                                     <td>Hydropathy Plots</td>
                                     <td>{{ protein.hydropathy_plots }}</td>
-                                </tr>
-
+                                </tr> -->
+<!-- 
                                 <tr>
                                     <td>DisulfideEnd</td>
                                     <td>{{ protein.disulfide_end }}</td>
-                                </tr>
+                                </tr> -->
 
                                 <tr>
                                     <td>Toxicity</td>
@@ -332,12 +332,12 @@
                                     <td>RMSF</td>
                                     <td>{{ protein.rmsf }}</td>
                                 </tr>
-                                <tr>
+                                <!-- <tr>
                                     <td>Flexibility</td>
                                     <td>
                                         <a href="{{ protein.flexibility }}"></a>
                                     </td>
-                                </tr>
+                                </tr> -->
                                 <tr>
                                     <td>Score</td>
                                     <td>{{ protein.score }}</td>
@@ -570,11 +570,11 @@
                                         <sup><i style="color: rgb(0, 0, 0);" class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Attractive van der Waals forces should be negative"></i>
                                             </sup>
                                     </th>
-                                    <th>Binding_affinity
+                                    <th>Scores
                                         <sup><i style="color: rgb(0, 0, 0);" class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Binding energy and it should be negative"></i>
                                             </sup>
                                     </th>
-                                    <th>Scores
+                                    <th>Binding_affinity
                                         <sup><i style="color: rgb(0, 0, 0);" class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="Repulsive van der Waals forces should be positive"></i>
                                             </sup>
                                     </th>
@@ -588,8 +588,8 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{dock.attr_vdw}}</td>
                                     <td>{{dock.global_energy}}</td>
+                                    <td>{{dock.attr_vdw}}</td>
                                     <td>{{dock.repl_vdw}}</td>
                                     <td>{{dock.binding_energy}}</td>
                                     
