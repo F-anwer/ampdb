@@ -1,5 +1,23 @@
 <!doctype html> {% if csrf_token %} {% load static %}
 
+<style>
+.normal-text {
+    font-weight: normal;
+}
+
+.custom-color {
+    background-color: #0049a3!important; /* Dark blue color */
+    border-color: #0049a3!important; /* Dark blue color */
+}
+.custom-color:hover,
+.custom-color:focus,
+.custom-color:active {
+    background-color: #0049a3!important; /* Darker blue color on hover, focus, and active states */
+    border-color: #0049a3!important;/* Darker blue color on hover, focus, and active states */
+}
+
+</style>
+
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -10,9 +28,9 @@
 
 <body>
     <div class="container">
-        <h4 class="text-center"><br><br><br>AbAMPdb is the manually-curated database for antimicrobial peptides (AMPs) specifically against
-            <em>Acinetobacter baumannii</em>. The database provides experimental AMPs information related to antimicrobial potentials, homology-based modelled structures and the peptide protein interactions of these AMPs<br><br></h4>
+        
 
+        <br><br><br> <!-- Add space before -->
         <link rel="stylesheet" type="text/css" href="{% static 'abampdb/abampdb/style.css' %}">
         <center><img src="{% static 'img/logo.png' %}" width="30%" height="20%"></center><br>
         <div class="cover" style="background-image: url({% static 'amp.jpg' %});
@@ -20,7 +38,17 @@
         background-attachment: fixed;
         background-position: bottom;">
 
-            <center><a href="{% url 'abampdb:search' %}" class="btn btn-primary btn-md active" role="button" aria-pressed="true">Enter AbAMPdb</a></center>
+
+            
+
+            <h5 class="text-center"><br><span class="normal-text">AbAMPdb is the manually-curated database for antimicrobial peptides (AMPs) specifically against <em>Acinetobacter baumannii</em>. The database provides experimental AMPs information related to antimicrobial potentials, homology-based modelled structures and the peptide protein interactions of these AMPs</span><br><br></h5>
+
+            <br><br> <!-- Add space before -->
+            <center><a href="{% url 'abampdb:search' %}" class="btn btn-primary btn-md active custom-color" role="button" aria-pressed="true">Enter AbAMPdb</a></center>
+            <br> <!-- Add space after -->
+
+
+
             {% else %}
             <p>Page unavailable. Pleasse try again soon.</p>
             {% endif %}
