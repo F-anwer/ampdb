@@ -67,7 +67,7 @@
             </td>
             <td><button onclick="exportTableToCSV('table-data.csv')" style="background-color: #f9f9f9; font-size:28px; margin: 0; padding: 0;"><i class="fas fa-file-csv" style="color: rgb(17, 44, 35); margin-top: -10px;"></i></button>
                 <button onclick="exportTableToXML('table-data.xml')" style="background-color: #f9f9f9; font-size: 28px; margin: 0; padding: 0;">
-                    <i class="fas fa-file-code" style="color: rgb(0,73,163); margin-top: -10px;"></i>
+                    <i class="fas fa-file-code" style="color: rgb(34, 26, 145); margin-top: -10px;"></i>
                   </button>
 
             </td>
@@ -120,7 +120,7 @@
                                         v.addModel(data, "pdb"); /* load data */
                                         v.setStyle({}, {
                                             cartoon: {
-                                                color: "purple"
+                                                color: "#de9a1f"
                                             }
                                         }); /* style all atoms */
                                         v.zoomTo(); /* set camera */
@@ -443,7 +443,7 @@
                                             chain: 'A'
                                         }, {
                                             cartoon: {
-                                                color: "grey" // Replace with the desired color for Chain A
+                                                color: "#de9a1f" // Replace with the desired color for Chain A
                                             }
                                         });
 
@@ -452,7 +452,7 @@
                                             chain: 'B'
                                         }, {
                                             cartoon: {
-                                                color: "purple" // Replace with the desired color for Chain B
+                                                color: "#60399d" // Replace with the desired color for Chain B
                                             }
                                         }); /* style all atoms */
                                         // Set style for Chain B
@@ -460,7 +460,7 @@
                                             chain: 'P'
                                         }, {
                                             cartoon: {
-                                                color: "purple" // Replace with the desired color for Chain B
+                                                color: "#de9a1f" // Replace with the desired color for Chain B
                                             }
                                         });
                                         v.zoomTo(); /* set camera */
