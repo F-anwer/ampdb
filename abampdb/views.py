@@ -137,7 +137,9 @@ def create_protien(request):
         target_protein_id = request.POST.get('target_id')
         
         # Retrieve other form data in a similar manner
-
+        if not target_protein_id:
+            # Re-render the form with an error message
+            return redirect(reverse('abampdb:search'))
         
         try:
             protien = Proteins.objects.get(id=protein_id)
