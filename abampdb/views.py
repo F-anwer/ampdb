@@ -29,7 +29,7 @@ from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 from abampdb.forms import SearchForm
 from django.views.generic.edit import FormView
-
+from synthetic.models import Synthetic
 
 
 def EnterPage(request):
@@ -94,9 +94,15 @@ def TutorialPage(request):
     return render(request, 'abampdb/tutorial.html')
 
 def search_view(request):
+    # synthetic_name = Synthetic.objects.all().values('name')
+    # print("synthetic_name , synthetic_name", synthetic_name)
+    # protien_name =  Proteins.objects.all().values('name')
+    # print("protien_id", protien_name)
+
     return render(request, "abampdb/search.html", {
         "targets": Targetproteins.objects.all(),
-        "proteins": Proteins.objects.all()
+        "proteins": Proteins.objects.all(),
+        "synthetics" : Synthetic.objects.all()
     })
 
 def protein(request, proteins_id):
