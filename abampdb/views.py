@@ -135,11 +135,12 @@ def create_protien(request):
         score = request.POST.get('score')
         sequence = request.POST.get('sequence')
         target_protein_id = request.POST.get('target_id')
-        
+        default_protein_id = 1
         # Retrieve other form data in a similar manner
         if not target_protein_id:
             # Re-render the form with an error message
-            return redirect(reverse('abampdb:search'))
+            return redirect(reverse('abampdb:protein', args=[default_protein_id]))
+        
         
         try:
             protien = Proteins.objects.get(id=protein_id)
