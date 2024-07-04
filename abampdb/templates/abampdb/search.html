@@ -143,7 +143,7 @@ Generic Styling, for Desktops/Laptops
                         <a href="{% url 'abampdb:protein' proteins_id=protein.pk %}"></a>
                         <td>
                             <select class="mySelect" name="dropdown" onchange="updateHiddenInput(this, {{ protein.id }})" required>
-                                <option value="" disabled selected>Select an option</option>
+                                <!-- <option value="" disabled selected>Select an option</option> -->
                                 {% for target in targets %}
                                 <option value="{{ target.id }}">{{ target.targets }}</option>
                                 {% endfor %}
