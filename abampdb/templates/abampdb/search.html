@@ -122,8 +122,8 @@ Generic Styling, for Desktops/Laptops
                     <tr>
                         <th scope="col">select AMP</th>
                         <th scope="col">AMP name</th>
-                        <th scope="col">Synthetic name</th>
                         <th scope="col">AMP-Sequence</th>
+                        <th scope="col">Synthetic name</th>
                         <th scope="col">Rank 1-10 <sup><i style="color: rgb(243, 235, 235);" class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="1 is top Ranked"></i>
                         </sup></th>
                         <th scope="col" style="padding-left: 20px;"> Select Target protein</th>
@@ -136,6 +136,7 @@ Generic Styling, for Desktops/Laptops
                     <tr class="table-info">
                         <td> AMP{{ protein.id }}
                         <td>{{ protein.name }}</td>
+                        <td>{{ protein.sequence }}</td>
                         <td>
                             {% for synthetic in synthetics %}
                                 {% if synthetic.name == 'Cec4' or synthetic.name == 'Cec4-7' or synthetic.name == 'Cec4-8' or synthetic.name == 'FITC-Cec4' %}
@@ -153,7 +154,6 @@ Generic Styling, for Desktops/Laptops
                                 {% endif %}
                             {% endfor %}
                         </td>
-                        <td>{{ protein.sequence }}</td>
                         <td>{{ protein.score }}</td>
 
 
