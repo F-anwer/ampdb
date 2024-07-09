@@ -137,13 +137,11 @@ Generic Styling, for Desktops/Laptops
                         <td> AMP{{ protein.id }}
                         <td>{{ protein.name }}</td>
                         <td>
-                            <select name="synthetic_name">
-                                {% for synthetic in synthetics %}
-                                    {% if protein.name in synthetic.name %}
-                                        <option value="{{ synthetic.name }}">{{ synthetic.name }}</option>
-                                    {% endif %}
-                                {% endfor %}
-                            </select>
+                            {% for synthetic in synthetics %}
+                                {% if protein.name in synthetic.name %}
+                                    <a href="{{ base_url }}synthetic/synthetic/{{ synthetic.id }}">{{ synthetic.title }}</a><br>
+                                {% endif %}
+                            {% endfor %}
                         </td>
                         <td>{{ protein.sequence }}</td>
                         <td>{{ protein.score }}</td>

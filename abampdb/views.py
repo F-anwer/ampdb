@@ -94,6 +94,7 @@ def TutorialPage(request):
     return render(request, 'abampdb/tutorial.html')
 
 def search_view(request):
+    base_url = f"{request.scheme}://{request.get_host()}/"
     # synthetic_name = Synthetic.objects.all().values('name')
     # print("synthetic_name , synthetic_name", synthetic_name)
     # protien_name =  Proteins.objects.all().values('name')
@@ -102,7 +103,8 @@ def search_view(request):
     return render(request, "abampdb/search.html", {
         "targets": Targetproteins.objects.all(),
         "proteins": Proteins.objects.all(),
-        "synthetics" : Synthetic.objects.all()
+        "synthetics" : Synthetic.objects.all(),
+        "base_url" : base_url
     })
 
 def protein(request, proteins_id):
