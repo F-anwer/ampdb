@@ -112,7 +112,7 @@ Generic Styling, for Desktops/Laptops
             <table class="table table-striped w-auto">
                 <thead>
                     <tr>
-                        <th colspan="6" style="text-align: left;">
+                        <th colspan="7" style="text-align: left;">
                             <div class="search-container">
                                 <input type="text" class="search-input" id="searchInput" placeholder="Search by AMP Name or AMP-Sequence">
                                 <button class="search-button" onclick="search()">Search</button>
@@ -138,8 +138,18 @@ Generic Styling, for Desktops/Laptops
                         <td>{{ protein.name }}</td>
                         <td>
                             {% for synthetic in synthetics %}
-                                {% if protein.name in synthetic.name %}
-                                    <a href="{{ base_url }}synthetic/synthetic/{{ synthetic.id }}">{{ synthetic.title }}</a><br>
+                                {% if synthetic.name == 'Cec4' or synthetic.name == 'Cec4-7' or synthetic.name == 'Cec4-8' or synthetic.name == 'FITC-Cec4' %}
+                                    {% if protein.name == synthetic.name %}
+                                        <div>
+                                            <a href="{{ base_url }}synthetic/synthetic/{{ synthetic.id }}">{{ synthetic.title }}</a>
+                                            (Score: {{ synthetic.synthetic_score }}, Position: {{ synthetic.position }})
+                                        </div>
+                                    {% endif %}
+                                {% elif protein.name in synthetic.name %}
+                                    <div>
+                                        <a href="{{ base_url }}synthetic/synthetic/{{ synthetic.id }}">{{ synthetic.title }}</a>
+                                        (Score: {{ synthetic.synthetic_score }}, Position: {{ synthetic.position }})
+                                    </div>
                                 {% endif %}
                             {% endfor %}
                         </td>
