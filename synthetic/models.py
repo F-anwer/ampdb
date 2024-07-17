@@ -3,22 +3,6 @@ from django.db import models
 # Create your models here.
 
 
-class PDBSTQuery(models.Model):
-    stargets_id = models.CharField(max_length=200)
-    # email = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.Stargetproteins_id
-
-
-class Stargetproteins(models.Model):
-    stargets = models.CharField(
-        ("Stargets"), max_length=1000, default=None, blank=True)
-
-    def __str__(self):
-        return self.stargets
-
-
 class PDBSQuery(models.Model):
     synthetic_id = models.CharField(max_length=200)
     # email = models.CharField(max_length=200)
@@ -28,9 +12,6 @@ class PDBSQuery(models.Model):
 
 
 class Synthetic(models.Model):
-    starget_protein = models.ForeignKey(
-        Stargetproteins, on_delete=models.SET_NULL, null=True, blank=True)
-    sdock = models.ManyToManyField('Sdock', related_name='sdock')
     title = models.CharField(("Title"), max_length=255)
     name = models.CharField(("Name"), max_length=255)
     s = models.CharField(
@@ -85,6 +66,10 @@ class Synthetic(models.Model):
     synthetic_hemolytic_activity = models.FloatField(
         ("Synthetic_Hemolytic activity"), max_length=255)
     synthetic_score = models.IntegerField(("Synthetic_Score"), default=None)
+    mutaions = models.CharField(
+        ("Mutations"), max_length=255, default=None)
+    mutaion_count = models.CharField(
+        ("Mutation_count"), max_length=255, default=None)
     synthetic_pdb_name = models.CharField(
         ("Synthetic_PDBName"), max_length=255, default=None)
 
@@ -92,31 +77,3 @@ class Synthetic(models.Model):
         return self.title
 
 
-class PDBSDQuery(models.Model):
-    query_id = models.CharField(max_length=1000)
-    # email = models.CharField(max_length=200)
-
-    def __str__(self):
-        return self.query_id
-
-
-class Sdock(models.Model):
-    stargets = models.ManyToManyField('Stargetproteins')
-    s_dock = models.CharField(("S_dock"), max_length=1000)
-    image1 = models.CharField(("Image1"), max_length=1000)
-    image2 = models.CharField(("Image2"), max_length=1000)
-    rmsf_min = models.CharField(("RSMF_min"), max_length=1000)
-    total_score_before_refinement = models.CharField(
-        ("Total_score_before_Refinement"), max_length=1000)
-    i_sc_before_refinement = models.CharField(
-        ("I_sc_before_Refinement"), max_length=1000)
-    bb_rmsd_before_refinement = models.CharField(
-        ("bb_RMSD_before_Refinement"), max_length=1000)
-    total_score_after_refinement = models.CharField(
-        ("Total_score_after_Refinement"), max_length=1000)
-    bb_rmsd_after_refinement = models.CharField(
-        ("bb_RMSD_after_Refinement"), max_length=1000)
-
-
-    def __str__(self):
-        return self.s_dock

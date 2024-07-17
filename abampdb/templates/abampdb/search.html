@@ -1,11 +1,23 @@
 {% extends 'base.html' %} {% block content %}
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"> -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
 
 <style>
     /* 
 Generic Styling, for Desktops/Laptops 
 */
-    
+    .scrollable-container {
+            max-height: 150px;
+            overflow-y: auto;
+        }
+
     table {
         width: 100%;
         border-collapse: collapse;
@@ -101,18 +113,36 @@ Generic Styling, for Desktops/Laptops
     .search-button:hover {
         background-color: #45a049; /* Darker green on hover */
     }
+
+    /* new css */
+    .center-table {
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .table {
+            font-size: 12px; /* Adjust the font size as needed */
+            width: auto;
+        }
+
+        .search-container {
+            text-align: left;
+        }
+
+        .panel-success {
+            margin-top: 20px;
+        }
 </style>
 
 <body>
     {% comment %}
     <form class="form-inline" method="POST" action="/create_protien/"> {% endcomment %} {% comment %} {% csrf_token %} {% endcomment %}
-        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 center-table">
             <div class="panel panel-success"></div>
-
-            <table class="table table-striped w-auto">
+            <table class="table table-striped">
                 <thead>
                     <tr>
-                        <th colspan="7" style="text-align: left;">
+                        <th colspan="9" style="text-align: left;">
                             <div class="search-container">
                                 <input type="text" class="search-input" id="searchInput" placeholder="Search by AMP Name or AMP-Sequence">
                                 <button class="search-button" onclick="search()">Search</button>
@@ -120,10 +150,12 @@ Generic Styling, for Desktops/Laptops
                         </th>
                     </tr>
                     <tr>
-                        <th scope="col">select AMP</th>
-                        <th scope="col">AMP name</th>
-                        <th scope="col">AMP-Sequence</th>
-                        <th scope="col">Synthetic name</th>
+                        <th scope="col">AMP ID</th>
+                        <th scope="col">Natural AMP</th>
+                        <th scope="col">Natural AMP-Sequence</th>
+                        <th scope="col">Synthetic AMP</th>
+                        <!-- <th scope="col">Mutations</th> -->
+                        <th scope="col">Mutations count</th>
                         <th scope="col">Rank 1-10 <sup><i style="color: rgb(243, 235, 235);" class="fas fa-question-circle" data-toggle="tooltip" data-placement="bottom" title="1 is top Ranked"></i>
                         </sup></th>
                         <th scope="col" style="padding-left: 20px;"> Select Target protein</th>
@@ -139,21 +171,69 @@ Generic Styling, for Desktops/Laptops
                         <td>{{ protein.sequence }}</td>
                         <td>
                             {% for synthetic in synthetics %}
-                                {% if synthetic.name == 'Cec4' or synthetic.name == 'Cec4-7' or synthetic.name == 'Cec4-8' or synthetic.name == 'FITC-Cec4' %}
+                                {% if synthetic.name == 'Cec4' or synthetic.name == 'Cec4-7' or synthetic.name == 'Cec4-8' or synthetic.name == 'Cec4' %}
                                     {% if protein.name == synthetic.name %}
-                                        <div>
+                                        <div style="display: flex; align-items: center;">
                                             <a href="{{ base_url }}synthetic/synthetic/{{ synthetic.id }}">{{ synthetic.title }}</a>
-                                            (Score: {{ synthetic.synthetic_score }}, Position: {{ synthetic.position }})
+                                            <a href="#" onclick="toggleMutations(this, '{{ synthetic.mutaions }}'); return false;" style="margin-left: 10px;">View</a>
+                                            <div class="mutations-content" style="display: none;"></div>
                                         </div>
                                     {% endif %}
                                 {% elif protein.name in synthetic.name %}
-                                    <div>
+                                    <div style="display: flex; align-items: center;">
                                         <a href="{{ base_url }}synthetic/synthetic/{{ synthetic.id }}">{{ synthetic.title }}</a>
-                                        (Score: {{ synthetic.synthetic_score }}, Position: {{ synthetic.position }})
+                                        <a href="#" onclick="toggleMutations(this, '{{ synthetic.mutaions }}'); return false;" style="margin-left: 10px;">View</a>
+                                        <div class="mutations-content" style="display: none;"></div>
                                     </div>
                                 {% endif %}
                             {% endfor %}
                         </td>
+                        <!-- <td>{% for synthetic in synthetics %}
+                            {% if synthetic.name == 'Cec4' or synthetic.name == 'Cec4-7' or synthetic.name == 'Cec4-8' or synthetic.name == 'Cec4' %}
+                                {% if protein.name == synthetic.name %}
+                                    <div>
+                                        ({{ synthetic.mutaions }})
+                                    </div>
+                                {% endif %}
+                            {% elif protein.name in synthetic.name %}
+                                <div>
+                                                               ({{ synthetic.mutaions }})
+                                </div>
+                            {% endif %}
+                        {% endfor %}</td> -->
+
+                        <!-- <td>
+                            {% for synthetic in synthetics %}
+                                {% if synthetic.name == 'Cec4' or synthetic.name == 'Cec4-7' or synthetic.name == 'Cec4-8' or synthetic.name == 'Cec4' %}
+                                    {% if protein.name == synthetic.name %}
+                                        <div>
+                                            <a href="#" onclick="toggleMutations(this, '{{ synthetic.mutaions }}'); return false;">View</a>
+                                            <div class="mutations-content" style="display: none;"></div>
+                                        </div>
+                                    {% endif %}
+                                {% elif protein.name in synthetic.name %}
+                                    <div>
+                                        <a href="#" onclick="toggleMutations(this, '{{ synthetic.mutaions }}'); return false;">View</a>
+                                        <div class="mutations-content" style="display: none;"></div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        </td> -->
+
+                        <td>{% for synthetic in synthetics %}
+                            {% if synthetic.name == 'Cec4' or synthetic.name == 'Cec4-7' or synthetic.name == 'Cec4-8' or synthetic.name == 'Cec4' %}
+                                {% if protein.name == synthetic.name %}
+                                    <div>
+                                        ({{ synthetic.mutaion_count }})
+                                    </div>
+                                {% endif %}
+                            {% elif protein.name in synthetic.name %}
+                                <div>
+                                                               ({{ synthetic.mutaion_count }})
+                                </div>
+                            {% endif %}
+                        {% endfor %}</td>
+
                         <td>{{ protein.score }}</td>
 
 
@@ -216,6 +296,22 @@ Generic Styling, for Desktops/Laptops
                 }
             });
         }
+    </script>
+    <script>
+        function toggleMutations(link, mutations) {
+        var contentDiv = link.nextElementSibling;
+        if (contentDiv.style.display === 'none' || contentDiv.style.display === '') {
+            contentDiv.innerHTML = 'Mutations: ' + mutations;
+            contentDiv.style.display = 'block';
+            link.innerText = 'Hide';
+        } else {
+            contentDiv.style.display = 'none';
+            link.innerText = 'View';
+        }
+    }
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
     </script>
     <section>
         <hr />

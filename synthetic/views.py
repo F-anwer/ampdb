@@ -15,7 +15,7 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from .models import *
 
-from .models import Synthetic, Sdock, PDBSDQuery, Stargetproteins
+from .models import Synthetic
 import uuid
 from django.shortcuts import redirect
 from django.http import HttpResponse
@@ -34,7 +34,6 @@ from django.views.generic.edit import FormView
 
 def synthetic(request):
     return render(request, "synthetic/predicted.html", {
-        "starget": Stargetproteins.objects.all(),
         "synthetic": Synthetic.objects.all()
     })
 
@@ -83,13 +82,12 @@ def create_syntheticprotien(request):
     if request.method == 'POST':
         synthetic_id = request.POST.get('synthetic_id')
         print(synthetic_id)
-        starget_protein_id = request.POST.get('starget_id')
+
 
         # Retrieve other form data in a similar manner
 
         try:
             synthetic = Synthetic.objects.get(id=synthetic_id)
-            synthetic.starget_protein_id = starget_protein_id
             synthetic.save()
             redirect_url = reverse('synthetic:submit_synthetic', kwargs={
                                    'synthetic_id': synthetic_id})
