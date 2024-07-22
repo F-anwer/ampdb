@@ -203,7 +203,7 @@ Generic Styling, for Desktops/Laptops
                         <td>
                             <div class="row-container">
                                 {% for synthetic in synthetics %}
-                                    {% if synthetic.name == 'Cec4' or synthetic.name == 'Cec4-7' or synthetic.name == 'Cec4-8' %}
+                                    {% if synthetic.name == 'Cec4' or synthetic.name == 'Cec4-7' or synthetic.name == 'Cec4-8' or synthetic.name == 'HD5d5' or synthetic.name == 'H4' %}
                                         {% if protein.name == synthetic.name %}
                                             <div class="item">
                                                 <a href="{{ base_url }}synthetic/synthetic/{{ synthetic.id }}">{{ synthetic.title }}</a>
