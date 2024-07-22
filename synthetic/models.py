@@ -68,8 +68,8 @@ class Synthetic(models.Model):
     synthetic_score = models.IntegerField(("Synthetic_Score"), default=None)
     mutaions = models.CharField(
         ("Mutations"), max_length=255, default=None)
-    mutaion_count = models.CharField(
-        ("Mutation_count"), max_length=255, default=None)
+    mutaion_count = models.IntegerField(
+        ("Mutation_count"), default=None)
     synthetic_pdb_name = models.CharField(
         ("Synthetic_PDBName"), max_length=255, default=None)
 

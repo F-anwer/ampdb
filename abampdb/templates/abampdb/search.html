@@ -183,7 +183,7 @@ Generic Styling, for Desktops/Laptops
                         <th scope="col">AMP ID</th>
                         <th scope="col">Natural AMP</th>
                         <th scope="col">Natural AMP-Sequence</th>
-                        <th scope="col">Synthetic AMP/View Mutations/Mutation count</th>
+                        <th scope="col">Synthetic AMP/View Mutations</th>
                         <!-- <th scope="col">Mutations</th> -->
                         <th scope="col">Rank 1-10 
                             <span title="1 is top ranked"><i class="fa fa-question-circle"></i></span>
@@ -209,9 +209,9 @@ Generic Styling, for Desktops/Laptops
                                                 <a href="{{ base_url }}synthetic/synthetic/{{ synthetic.id }}">{{ synthetic.title }}</a>
                                                 <a href="#" onclick="toggleMutations(this, '{{ synthetic.mutaions }}'); return false;" style="margin-left: 10px;">View</a>
                                                 <div class="mutations-content" style="display: none;"></div>
-                                                <div>
+                                                <!-- <div>
                                                     ({{ synthetic.mutaion_count }})
-                                                </div>
+                                                </div> -->
                                             </div>
                                         {% endif %}
                                     {% elif protein.name in synthetic.name %}
@@ -219,9 +219,9 @@ Generic Styling, for Desktops/Laptops
                                             <a href="{{ base_url }}synthetic/synthetic/{{ synthetic.id }}">{{ synthetic.title }}</a>
                                             <a href="#" onclick="toggleMutations(this, '{{ synthetic.mutaions }}'); return false;" style="margin-left: 10px;">View</a>
                                             <div class="mutations-content" style="display: none;"></div>
-                                            <div>
+                                            <!-- <div>
                                                 ({{ synthetic.mutaion_count }})
-                                            </div>
+                                            </div> -->
                                         </div>
                                     {% endif %}
                                 {% endfor %}
