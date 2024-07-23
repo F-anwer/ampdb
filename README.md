@@ -16,7 +16,7 @@ The AMPdb app looks as follows:
 ### Select AMP and protein tab
 
 
-![image](https://github.com/nadzhou/ampdb/blob/main/static/img/interface1.png)
+![image](https://github.com/nadzhou/ampdb/blob/main/static/img/Interface1.png)
 
 
 ## Installation 
