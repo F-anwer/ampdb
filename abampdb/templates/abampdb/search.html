@@ -204,15 +204,13 @@ Generic Styling, for Desktops/Laptops
                             <div class="row-container">
                                 {% for synthetic in synthetics %}
                                     {% if protein.amp != 'AbAMP118' %}
-                                        {% if synthetic.name == 'Cec4' or synthetic.name == 'Cec4-7' or synthetic.name == 'Cec4-8' or synthetic.name == 'HD5d5' or synthetic.name == 'Cathelicidin Ps-CATH4' %}
+                                        {% if synthetic.name == 'Cec4' or synthetic.name == 'Cec4-7' or synthetic.name == 'Cec4-8' or synthetic.name == 'HD5d5' or synthetic.name == 'Cathelicidin Ps-CATH4' or synthetic.name == 'Bactenecin-derivative' %}
                                             {% if protein.name == synthetic.name %}
                                                 <div class="item">
                                                     <a href="{{ base_url }}synthetic/synthetic/{{ synthetic.id }}">{{ synthetic.title }}</a>
                                                     <a href="#" onclick="toggleMutations(this, '{{ synthetic.mutaions }}'); return false;" style="margin-left: 10px;">View</a>
                                                     <div class="mutations-content" style="display: none;"></div>
-                                                    <div>
-                                                        ({{ synthetic.mutaion_count }})
-                                                    </div>
+                                                    
                                                 </div>
                                             {% endif %}
                                         {% elif protein.name in synthetic.name and synthetic.name != 'H4' %}
@@ -220,9 +218,7 @@ Generic Styling, for Desktops/Laptops
                                                 <a href="{{ base_url }}synthetic/synthetic/{{ synthetic.id }}">{{ synthetic.title }}</a>
                                                 <a href="#" onclick="toggleMutations(this, '{{ synthetic.mutaions }}'); return false;" style="margin-left: 10px;">View</a>
                                                 <div class="mutations-content" style="display: none;"></div>
-                                                <div>
-                                                    ({{ synthetic.mutaion_count }})
-                                                </div>
+                                               
                                             </div>
                                         {% endif %}
                                     {% endif %}
